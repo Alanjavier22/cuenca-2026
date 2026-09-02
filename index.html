@@ -4117,6 +4117,16 @@ Devuelve ÚNICAMENTE un JSON válido con este formato:
     broadcastLiveEvent('truthGame', { html, options: currentTruthOptions, realIndex: realTruthIndex });
     inp.value = '';
     hideTruthTemporary();
+
+    // Registrar silenciosamente la anécdota y mentiras en Firebase
+    logAiInteraction('verdades', {
+      verdad_ingresada: truth,
+      verdad_pulida: cleanTruthText,
+      mentira1: lies ? lies.mentira1 : '',
+      mentira2: lies ? lies.mentira2 : '',
+      opcion_verdad_real: letters[realTruthIndex],
+      opciones_mostradas: rawOptions.map((o, idx) => ({ opcion: letters[idx], texto: o.text, es_verdad: o.isReal }))
+    });
   } catch(err) {
     box.innerHTML = '❌ Ocurrió un error al camuflar. Por favor intenta de nuevo.';
   }
@@ -4250,6 +4260,12 @@ async function sendUserChatMessage() {
   const formatted = cleanFormat(res);
   aiDiv.innerHTML = formatted;
   chatContainer.scrollTop = chatContainer.scrollHeight;
+
+  // Registrar silenciosamente en Firebase para la bitácora del viaje
+  logAiInteraction('chats', {
+    pregunta: text,
+    respuesta: res
+  });
 }
 
 async function callGeminiAI(userQuery, isDirect = false) {
@@ -4299,6 +4315,22 @@ async function callGeminiAI(userQuery, isDirect = false) {
   } catch(e) {
     return getOfflineFallback(userQuery);
   }
+}
+
+// --- REGISTRO Y BITÁCORA PRIVADA DE IA EN FIREBASE ---
+function logAiInteraction(category, data) {
+  try {
+    const payload = {
+      ...data,
+      timestamp: new Date().toISOString(),
+      horaLocal: new Date().toLocaleString('es-EC', { timeZone: 'America/Guayaquil' })
+    };
+    fetch(`https://cuenca-2026-default-rtdb.firebaseio.com/cuenca/ai_logs/${category}.json`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    }).catch(() => {});
+  } catch(e) {}
 }
 
 function getOfflineFallback(q) {
@@ -4766,6 +4798,10 @@ REGLAS ESTRICTAS:
     const cleaned = cleanDirectOutput(res);
     box.innerHTML = cleanFormat(cleaned);
     broadcastLiveCard('barmanBox', box.innerHTML);
+    logAiInteraction('barman', {
+      ingredientes_ingresados: ings,
+      receta_generada: cleaned
+    });
   } catch(e) {
     box.innerHTML = `
       🍹 <b>El Canelazo Exprés de ANICÁ</b><br>
@@ -5326,7 +5362,7 @@ window.addEventListener('DOMContentLoaded', () => {
 });
 
 // Control de versión para auto-recarga transparente al desminimizar la app
-window.APP_VERSION = '2026.09.02.1715';
+window.APP_VERSION = '2026.09.02.1720';
 
 async function checkAppUpdate() {
   try {
