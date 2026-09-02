@@ -1,0 +1,4783 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<title>Cuenca 2026 · Guía de Viaje Oficial</title>
+<meta name="theme-color" content="#0B2236">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Cuenca 2026">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,600;0,700;0,800;1,400;1,600&family=Work+Sans:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --blue-deep: #0B2236;
+    --blue: #1C5B88;
+    --blue-light: #EAF3F9;
+    --blue-soft: #CCE1EE;
+    --cream: #F8F6F0;
+    --cream-card: #FFFFFF;
+    --gold: #B88018;
+    --gold-soft: #FAF0D4;
+    --gold-border: #E8D19B;
+    --terracotta: #B5421D;
+    --terracotta-soft: #FDECE5;
+    --terracotta-border: #F4C2B1;
+    --green: #22754D;
+    --green-soft: #DCF2E5;
+    --green-border: #B4DEC5;
+    --purple: #6234B8;
+    --purple-soft: #EFE8FB;
+    --purple-border: #D5C1F3;
+    --ink: #141E28;
+    --ink-soft: #4E606F;
+    --ink-muted: #7E909F;
+    --line: #DEE4EA;
+    --line-warm: #E7DFD2;
+    --white: #FFFFFF;
+    --shadow-sm: 0 2px 8px rgba(11, 34, 54, 0.05);
+    --shadow-md: 0 6px 20px rgba(11, 34, 54, 0.08);
+    --shadow-lg: 0 14px 34px rgba(11, 34, 54, 0.12);
+    --radius-sm: 8px;
+    --radius-md: 14px;
+    --radius-lg: 20px;
+    --radius-full: 9999px;
+    --transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+  body {
+    background-color: var(--cream);
+    color: var(--ink);
+    font-family: 'Work Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    line-height: 1.55;
+    padding-bottom: 90px;
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+
+  /* TOP STICKY NAV */
+  .sticky-nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(248, 246, 240, 0.95);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--line-warm);
+    padding: 8px 0;
+    box-shadow: var(--shadow-sm);
+  }
+  .nav-inner {
+    max-width: 1040px;
+    margin: 0 auto;
+    padding: 0 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+  }
+  .nav-brand {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    color: var(--blue-deep);
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-shrink: 0;
+  }
+  .nav-right-actions { display: flex; align-items: center; gap: 6px; }
+  .nav-ai-btn {
+    background: var(--purple-soft);
+    color: var(--purple);
+    border: 1px solid var(--purple-border);
+    padding: 5px 12px;
+    border-radius: var(--radius-full);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    font-weight: 700;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    transition: var(--transition);
+  }
+  .nav-ai-btn:hover { background: var(--purple); color: var(--white); }
+
+  /* MAIN SECTION TABS (TOP BAR) */
+  .main-tabs-wrapper {
+    background: var(--white);
+    border-bottom: 1px solid var(--line);
+    padding: 10px 0;
+    position: sticky;
+    top: 45px;
+    z-index: 90;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+  }
+  .main-tabs-inner {
+    max-width: 1040px;
+    margin: 0 auto;
+    padding: 0 16px;
+    display: flex;
+    gap: 6px;
+    overflow-x: auto;
+    white-space: nowrap;
+    scrollbar-width: none;
+  }
+  .main-tabs-inner::-webkit-scrollbar { display: none; }
+  .tab-pill-btn {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 8px 16px;
+    border-radius: var(--radius-full);
+    border: 1px solid var(--line);
+    background: var(--cream);
+    color: var(--ink-soft);
+    cursor: pointer;
+    transition: var(--transition);
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .tab-pill-btn:hover { background: var(--blue-light); color: var(--blue-deep); }
+  .tab-pill-btn.active {
+    background: var(--blue-deep);
+    color: var(--white);
+    border-color: var(--blue-deep);
+    box-shadow: 0 2px 8px rgba(11, 34, 54, 0.25);
+  }
+
+  /* MOBILE QUICK BAR */
+  .mobile-bar {
+    display: none;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 110;
+    background: rgba(255, 255, 255, 0.97);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-top: 1px solid var(--line);
+    padding: 8px 10px max(8px, env(safe-area-inset-bottom));
+    box-shadow: 0 -4px 16px rgba(0,0,0,0.08);
+    justify-content: space-around;
+  }
+  .mobile-action-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+    color: var(--ink-soft);
+    font-size: 10px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-weight: 600;
+    gap: 2px;
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+  .mobile-action-btn span:first-child { font-size: 18px; }
+  .mobile-action-btn.active { color: var(--blue); }
+
+  /* LAYOUT */
+  .wrap { max-width: 1040px; margin: 0 auto; padding: 0 20px; }
+
+  /* HERO */
+  .hero { text-align: center; padding: 22px 0 12px; position: relative; }
+  .eyebrow {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--blue);
+    font-weight: 700;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 10px;
+    background: var(--blue-light);
+    padding: 4px 12px;
+    border-radius: var(--radius-full);
+    border: 1px solid var(--blue-soft);
+  }
+  .confirmed-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--green-soft);
+    color: #12452B;
+    border-radius: var(--radius-full);
+    padding: 5px 14px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    font-weight: 700;
+    margin-bottom: 12px;
+    border: 1px solid var(--green-border);
+  }
+  .check-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--green);
+    display: inline-block;
+    box-shadow: 0 0 0 3px rgba(34, 117, 77, 0.25);
+  }
+  h1 {
+    font-family: 'Spectral', serif;
+    font-weight: 800;
+    font-size: 34px;
+    line-height: 1.15;
+    margin: 0 0 10px;
+    color: var(--blue-deep);
+    letter-spacing: -0.015em;
+  }
+  h1 em { font-style: italic; color: var(--terracotta); }
+
+  .travelers-strip {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 0 auto 14px;
+  }
+  .traveler-tag {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    background: var(--white);
+    border: 1px solid var(--line);
+    padding: 5px 14px;
+    border-radius: var(--radius-full);
+    color: var(--blue-deep);
+    font-weight: 600;
+    box-shadow: var(--shadow-sm);
+  }
+
+  /* STAT STRIP */
+  .stat-strip {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    margin-bottom: 18px;
+  }
+  .stat {
+    background: var(--white);
+    padding: 10px 6px;
+    text-align: center;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--line);
+    box-shadow: var(--shadow-sm);
+    transition: var(--transition);
+  }
+  .stat-icon { font-size: 18px; margin-bottom: 2px; }
+  .stat-val {
+    font-family: 'IBM Plex Mono', monospace;
+    font-weight: 700;
+    font-size: 15px;
+    color: var(--blue-deep);
+  }
+  .stat-lbl { font-size: 10.5px; color: var(--ink-soft); margin-top: 1px; }
+
+  /* TAB VIEW CONTAINERS */
+  .main-tab-view { display: none; animation: fadeIn 0.25s ease; }
+  .main-tab-view.active { display: block; }
+
+  /* SECTION HEADERS */
+  .section-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 20px 0 14px;
+    border-bottom: 1.5px solid var(--line-warm);
+    padding-bottom: 8px;
+  }
+  .section-title-wrap { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; }
+  .section-tag {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    color: var(--blue);
+    text-transform: uppercase;
+    font-weight: 700;
+    background: var(--blue-light);
+    padding: 3px 8px;
+    border-radius: var(--radius-sm);
+  }
+  .section-title { font-family: 'Spectral', serif; font-size: 22px; font-weight: 700; color: var(--blue-deep); }
+  .section-note { font-size: 13.5px; color: var(--ink-soft); margin: -4px 0 16px; line-height: 1.5; }
+
+  /* TOOLS GRID */
+  .tools-grid {
+    display: grid;
+    grid-template-columns: 1.3fr 1fr;
+    gap: 16px;
+  }
+  .tool-card {
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-md);
+    padding: 18px;
+    box-shadow: var(--shadow-sm);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 16px;
+  }
+  .tool-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 12px;
+  }
+  .tool-header-left { display: flex; align-items: center; gap: 8px; }
+  .tool-header h3 { font-family: 'Spectral', serif; font-size: 17.5px; font-weight: 700; color: var(--blue-deep); }
+  
+  /* TACTILE EXPENSE SPLITTER */
+  .section-label-small {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10.5px;
+    color: var(--ink-soft);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 6px;
+    font-weight: 600;
+  }
+  .category-strip {
+    display: flex;
+    gap: 5px;
+    flex-wrap: wrap;
+    margin-bottom: 12px;
+  }
+  .cat-pill {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    background: var(--cream);
+    border: 1px solid var(--line);
+    padding: 6px 10px;
+    border-radius: var(--radius-full);
+    cursor: pointer;
+    color: var(--ink);
+    font-weight: 600;
+    transition: var(--transition);
+  }
+  .cat-pill.active {
+    background: var(--blue);
+    color: var(--white);
+    border-color: var(--blue);
+  }
+  
+  .payer-strip {
+    display: flex;
+    gap: 5px;
+    margin-bottom: 12px;
+    flex-wrap: wrap;
+  }
+  .payer-pill {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    padding: 6px 12px;
+    border-radius: var(--radius-full);
+    border: 1px solid var(--line);
+    background: var(--white);
+    color: var(--ink-soft);
+    cursor: pointer;
+    font-weight: 600;
+    transition: var(--transition);
+  }
+  .payer-pill.active {
+    background: var(--blue-deep);
+    color: var(--white);
+    border-color: var(--blue-deep);
+  }
+
+  .expense-entry-grid {
+    display: grid;
+    grid-template-columns: 1fr 120px 140px;
+    gap: 8px;
+    margin-bottom: 12px;
+  }
+  .expense-entry-grid input {
+    padding: 8px 12px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-sm);
+    font-size: 13px;
+    font-family: inherit;
+    outline: none;
+    background: var(--cream);
+  }
+  .expense-entry-grid input:focus { border-color: var(--blue); background: var(--white); }
+  .btn-add-expense {
+    background: #166534;
+    color: #FFFFFF !important;
+    border: none;
+    border-radius: var(--radius-sm);
+    padding: 0 16px;
+    font-size: 13px;
+    font-family: inherit;
+    font-weight: 700;
+    cursor: pointer;
+    transition: var(--transition);
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+  }
+  .btn-add-expense:hover { background: #14532D; }
+
+  .expense-list {
+    max-height: 140px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    margin-bottom: 12px;
+  }
+  .expense-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--cream);
+    padding: 7px 12px;
+    border-radius: var(--radius-sm);
+    font-size: 12px;
+    border: 1px solid var(--line);
+  }
+  .expense-item .del-btn {
+    border: none; background: transparent; color: var(--ink-muted); cursor: pointer; font-size: 15px; margin-left: 6px;
+  }
+  .expense-item .del-btn:hover { color: var(--terracotta); }
+
+  .settle-matrix {
+    background: var(--gold-soft);
+    border: 1px solid var(--gold-border);
+    border-radius: var(--radius-sm);
+    padding: 12px 14px;
+    font-size: 12px;
+    margin-top: 6px;
+  }
+  .settle-title {
+    font-family: 'IBM Plex Mono', monospace;
+    font-weight: 700;
+    font-size: 11.5px;
+    color: #7A510A;
+    margin-bottom: 6px;
+    text-transform: uppercase;
+  }
+  .settle-line { font-family: 'IBM Plex Mono', monospace; color: var(--ink); margin-bottom: 3px; }
+
+  /* RULETA */
+  .roulette-box {
+    text-align: center;
+    padding: 14px 10px;
+    background: var(--purple-soft);
+    border: 1.5px dashed var(--purple-border);
+    border-radius: var(--radius-sm);
+    margin-bottom: 10px;
+    min-height: 80px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .roulette-name {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--purple);
+    margin-bottom: 2px;
+  }
+  .roulette-action { font-size: 12.5px; color: var(--ink); line-height: 1.4; }
+  .roulette-buttons { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin-bottom: 10px; }
+  .btn-roulette {
+    background: var(--blue-deep);
+    color: var(--white);
+    border: none;
+    padding: 8px 10px;
+    border-radius: var(--radius-sm);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+  }
+  .btn-roulette.purple { background: var(--purple); }
+  .btn-roulette.ai {
+    background: linear-gradient(135deg, var(--purple) 0%, var(--terracotta) 100%);
+    grid-column: 1 / -1;
+    color: #fff;
+    font-weight: 700;
+  }
+  .btn-roulette:hover { transform: translateY(-1px); opacity: 0.95; }
+
+  /* WEATHER WIDGET (EN VIVO & PRÓXIMAS HORAS DE HOY) */
+  .weather-container {
+    background: #F0F6FA;
+    border: 1px solid var(--blue-soft);
+    border-radius: var(--radius-md);
+    padding: 14px;
+    margin-top: 14px;
+  }
+  .weather-tag {
+    font-size: 10px;
+    font-family: 'IBM Plex Mono', monospace;
+    color: var(--blue);
+    text-transform: uppercase;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+  }
+  .weather-main-row {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    margin-top: 2px;
+  }
+  .weather-temp { font-family: 'IBM Plex Mono', monospace; font-size: 24px; font-weight: 800; color: var(--blue-deep); }
+  .weather-sub-details {
+    font-size: 11px;
+    color: var(--ink-soft);
+    font-family: 'IBM Plex Mono', monospace;
+  }
+  .weather-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgba(24, 76, 120, 0.12);
+    padding-bottom: 10px;
+  }
+  .weather-condition { font-size: 12px; color: var(--blue-deep); font-weight: 700; text-align: right; }
+  .weather-hourly-wrap {
+    margin-top: 10px;
+  }
+  .weather-hourly-title {
+    font-size: 10px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-weight: 700;
+    color: var(--blue-deep);
+    margin-bottom: 6px;
+    letter-spacing: 0.05em;
+  }
+  .weather-hourly-strip {
+    display: flex;
+    gap: 6px;
+    overflow-x: auto;
+    padding-bottom: 4px;
+    scrollbar-width: thin;
+  }
+  .weather-hour-card {
+    flex: 1;
+    min-width: 52px;
+    background: var(--white);
+    border: 1px solid rgba(24, 76, 120, 0.12);
+    border-radius: var(--radius-sm);
+    padding: 6px 4px;
+    text-align: center;
+    font-family: 'IBM Plex Mono', monospace;
+  }
+  .weather-hour-card.rain-high {
+    border-color: #38BDF8;
+    background: #E0F2FE;
+  }
+  .weather-hour-time { font-size: 10.5px; font-weight: 600; color: var(--ink-soft); }
+  .weather-hour-icon { font-size: 16px; margin: 2px 0; display: block; }
+  .weather-hour-temp { font-size: 12px; font-weight: 700; color: var(--blue-deep); display: block; }
+  .weather-hour-rain { font-size: 9.5px; font-weight: 600; color: #0284C7; }
+  .weather-alert-box {
+    margin-top: 10px;
+    background: var(--white);
+    border: 1px dashed var(--blue-soft);
+    border-radius: var(--radius-sm);
+    padding: 8px 10px;
+    font-size: 11.5px;
+    color: var(--blue-deep);
+    line-height: 1.4;
+  }
+
+  /* ITINERARIO */
+  .day-card {
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    background: var(--white);
+    padding: 22px;
+    margin-bottom: 20px;
+    box-shadow: var(--shadow-sm);
+  }
+  .day-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 14px;
+  }
+  .day-name {
+    font-family: 'Spectral', serif;
+    font-weight: 800;
+    font-size: 21px;
+    color: var(--blue-deep);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .day-date { font-family: 'IBM Plex Mono', monospace; font-size: 11.5px; color: var(--ink-soft); margin-top: 2px; }
+  .day-chips { display: flex; gap: 6px; flex-wrap: wrap; }
+  .chip {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    padding: 4px 10px;
+    border-radius: var(--radius-full);
+    background: var(--blue-light);
+    color: var(--blue-deep);
+    border: 1px solid var(--blue-soft);
+    font-weight: 600;
+    white-space: nowrap;
+  }
+  .chip.warm { background: var(--gold-soft); color: #7A530E; border-color: var(--gold-border); }
+  .chip.green { background: var(--green-soft); color: #13462C; border-color: var(--green-border); }
+  .chip.purple { background: var(--purple-soft); color: var(--purple); border-color: var(--purple-border); }
+
+  /* TIMELINE */
+  .timeline {
+    position: relative;
+    padding-left: 24px;
+    border-left: 2px solid var(--line);
+    margin-left: 6px;
+  }
+  .tl-item { position: relative; padding-bottom: 18px; }
+  .tl-item:last-child { padding-bottom: 2px; }
+  .tl-item::before {
+    content: '';
+    position: absolute;
+    left: -31px;
+    top: 3px;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--blue);
+    border: 2px solid var(--white);
+    box-shadow: 0 0 0 2px var(--blue-soft);
+  }
+  .tl-item.drive::before { background: var(--terracotta); box-shadow: 0 0 0 2px var(--terracotta-soft); }
+  .tl-item.food::before { background: var(--gold); box-shadow: 0 0 0 2px var(--gold-soft); }
+  .tl-item.home::before { background: var(--purple); box-shadow: 0 0 0 2px var(--purple-soft); }
+  .tl-item.nature::before { background: var(--green); box-shadow: 0 0 0 2px var(--green-soft); }
+
+  .tl-header { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-bottom: 3px; }
+  .tl-time { font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: var(--blue-deep); font-weight: 700; }
+  .tl-badge {
+    display: inline-block;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    color: var(--terracotta);
+    background: var(--terracotta-soft);
+    border-radius: 6px;
+    padding: 2px 7px;
+    font-weight: 600;
+  }
+  .tl-badge.food { color: #7A530E; background: var(--gold-soft); }
+  .tl-badge.rec { color: var(--green); background: var(--green-soft); }
+  .tl-badge.maps-btn { color: var(--blue); background: var(--blue-light); text-decoration: none; }
+  .tl-text { font-size: 13.8px; line-height: 1.55; color: var(--ink); }
+  .tl-text b { font-weight: 600; color: var(--blue-deep); }
+  .tl-subtext { font-size: 12.5px; color: var(--ink-soft); margin-top: 4px; line-height: 1.45; }
+
+  /* TABS (SATURDAY) */
+  .tabs {
+    display: flex;
+    gap: 6px;
+    margin-bottom: 16px;
+    flex-wrap: wrap;
+    background: var(--cream);
+    padding: 5px;
+    border-radius: var(--radius-full);
+    width: fit-content;
+    border: 1px solid var(--line-warm);
+  }
+  .tab-btn {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11.5px;
+    font-weight: 600;
+    padding: 6px 14px;
+    border-radius: var(--radius-full);
+    border: none;
+    background: transparent;
+    color: var(--ink-soft);
+    cursor: pointer;
+    transition: var(--transition);
+  }
+  .tab-btn.active {
+    background: var(--blue-deep);
+    color: var(--white);
+    box-shadow: 0 2px 6px rgba(11, 34, 54, 0.2);
+  }
+  .tab-panel { display: none; animation: fadeIn 0.25s ease; }
+  .tab-panel.active { display: block; }
+
+  .btn-ai-inline {
+    background: var(--purple-soft);
+    color: var(--purple);
+    border: 1px solid var(--purple-border);
+    padding: 4px 10px;
+    border-radius: var(--radius-full);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10.5px;
+    font-weight: 600;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    margin-top: 6px;
+    transition: var(--transition);
+  }
+  .btn-ai-inline:hover { background: var(--purple); color: var(--white); }
+
+  /* LUGARES */
+  .search-filter-wrap { display: flex; gap: 8px; margin-bottom: 14px; flex-wrap: wrap; }
+  .search-input {
+    flex: 1;
+    min-width: 200px;
+    padding: 8px 14px;
+    border-radius: var(--radius-full);
+    border: 1px solid var(--line);
+    font-size: 13px;
+    background: var(--white);
+    outline: none;
+  }
+  .place-filter { display: flex; gap: 5px; flex-wrap: wrap; }
+  .filter-btn {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    padding: 6px 12px;
+    border-radius: var(--radius-full);
+    border: 1px solid var(--line);
+    background: var(--white);
+    color: var(--ink-soft);
+    cursor: pointer;
+    font-weight: 600;
+  }
+  .filter-btn.active { background: var(--blue-deep); color: var(--white); border-color: var(--blue-deep); }
+
+  .place-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .place {
+    border: 1px solid var(--line);
+    border-radius: var(--radius-md);
+    padding: 16px;
+    background: var(--white);
+    box-shadow: var(--shadow-sm);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: var(--transition);
+  }
+  .place:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
+  .place.star { border-color: var(--gold-border); background: linear-gradient(180deg, #FFFDF8 0%, #FFFFFF 100%); }
+  .place-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; margin-bottom: 6px; }
+  .place-name { font-family: 'Spectral', serif; font-weight: 700; font-size: 16.5px; color: var(--blue-deep); }
+  .place-rate {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--gold);
+    background: var(--gold-soft);
+    padding: 2px 7px;
+    border-radius: var(--radius-sm);
+    white-space: nowrap;
+  }
+  .place p { font-size: 12.8px; line-height: 1.5; color: var(--ink-soft); margin: 0 0 8px; }
+  .place-meta { display: flex; gap: 5px; flex-wrap: wrap; margin-bottom: 8px; }
+  .pm {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    padding: 3px 7px;
+    border-radius: var(--radius-full);
+    background: var(--cream);
+    color: var(--ink-soft);
+    border: 1px solid var(--line);
+    font-weight: 500;
+  }
+  .pm.free { background: var(--green-soft); color: #13462C; border-color: var(--green-border); font-weight: 600; }
+  .pm.time { background: var(--blue-light); color: var(--blue-deep); }
+  .pm.warn { background: var(--terracotta-soft); color: var(--terracotta); }
+  .place-footer { display: flex; justify-content: space-between; align-items: center; border-top: 1px dashed var(--line); padding-top: 6px; margin-top: auto; }
+  .map-link {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    color: var(--blue);
+    text-decoration: none;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+  }
+  .map-link:hover { text-decoration: underline; }
+
+  /* GASTRONOMIA */
+  .food-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+  .food-card {
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-md);
+    padding: 14px;
+    box-shadow: var(--shadow-sm);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .food-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
+  .food-icon { font-size: 22px; margin-bottom: 4px; }
+  .food-name { font-family: 'Spectral', serif; font-weight: 700; font-size: 15.5px; color: var(--blue-deep); }
+  .food-where { font-family: 'IBM Plex Mono', monospace; font-size: 10.5px; color: var(--gold); font-weight: 600; margin-bottom: 4px; }
+  .food-card p { font-size: 12.5px; color: var(--ink-soft); line-height: 1.45; margin-bottom: 8px; }
+
+  /* JUEGOS CARD STYLES */
+  .game-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .game {
+    border: 1px solid var(--line);
+    border-radius: var(--radius-md);
+    padding: 16px;
+    background: var(--white);
+    box-shadow: var(--shadow-sm);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .game:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
+  .game.hero-game { border-color: var(--gold-border); background: linear-gradient(135deg, #FFFDF6 0%, #FAF2DE 100%); }
+  .game-top { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; }
+  .game-icon { font-size: 22px; }
+  .game-name { font-family: 'Spectral', serif; font-weight: 700; font-size: 16.5px; color: var(--blue-deep); }
+  .game p { font-size: 13px; line-height: 1.5; color: var(--ink-soft); margin: 0 0 10px; }
+  .game p b { color: var(--ink); font-weight: 600; }
+  
+  /* INLINE AI GENERATOR BOXES FOR GAMES */
+  .game-ai-inline-box {
+    background: var(--cream);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-sm);
+    padding: 10px 12px;
+    margin: 8px 0;
+    font-size: 13px;
+    line-height: 1.5;
+    color: var(--blue-deep);
+    min-height: 48px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .game-meta { display: flex; gap: 5px; flex-wrap: wrap; margin-top: 6px; }
+  .gm {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    padding: 3px 7px;
+    border-radius: var(--radius-full);
+    background: var(--cream);
+    color: var(--ink-soft);
+    border: 1px solid var(--line);
+    font-weight: 500;
+  }
+  .gm.need { background: var(--terracotta-soft); color: var(--terracotta); }
+  .gm.zero { background: var(--green-soft); color: #13462C; }
+  .gm.star { background: var(--gold-soft); color: #7A530E; font-weight: 600; }
+
+  /* CRONOMETRO MIMICA */
+  .timer-box {
+    background: var(--cream);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-sm);
+    padding: 8px 12px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 8px 0;
+  }
+  .timer-display { font-family: 'IBM Plex Mono', monospace; font-size: 20px; font-weight: 700; color: var(--terracotta); }
+  .timer-btn {
+    background: var(--blue-deep);
+    color: var(--white);
+    border: none;
+    padding: 5px 12px;
+    border-radius: 4px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    cursor: pointer;
+  }
+
+  /* 1 VERDAD Y 2 MENTIRAS CAMUFLAJE */
+  .truth-secret-wrap {
+    display: flex;
+    gap: 6px;
+    margin: 8px 0;
+    align-items: center;
+  }
+  .truth-secret-input {
+    flex: 1;
+    padding: 7px 12px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-sm);
+    font-size: 12.5px;
+    outline: none;
+    background: var(--white);
+    transition: var(--transition);
+  }
+  .truth-secret-input:focus { border-color: var(--blue); }
+  .btn-mask-toggle {
+    background: var(--cream);
+    border: 1px solid var(--line);
+    padding: 7px 10px;
+    border-radius: var(--radius-sm);
+    font-size: 11px;
+    font-family: 'IBM Plex Mono', monospace;
+    cursor: pointer;
+    color: var(--ink-soft);
+    white-space: nowrap;
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-touch-callout: none;
+    transition: var(--transition);
+  }
+  .btn-mask-toggle:active, .btn-mask-toggle.holding {
+    background: var(--blue-deep);
+    color: var(--white);
+    border-color: var(--blue-deep);
+  }
+  .truth-option-card {
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-sm);
+    padding: 9px 12px;
+    margin-top: 6px;
+    font-size: 12.5px;
+    line-height: 1.45;
+    transition: var(--transition);
+  }
+  .truth-option-card.real-revealed {
+    background: #E8F5E9;
+    border-color: #2E7D32;
+    box-shadow: 0 0 0 1.5px #2E7D32;
+  }
+  .truth-option-card.lie-revealed {
+    background: #FFF8E1;
+    border-color: #FFA000;
+    opacity: 0.9;
+  }
+  .truth-badge {
+    display: inline-block;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    font-weight: 700;
+    padding: 2px 7px;
+    border-radius: 4px;
+    margin-bottom: 4px;
+  }
+  .truth-badge.real { background: #2E7D32; color: #fff; }
+  .truth-badge.lie { background: #FFA000; color: #fff; }
+  .btn-reveal-truth {
+    background: var(--terracotta);
+    color: var(--white);
+    border: none;
+    border-radius: var(--radius-full);
+    padding: 7px 14px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 10px;
+    box-shadow: var(--shadow-sm);
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: var(--transition);
+  }
+  .btn-reveal-truth:hover { background: #B33D1C; }
+
+  /* SCOREBOARD CARD */
+  .score-card {
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    padding: 18px;
+    margin-top: 18px;
+    box-shadow: var(--shadow-sm);
+  }
+  .scoreboard-table { width: 100%; border-collapse: collapse; font-size: 12.5px; }
+  .scoreboard-table th {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    text-align: left;
+    padding: 6px 8px;
+    background: var(--cream);
+    color: var(--ink-soft);
+    border-bottom: 1px solid var(--line);
+  }
+  /* SCOREBOARD STREAMLINED */
+  .scoreboard-direct-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .score-player-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--cream);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-sm);
+    padding: 10px 14px;
+    transition: var(--transition);
+  }
+  .score-player-row.is-leader {
+    background: #FEF9C3;
+    border-color: #FDE047;
+    box-shadow: 0 2px 8px rgba(234, 179, 8, 0.15);
+  }
+  .score-player-info {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .score-player-name {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--blue-deep);
+  }
+  .score-player-controls {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .score-value {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 18px;
+    font-weight: 800;
+    color: var(--terracotta);
+    min-width: 30px;
+    text-align: center;
+  }
+  .btn-score-ctrl {
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    font-weight: 700;
+    cursor: pointer;
+    padding: 4px 9px;
+    transition: var(--transition);
+  }
+  .btn-score-ctrl.plus {
+    background: var(--white);
+    color: var(--blue-deep);
+  }
+  .btn-score-ctrl.plus:hover {
+    background: var(--blue-deep);
+    color: #fff;
+  }
+  .btn-score-ctrl.minus {
+    background: #FEE2E2;
+    color: #991B1B;
+    border-color: #FECACA;
+    padding: 4px 8px;
+  }
+  .btn-score-ctrl.minus:hover {
+    background: #EF4444;
+    color: #fff;
+  }
+  .leader-badge { font-size: 11px; font-weight: 700; color: #B45309; background: #FEF3C7; border: 1px solid #FDE68A; padding: 2px 6px; border-radius: 4px; }
+
+  /* SPOT LIVE SCHEDULE BADGES */
+  .place-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 8px;
+    margin-bottom: 8px;
+  }
+  .radar-badge {
+    font-size: 10px;
+    font-weight: 700;
+    padding: 3px 7px;
+    border-radius: var(--radius-full);
+    white-space: nowrap;
+    font-family: 'IBM Plex Mono', monospace;
+  }
+  .radar-badge.open { background: #DCFCE7; color: #166534; border: 1px solid #86EFAC; }
+  .radar-badge.soon { background: #FEF3C7; color: #92400E; border: 1px solid #FDE68A; }
+  .radar-badge.closed { background: #FEE2E2; color: #991B1B; border: 1px solid #FECACA; }
+
+  /* PHOTO MISSION CARD */
+  .photo-mission-box {
+    background: linear-gradient(135deg, #FFFDF8 0%, #F5F3FF 100%);
+    border: 1px solid rgba(110, 68, 255, 0.2);
+    border-radius: var(--radius-md);
+    padding: 16px;
+    margin-top: 14px;
+  }
+  .btn-photo-traveler {
+    background: var(--white);
+    border: 1px solid var(--line);
+    color: var(--blue-deep);
+    padding: 6px 12px;
+    border-radius: var(--radius-sm);
+    font-size: 11.5px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: var(--transition);
+  }
+  .btn-photo-traveler:hover {
+    border-color: var(--purple);
+    color: var(--purple);
+    background: var(--purple-soft);
+  }
+
+  /* BEDS & APARTMENT */
+  .bed-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; margin-top: 12px; }
+  .room-card {
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-md);
+    padding: 14px;
+    box-shadow: var(--shadow-sm);
+  }
+  .room-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid var(--line-warm);
+  }
+  .room-title { font-weight: 700; font-size: 13.5px; color: var(--blue-deep); }
+  .room-pill { font-size: 10px; font-weight: 700; color: var(--blue); background: var(--blue-light); border: 1px solid var(--blue-soft); padding: 2px 6px; border-radius: 4px; font-family: 'IBM Plex Mono', monospace; }
+  .room-desc { font-size: 11px; color: var(--ink-soft); margin-bottom: 8px; }
+  .bed-select {
+    width: 100%;
+    padding: 6px 8px;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 600;
+    background: var(--cream);
+    color: var(--blue-deep);
+    margin-bottom: 6px;
+  }
+
+  /* TRUNK GAUGE (BAÚL KIA SONET 392L) */
+  .trunk-card {
+    background: #F8FAFC;
+    border: 1px solid #CBD5E1;
+    border-radius: var(--radius-md);
+    padding: 14px 16px;
+    margin-bottom: 14px;
+  }
+  .trunk-rule-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 8px;
+    margin-top: 10px;
+  }
+  .trunk-rule-box {
+    background: #fff;
+    border: 1px solid #E2E8F0;
+    border-radius: var(--radius-sm);
+    padding: 8px 10px;
+    font-size: 11.5px;
+  }
+  .trunk-rule-box.ok { border-color: #86EFAC; background: #F0FDF4; }
+  .trunk-rule-box.warn { border-color: #FECACA; background: #FEF2F2; }
+
+  /* CHECKLIST */
+  .pack-container {
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+  }
+  .pack-progress-bar { background: var(--line); height: 6px; width: 100%; }
+  .pack-progress-fill { background: var(--green); height: 100%; width: 0%; transition: width 0.3s ease; }
+  .pack-progress-text {
+    padding: 10px 16px;
+    background: var(--cream);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11.5px;
+    font-weight: 600;
+    color: var(--ink-soft);
+    border-bottom: 1px solid var(--line);
+  }
+  .pack-cat { padding: 12px 16px; border-bottom: 1px solid var(--line); }
+  .pack-cat:last-child { border-bottom: none; }
+  .pack-lbl {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--blue);
+    font-weight: 700;
+    margin-bottom: 6px;
+    display: block;
+  }
+  .pack-items-list { display: grid; grid-template-columns: 1fr 1fr; gap: 6px 12px; }
+  .pack-item-label {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    font-size: 12.8px;
+    color: var(--ink);
+    cursor: pointer;
+    user-select: none;
+  }
+  .pack-item-label input[type="checkbox"] { margin-top: 2px; accent-color: var(--green); width: 15px; height: 15px; }
+  .pack-item-label.checked { color: var(--ink-muted); text-decoration: line-through; }
+
+  /* AI CHAT MODAL (DIRECT INTERACTIVE CONVERSATION) */
+  .ai-modal-overlay {
+    display: none;
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(11, 34, 54, 0.6);
+    backdrop-filter: blur(6px);
+    z-index: 200;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+  }
+  .ai-modal-card {
+    background: var(--white);
+    border-radius: var(--radius-lg);
+    width: 100%;
+    max-width: 520px;
+    box-shadow: var(--shadow-lg);
+    overflow: hidden;
+    animation: fadeIn 0.2s ease;
+    display: flex;
+    flex-direction: column;
+    max-height: 82vh;
+  }
+  .ai-modal-head {
+    background: linear-gradient(135deg, var(--blue-deep) 0%, var(--purple) 100%);
+    color: var(--white);
+    padding: 14px 18px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .ai-modal-head h3 { font-family: 'Spectral', serif; font-size: 18px; font-weight: 700; }
+  .ai-modal-close {
+    background: transparent;
+    border: none;
+    color: #fff;
+    font-size: 24px;
+    cursor: pointer;
+    line-height: 1;
+  }
+  .ai-modal-body {
+    padding: 16px;
+    overflow-y: auto;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    background: #FAF8F5;
+  }
+  .chat-msg {
+    padding: 10px 14px;
+    border-radius: var(--radius-md);
+    font-size: 13.5px;
+    line-height: 1.5;
+    max-width: 88%;
+    word-break: break-word;
+  }
+  .chat-msg.ai {
+    background: var(--white);
+    color: var(--ink);
+    border: 1px solid var(--line);
+    align-self: flex-start;
+    border-bottom-left-radius: 4px;
+  }
+  .chat-msg.user {
+    background: var(--blue-deep);
+    color: var(--white);
+    align-self: flex-end;
+    border-bottom-right-radius: 4px;
+  }
+  .ai-modal-footer {
+    padding: 12px 16px;
+    background: var(--white);
+    border-top: 1px solid var(--line);
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 8px;
+  }
+  .ai-modal-input {
+    padding: 10px 14px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-full);
+    font-size: 13px;
+    outline: none;
+    font-family: inherit;
+    background: var(--cream);
+  }
+  .ai-modal-input:focus { border-color: var(--blue); background: var(--white); }
+  .ai-modal-btn {
+    background: var(--purple);
+    color: #fff;
+    border: none;
+    padding: 0 18px;
+    border-radius: var(--radius-full);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    font-weight: 700;
+    cursor: pointer;
+  }
+
+  /* MODAL FRENTE (HEADS UP FULLSCREEN HORIZONTAL) */
+  .forehead-modal {
+    display: none;
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 99999;
+    background: #061522;
+    color: #ffffff;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 24px;
+    box-sizing: border-box;
+    user-select: none;
+    -webkit-user-select: none;
+  }
+  .forehead-modal:fullscreen {
+    width: 100vw;
+    height: 100vh;
+    background: #061522;
+  }
+  .forehead-modal.rotated {
+    transform: rotate(90deg);
+    transform-origin: center center;
+    width: 100vh !important;
+    height: 100vw !important;
+  }
+  .forehead-countdown {
+    font-size: clamp(65px, 20vw, 130px);
+    font-weight: 900;
+    font-family: 'IBM Plex Mono', monospace;
+    color: #FFD166;
+    animation: pulseCount 0.9s infinite alternate ease-in-out;
+  }
+  .forehead-subcountdown {
+    font-size: clamp(16px, 4vw, 24px);
+    color: #CBD5E1;
+    margin-top: 14px;
+    font-family: 'Work Sans', sans-serif;
+    font-weight: 600;
+  }
+  .forehead-content {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    animation: fadeIn 0.3s ease;
+  }
+  .forehead-badge {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: clamp(11px, 2.2vw, 14px);
+    font-weight: 700;
+    color: #061522;
+    background: #FFD166;
+    padding: 4px 14px;
+    border-radius: var(--radius-full);
+    margin-bottom: 14px;
+    letter-spacing: 1.5px;
+  }
+  .forehead-name {
+    font-size: clamp(36px, 9vw, 76px);
+    font-weight: 900;
+    color: #ffffff;
+    text-transform: uppercase;
+    line-height: 1.08;
+    text-shadow: 0 4px 24px rgba(0,0,0,0.7);
+    max-width: 92%;
+    word-break: break-word;
+  }
+  .forehead-category {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: clamp(15px, 3.2vw, 24px);
+    color: #7DD3FC;
+    margin-top: 12px;
+    font-weight: 600;
+  }
+  .forehead-clue {
+    font-size: clamp(12px, 2.2vw, 16px);
+    color: #94A3B8;
+    margin-top: 8px;
+    font-style: italic;
+    max-width: 80%;
+    line-height: 1.4;
+  }
+  .forehead-top-actions {
+    position: absolute;
+    top: 18px;
+    right: 18px;
+    display: flex;
+    gap: 10px;
+    z-index: 50;
+  }
+  .btn-forehead-action {
+    background: rgba(255,255,255,0.18);
+    border: 1px solid rgba(255,255,255,0.35);
+    color: #ffffff;
+    padding: 8px 16px;
+    border-radius: var(--radius-full);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    backdrop-filter: blur(4px);
+    transition: var(--transition);
+    user-select: none;
+    -webkit-user-select: none;
+  }
+  .btn-forehead-action:hover, .btn-forehead-action:active {
+    background: rgba(255,255,255,0.3);
+  }
+  .btn-forehead-exit {
+    background: rgba(239, 68, 68, 0.25);
+    border-color: rgba(239, 68, 68, 0.5);
+    color: #FCA5A5;
+  }
+  .btn-forehead-exit:hover, .btn-forehead-exit:active {
+    background: rgba(239, 68, 68, 0.45);
+    color: #FFFFFF;
+  }
+  .btn-forehead-launch {
+    background: var(--blue-deep);
+    color: var(--white);
+    border: none;
+    padding: 7px 14px;
+    border-radius: var(--radius-full);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    font-weight: 700;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    box-shadow: var(--shadow-sm);
+    transition: var(--transition);
+  }
+  .btn-forehead-launch:hover { background: var(--blue); }
+
+  /* FOOTER */
+  .footer { margin-top: 36px; text-align: center; border-top: 1.5px solid var(--line-warm); padding-top: 24px; }
+  .footer-actions { display: flex; justify-content: center; gap: 8px; margin-bottom: 14px; flex-wrap: wrap; }
+  .btn-print {
+    background: var(--white);
+    border: 1px solid var(--line);
+    color: var(--blue-deep);
+    padding: 7px 14px;
+    border-radius: var(--radius-full);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: var(--shadow-sm);
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .btn-print:hover { background: var(--blue-light); }
+  .footer-note { font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: var(--ink-soft); line-height: 1.7; }
+
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
+
+  /* RESPONSIVE */
+  @media (max-width: 860px) {
+    .tools-grid { grid-template-columns: 1fr; }
+    .stat-strip { grid-template-columns: repeat(2, 1fr); }
+    .place-grid, .game-grid, .food-grid, .bed-grid { grid-template-columns: 1fr; }
+    .game.hero-game { grid-column: auto; }
+    .pack-items-list { grid-template-columns: 1fr; }
+    .expense-entry-grid { grid-template-columns: 1fr 90px auto; }
+  }
+
+  @media (max-width: 768px) {
+    /* OCULTAR PESTAÑAS SUPERIORES EN CELULAR - SE MANTIENE SOLO LA BARRA INFERIOR */
+    .main-tabs-wrapper { display: none !important; }
+    .mobile-bar { display: flex !important; }
+    body { padding-bottom: 84px; }
+
+    /* PREVENIR DESBORDAMIENTO HORIZONTAL EN HERO */
+    .wrap { padding: 0 12px; width: 100%; max-width: 100%; overflow-x: hidden; }
+    h1 { font-size: 25px; line-height: 1.2; word-break: break-word; }
+    .eyebrow {
+      font-size: 10px;
+      white-space: normal;
+      text-align: center;
+      line-height: 1.4;
+      display: inline-block;
+      max-width: 100%;
+      word-break: break-word;
+      padding: 5px 10px;
+    }
+    .confirmed-pill {
+      font-size: 10px;
+      white-space: normal;
+      text-align: center;
+      line-height: 1.4;
+      display: inline-flex;
+      justify-content: center;
+      max-width: 100%;
+      word-break: break-word;
+      padding: 6px 12px;
+      border-radius: var(--radius-md);
+    }
+    .travelers-strip { gap: 6px; }
+    .traveler-tag { font-size: 11px; padding: 4px 10px; }
+
+    /* PESTAÑAS DE SÁBADO (ADAPTADAS A VERTICAL PARA NO DESBORDAR) */
+    .tabs {
+      width: 100%;
+      border-radius: var(--radius-md);
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      padding: 6px;
+    }
+    .tab-btn {
+      width: 100%;
+      text-align: center;
+      white-space: normal;
+      font-size: 11px;
+      padding: 8px 10px;
+      line-height: 1.35;
+      border-radius: 8px;
+    }
+
+    /* TARJETAS Y TIMELINE */
+    .day-card, .tool-card {
+      padding: 16px 12px;
+      width: 100%;
+      max-width: 100%;
+      overflow-x: hidden;
+    }
+    .day-head {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 8px;
+    }
+    .day-name { font-size: 18px; line-height: 1.25; }
+    .day-chips { width: 100%; gap: 4px; }
+    .chip { white-space: normal; font-size: 10px; padding: 3px 8px; }
+
+    .timeline { padding-left: 16px; margin-left: 2px; }
+    .tl-item::before { left: -22px; width: 10px; height: 10px; }
+    .tl-time { font-size: 12px; word-break: break-word; }
+    .tl-header { gap: 4px; }
+    .tl-text { font-size: 13px; word-break: break-word; }
+
+    /* DIVISOR DE GASTOS TÁCTIL EN CELULAR */
+    .category-strip {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 6px;
+      margin-bottom: 12px;
+    }
+    .cat-pill {
+      font-size: 10.5px;
+      padding: 7px 2px;
+      text-align: center;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      border-radius: var(--radius-sm);
+    }
+    .payer-strip {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 5px;
+      margin-bottom: 12px;
+    }
+    .payer-pill {
+      font-size: 11px;
+      padding: 7px 2px;
+      text-align: center;
+      white-space: nowrap;
+      border-radius: var(--radius-sm);
+    }
+    .expense-entry-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    #expName {
+      width: 100%;
+      padding: 10px 12px;
+      font-size: 13.5px;
+    }
+    #expVal {
+      width: 100%;
+      padding: 10px 12px;
+      font-size: 14px;
+      font-weight: 700;
+    }
+    .btn-add-expense {
+      width: 100%;
+      padding: 12px;
+      font-size: 14px;
+      font-weight: 800;
+      background: #166534 !important;
+      color: #FFFFFF !important;
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      box-shadow: 0 2px 8px rgba(22, 101, 52, 0.25);
+    }
+
+    /* BOTONES DE RULETA */
+    .roulette-buttons {
+      grid-template-columns: 1fr 1fr;
+      gap: 6px;
+    }
+    .btn-roulette {
+      font-size: 10.5px;
+      padding: 8px 6px;
+      white-space: normal;
+      text-align: center;
+      line-height: 1.25;
+    }
+
+    /* TABLA DE PUNTAJES RESPONSIVE */
+    .scoreboard-table th, .scoreboard-table td {
+      padding: 6px 4px;
+      font-size: 11px;
+    }
+    .score-input { width: 38px; font-size: 12px; padding: 3px; }
+    .score-card { padding: 14px 10px; overflow-x: hidden; }
+
+    /* BUSCADOR DE SPOTS */
+    .search-filter-wrap { flex-direction: column; width: 100%; }
+    .search-input { width: 100%; min-width: 0; }
+    .place-filter { width: 100%; overflow-x: auto; padding-bottom: 4px; }
+  }
+
+  @media (max-width: 480px) {
+    .stat-strip {
+      grid-template-columns: 1fr 1fr;
+      gap: 6px;
+    }
+    .stat { padding: 8px 4px; }
+    .stat-val { font-size: 13px; }
+    .stat-lbl { font-size: 9.5px; }
+    .stat-icon { font-size: 16px; }
+
+    .category-strip {
+      grid-template-columns: repeat(4, 1fr);
+      gap: 4px;
+    }
+    .cat-pill {
+      font-size: 9.5px;
+      padding: 6px 1px;
+    }
+    .payer-strip {
+      grid-template-columns: repeat(4, 1fr);
+      gap: 4px;
+    }
+    .payer-pill {
+      font-size: 10.5px;
+      padding: 6px 2px;
+    }
+  }
+
+  @media print {
+    .sticky-nav, .main-tabs-wrapper, .mobile-bar, .tools-grid, .btn-print, .search-filter-wrap { display: none !important; }
+    .main-tab-view { display: block !important; }
+    body { background: #fff; color: #000; padding: 0; }
+  }
+</style>
+</head>
+<body>
+
+<!-- TOP NAV -->
+<nav class="sticky-nav">
+  <div class="nav-inner">
+    <div class="nav-brand"><span>🏔️</span> CUENCA 2026</div>
+    <div class="nav-right-actions">
+      <button class="nav-ai-btn" onclick="openAiChat()">✨ Asistente de Viaje</button>
+    </div>
+  </div>
+</nav>
+
+<!-- MAIN TABS NAVIGATION (CLICKABLE SECTIONS) -->
+<div class="main-tabs-wrapper">
+  <div class="main-tabs-inner">
+    <button class="tab-pill-btn active" onclick="switchMainTab('itinerario', this)">📅 Itinerario por Día</button>
+    <button class="tab-pill-btn" onclick="switchMainTab('cuentas', this)">⚡ Cuentas & Ruleta</button>
+    <button class="tab-pill-btn" onclick="switchMainTab('spots', this)">🔥 Spots & Comida</button>
+    <button class="tab-pill-btn" onclick="switchMainTab('juegos', this)">🎲 Juegos & Noches</button>
+    <button class="tab-pill-btn" onclick="switchMainTab('logistica', this)">🎒 Camas & Maletas</button>
+  </div>
+</div>
+
+<!-- MOBILE QUICK BAR -->
+<div class="mobile-bar">
+  <button class="mobile-action-btn active" id="mob-btn-itinerario" onclick="switchMainTab('itinerario')"><span>📅</span><span>Plan</span></button>
+  <button class="mobile-action-btn" id="mob-btn-cuentas" onclick="switchMainTab('cuentas')"><span>⚡</span><span>Cuentas</span></button>
+  <button class="mobile-action-btn" id="mob-btn-spots" onclick="switchMainTab('spots')"><span>🔥</span><span>Spots</span></button>
+  <button class="mobile-action-btn" id="mob-btn-juegos" onclick="switchMainTab('juegos')"><span>🎲</span><span>Juegos</span></button>
+  <button class="mobile-action-btn" id="mob-btn-logistica" onclick="switchMainTab('logistica')"><span>🎒</span><span>Equipaje</span></button>
+</div>
+
+<div class="wrap">
+
+  <!-- ==================== PESTAÑA 1: ITINERARIO ==================== -->
+  <div class="main-tab-view active" id="tab-itinerario">
+
+    <!-- HERO (EXCLUSIVO DE LA PESTAÑA PLAN) -->
+    <div class="hero">
+      <div class="eyebrow">VIAJE CUENCA · VIE 4 AL DOM 6 SEP 2026 · KIA SONET</div>
+      <br>
+      <div class="confirmed-pill">
+        <span class="check-dot"></span> HOSPEDAJE ANICÁ CONFIRMADO · CHECK-IN 15:00 · CHECK-OUT 10:45 AM
+      </div>
+      <h1>Cuenca: <em>plan maestro</em> & diversión</h1>
+      
+      <div class="travelers-strip">
+        <span class="traveler-tag">👤 Alan</span>
+        <span class="traveler-tag">👤 Dennis</span>
+        <span class="traveler-tag">👤 Ashley</span>
+        <span class="traveler-tag">👤 Jahaira</span>
+        <span class="traveler-tag">👤 Douglas</span>
+      </div>
+
+      <!-- STAT STRIP -->
+      <div class="stat-strip">
+        <div class="stat">
+          <div class="stat-icon">🚗</div>
+          <div class="stat-val">9:30 AM</div>
+          <div class="stat-lbl">Salida Viernes GYE</div>
+        </div>
+        <div class="stat">
+          <div class="stat-icon">🛎️</div>
+          <div class="stat-val">15:00</div>
+          <div class="stat-lbl">Check-in ANICÁ</div>
+        </div>
+        <div class="stat">
+          <div class="stat-icon">🕛</div>
+          <div class="stat-val">12:00 PM</div>
+          <div class="stat-lbl">Retorno Dom (GYE 4pm)</div>
+        </div>
+        <div class="stat">
+          <div class="stat-icon">⛅</div>
+          <div class="stat-val" id="heroTemp">16 °C</div>
+          <div class="stat-lbl" id="heroWeather">Fresco de Sierra</div>
+        </div>
+      </div>
+    </div>
+    <div class="section-head">
+      <div class="section-title-wrap">
+        <span class="section-tag">01 — Itinerario Maestro</span>
+        <span class="section-title">El fin de semana hora por hora</span>
+      </div>
+    </div>
+    <p class="section-note">
+      Sincronizado exactamente: Salida Viernes 9:30 AM → Check-in 15:00 → Check-out Domingo 10:45 AM → Retorno 12:00 PM.
+    </p>
+
+    <!-- VIERNES (FIJO 9:30 AM) -->
+    <div class="day-card">
+      <div class="day-head">
+        <div>
+          <div class="day-name"><span>🚗</span> Viernes 4 · Salida, Llegada & Tarde Dorada</div>
+          <div class="day-date">Día 1 de 3 — Guayaquil a Cuenca vía Molleturo</div>
+        </div>
+        <div class="day-chips">
+          <span class="chip">🛣️ 195 km · ~3h30</span>
+          <span class="chip purple">🛎️ Check-in 15:00</span>
+          <span class="chip warm">🌇 Atardecer Turi 6:20 PM</span>
+        </div>
+      </div>
+
+      <div class="timeline">
+        <div class="tl-item drive">
+          <div class="tl-header">
+            <span class="tl-time">9:00 – 9:30 AM · Salida Fija desde Guayaquil</span>
+            <span class="tl-badge">Punto de Encuentro</span>
+          </div>
+          <div class="tl-text">
+            Reunión del grupo (Alan, Dennis, Ashley, Jahaira, Douglas). Cargar maletas en el Kia Sonet y <b>tanquear con Súper</b>. Calibrar llantas a 33 PSI y llevar agua.
+          </div>
+        </div>
+
+        <div class="tl-item drive">
+          <div class="tl-header">
+            <span class="tl-time">9:30 AM – 1:00 PM · Ascenso Panorámico por Molleturo</span>
+            <span class="tl-badge">Vía E582 con Sol</span>
+          </div>
+          <div class="tl-text">
+            Viaje con excelente visibilidad de montaña. Parada corta de 10 min en Tamarindo/Molleturo para estirar piernas y cafecito.
+          </div>
+        </div>
+
+        <div class="tl-item food">
+          <div class="tl-header">
+            <span class="tl-time">1:15 – 2:35 PM · Llegada & Festín de Hornado</span>
+            <span class="tl-badge food">Gastronomía Típica</span>
+            <a href="https://maps.google.com/?q=Mercado+10+de+Agosto+Cuenca" target="_blank" rel="noopener" class="tl-badge maps-btn">Mercado 10 de Agosto ↗</a>
+          </div>
+          <div class="tl-text">
+            Llegan directo a almorzar <b>hornado con cuero crocante, mote pillo jugoso y llapingachos</b> (Mercado 10 de Agosto o Raymipampa en el Parque Calderón).
+          </div>
+        </div>
+
+        <div class="tl-item home">
+          <div class="tl-header">
+            <span class="tl-time">3:00 PM (15:00) EN PUNTO · Check-in en ANICÁ</span>
+            <span class="tl-badge rec">Hospedaje Oficial</span>
+            <a href="https://www.google.com/maps/place/2%C2%B053'40.6%22S+78%C2%B057'50.1%22W/@-2.8951576,-78.9671131,16z/data=!4m4!3m3!8m2!3d-2.8946111!4d-78.9639167?entry=ttu&g_ep=EgoyMDI2MDgzMS4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener" class="tl-badge maps-btn">Cómo llegar ↗</a>
+          </div>
+          <div class="tl-text">
+            Llegada al edificio junto al Hospital del Río. Estacionan el Sonet en el parqueadero privado, suben en ascensor e ingresan al departamento.
+          </div>
+          <div class="tl-subtext">
+            🛏️ <i>Aclimatación:</i> Desempacar, tomar agua o té aromático y descansar 40 min para adaptarse a los 2.560 msnm.
+          </div>
+        </div>
+
+        <div class="tl-item">
+          <div class="tl-header">
+            <span class="tl-time">4:15 – 5:45 PM · Chocolatería Dos Chorreras & Plaza de las Flores</span>
+            <span class="tl-badge">Tarde Dulce</span>
+            <a href="https://maps.google.com/?q=Chocolateria+Dos+Chorreras+Centro+Cuenca" target="_blank" rel="noopener" class="tl-badge maps-btn">Dos Chorreras ↗</a>
+          </div>
+          <div class="tl-text">
+            Paseo por el centro: chocolate caliente espumoso con queso en el local temático con auto clásico adentro, fotos bajo las cúpulas de la Catedral y agua de pitisana en la Plaza de las Flores.
+          </div>
+        </div>
+
+        <div class="tl-item drive">
+          <div class="tl-header">
+            <span class="tl-time">6:00 – 7:30 PM · Mirador de Turi & Canelazos</span>
+            <span class="tl-badge">Atardecer 6:20 PM</span>
+            <a href="https://maps.google.com/?q=Mirador+de+Turi+Cuenca" target="_blank" rel="noopener" class="tl-badge maps-btn">Mirador Turi ↗</a>
+          </div>
+          <div class="tl-text">
+            Suben a Turi (12 min) para ver caer el sol y encenderse las luces de Cuenca. <b>Canelazos calientes</b> en los kioscos y Parque Extremo para quienes quieran columpios al vacío.
+          </div>
+        </div>
+
+        <div class="tl-item food">
+          <div class="tl-header">
+            <span class="tl-time">8:00 – 10:00 PM · Cena & Cerveza Artesanal en El Barranco</span>
+            <span class="tl-badge food">Vida Nocturna</span>
+          </div>
+          <div class="tl-text">
+            Cena y tragos junto al río iluminado: <b>Cervecería La María</b>, pizzas artesanales en Fabiano's o pubs en Calle Larga.
+          </div>
+        </div>
+
+        <div class="tl-item home">
+          <div class="tl-header">
+            <span class="tl-time">10:15 PM+ · Noche de Juegos en ANICÁ</span>
+            <span class="tl-badge rec">En el Depa</span>
+          </div>
+          <div class="tl-text">
+            Primera sesión de juegos en la sala: <b>¿Quién Soy? (Modo Frente)</b>, <b>Tribunal ("¿Quién es más probable que...?")</b> y <b>1 Verdad y 2 Mentiras con IA</b>.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SÁBADO -->
+    <div class="day-card">
+      <div class="day-head">
+        <div>
+          <div class="day-name"><span>💎</span> Sábado 5 · Experiencias & Diversión</div>
+          <div class="day-date">Día 2 de 3 — Ruinas Incas, Miradores o Termas</div>
+        </div>
+        <div class="day-chips">
+          <span class="chip warm">🏛️ Ruinas Pumapungo</span>
+          <span class="chip green">🍫 Pacari Paucarbamba</span>
+          <span class="chip purple">🌇 Torre Libertad 360°</span>
+        </div>
+      </div>
+
+      <div class="tabs">
+        <button class="tab-btn active" onclick="showTab('d2','a',this)">Opción A: Terrazas Incas Pumapungo + Torre de Vidrio 360° (Recomendada)</button>
+        <button class="tab-btn" onclick="showTab('d2','b',this)">Opción B: Páramo El Cajas & Trucha Fresca</button>
+        <button class="tab-btn" onclick="showTab('d2','c',this)">Opción C: Relax en Termas Piedra de Agua</button>
+      </div>
+
+      <!-- TAB 2A: PUMAPUNGO + CENTRO + TORRE LIBERTAD -->
+      <div id="d2a" class="tab-panel active">
+        <div class="timeline">
+          <div class="tl-item food">
+            <div class="tl-header">
+              <span class="tl-time">8:45 – 9:45 AM · Desayuno Cuencano</span>
+              <span class="tl-badge food">Café & Pan caliente</span>
+            </div>
+            <div class="tl-text">
+              Desayuno con calma en el depa o en <b>San Sebas Café</b>. <i>(Baño escalonado: 2 se alistan mientras 3 preparan café)</i>.
+            </div>
+          </div>
+
+          <div class="tl-item">
+            <div class="tl-header">
+              <span class="tl-time">10:00 – 11:15 AM · Casa Pacari Paucarbamba</span>
+              <span class="tl-badge">En su barrio</span>
+              <a href="https://maps.google.com/?q=Pacari+Paucarbamba+Cuenca" target="_blank" rel="noopener" class="tl-badge maps-btn">Pacari ↗</a>
+            </div>
+            <div class="tl-text">
+              Cata y compra de recuerdos en la boutique oficial del mejor chocolate del mundo junto a ANICÁ <i>(aprovechar hoy porque mañana domingo no abre)</i>.
+            </div>
+          </div>
+
+          <div class="tl-item nature">
+            <div class="tl-header">
+              <span class="tl-time">11:30 AM – 2:30 PM · Parque Arqueológico & Terrazas Pumapungo</span>
+              <span class="tl-badge rec">Ruinas Incas</span>
+              <a href="https://maps.google.com/?q=Museo+Pumapungo+Cuenca" target="_blank" rel="noopener" class="tl-badge maps-btn">Pumapungo ↗</a>
+            </div>
+            <div class="tl-text">
+              Recorrido a pie por la antigua capital incaica de Tomebamba en pleno centro:
+              <br>• <b>Terrazas agrícolas escalonadas:</b> Ruinas de piedra del Palacio Inca, canales de agua sagrada y jardín etnobotánico (entrada 100% gratuita).
+              <br>• <b>Almuerzo tradicional en el Centro:</b> Almuerzo tradicional cuencano con mote pillo, locro de papa caliente y carnes típicas.
+            </div>
+          </div>
+
+          <div class="tl-item">
+            <div class="tl-header">
+              <span class="tl-time">2:45 – 5:00 PM · Paseo por el Centro Histórico & Cafés</span>
+              <span class="tl-badge">Tiempo Libre</span>
+              <a href="https://maps.google.com/?q=Parque+Calderon+Cuenca" target="_blank" rel="noopener" class="tl-badge maps-btn">Centro ↗</a>
+            </div>
+            <div class="tl-text">
+              Caminata relajada por la Calle Santa Ana, Plaza de las Flores y cafés coloniales antes de subir a la torre mirador.
+            </div>
+          </div>
+
+          <div class="tl-item">
+            <div class="tl-header">
+              <span class="tl-time">5:15 – 6:30 PM · Torre Mirador de la Libertad (Piso de Vidrio)</span>
+              <span class="tl-badge rec">Piso de Cristal 360°</span>
+              <a href="https://maps.google.com/?q=Parque+de+la+Libertad+Cuenca" target="_blank" rel="noopener" class="tl-badge maps-btn">Torre Libertad ↗</a>
+            </div>
+            <div class="tl-text">
+              Torre de 8 pisos con ascensor panorámico y piso de cristal en la cima. Vista 360° gratuita sobre toda la ciudad y la cordillera antes del anochecer.
+            </div>
+          </div>
+
+          <div class="tl-item food">
+            <div class="tl-header">
+              <span class="tl-time">8:00 – 10:30 PM · Cena Especial & Rooftop</span>
+              <span class="tl-badge food">Noche de Sábado</span>
+            </div>
+            <div class="tl-text">
+              Cena de celebración en terraza con vista (Windmill Rooftop, Selina o restaurante Tiestos).
+            </div>
+          </div>
+
+          <div class="tl-item home">
+            <div class="tl-header">
+              <span class="tl-time">10:45 PM+ · Noche de Juegos en ANICÁ</span>
+              <span class="tl-badge rec">Noche Decisiva</span>
+            </div>
+            <div class="tl-text">
+              Torneo de juegos: <b>Dígalo con Mímica (con cronómetro)</b>, <b>¿Quién Soy?</b> y <b>Karaoke en el Smart TV</b>.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TAB 2B: CAJAS -->
+      <div id="d2b" class="tab-panel">
+        <div class="timeline">
+          <div class="tl-item food"><div class="tl-time">7:45 – 8:30 AM</div><div class="tl-text">Desayuno temprano. Llevar chompas térmicas, guantes y agua.</div></div>
+          <div class="tl-item drive"><div class="tl-time">8:30 – 9:30 AM</div><div class="tl-text">Subida al <b>Parque Nacional El Cajas</b> (35 km · 1h). Madrugar para ganarle a la neblina.</div></div>
+          <div class="tl-item nature"><div class="tl-time">9:30 AM – 1:00 PM</div><div class="tl-text"><b>Laguna Toreadora (3.900 msnm):</b> Caminata suave por senderos de páramo y bosque de árboles de papel (Polylepis). Fotos increíbles.</div></div>
+          <div class="tl-item food"><div class="tl-time">1:15 – 3:00 PM</div><div class="tl-text"><b>Almuerzo de Trucha Fresca</b> al ajillo en paraderos del Cajas o Hostería Dos Chorreras.</div></div>
+          <div class="tl-item"><div class="tl-time">3:45 – 6:00 PM</div><div class="tl-text">Regreso al depa, ducha caliente y tarde en la <b>Torre de la Libertad</b> o cafés de Calle Larga.</div></div>
+          <div class="tl-item food"><div class="tl-time">8:00 – 10:30 PM</div><div class="tl-text">Cena en El Barranco y juegos en el depa.</div></div>
+        </div>
+      </div>
+
+      <!-- TAB 2C: TERMAS -->
+      <div id="d2c" class="tab-panel">
+        <div class="timeline">
+          <div class="tl-item food"><div class="tl-time">9:00 – 10:00 AM</div><div class="tl-text">Desayuno relajado en el departamento.</div></div>
+          <div class="tl-item nature"><div class="tl-time">10:30 AM – 2:30 PM</div><div class="tl-text"><b>Termas Piedra de Agua (Baños de Cuenca):</b> Piscinas de aguas termales subterráneas, baños de vapor en cuevas naturales y barro volcánico. Súper divertido y relajante en grupo.</div></div>
+          <div class="tl-item food"><div class="tl-time">2:45 – 4:15 PM</div><div class="tl-text">Almuerzo tardío en restaurante típico campestre.</div></div>
+          <div class="tl-item"><div class="tl-time">5:00 – 6:30 PM</div><div class="tl-text">Visita a la <b>Torre Mirador de la Libertad</b> al atardecer.</div></div>
+          <div class="tl-item food"><div class="tl-time">8:00 – 10:30 PM</div><div class="tl-text">Cena en Calle Larga y juegos en el depa.</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DOMINGO -->
+    <div class="day-card">
+      <div class="day-head">
+        <div>
+          <div class="day-name"><span>🌿</span> Domingo 6 · Check-out 10:45 AM & Retorno al Mediodía</div>
+          <div class="day-date">Día 3 de 3 — Sincronizado para viajar con luz solar</div>
+        </div>
+        <div class="day-chips">
+          <span class="chip purple">🕚 Check-out 10:45 AM</span>
+          <span class="chip warm">🕛 Salida Carretera 12:00 PM</span>
+          <span class="chip green">🏠 Llegada GYE ~4:00 PM</span>
+        </div>
+      </div>
+
+      <div class="timeline">
+        <div class="tl-item food">
+          <div class="tl-header">
+            <span class="tl-time">8:30 – 9:30 AM · Desayuno Final & Maletas</span>
+            <span class="tl-badge">En ANICÁ</span>
+          </div>
+          <div class="tl-text">
+            Desayuno final del grupo. Dejar maletas cerradas y revisar no olvidar cargadores en los cuartos.
+          </div>
+        </div>
+
+        <div class="tl-item nature">
+          <div class="tl-header">
+            <span class="tl-time">9:30 – 10:30 AM · Paseo por Parque El Paraíso</span>
+            <span class="tl-badge rec">A pasos del depa</span>
+            <a href="https://maps.google.com/?q=Parque+El+Paraiso+Cuenca" target="_blank" rel="noopener" class="tl-badge maps-btn">El Paraíso ↗</a>
+          </div>
+          <div class="tl-text">
+            Salen caminando del edificio: paseo junto al río Tomebamba, aire fresco y fotos finales del grupo.
+          </div>
+        </div>
+
+        <div class="tl-item home">
+          <div class="tl-header">
+            <span class="tl-time">10:45 AM (Antes de las 11:00) · Check-out en ANICÁ</span>
+            <span class="tl-badge">Despedida</span>
+          </div>
+          <div class="tl-text">
+            Cargar el maletero del Sonet en el subsuelo, cerrar con código y salir con calma.
+          </div>
+        </div>
+
+        <div class="tl-item food">
+          <div class="tl-header">
+            <span class="tl-time">11:15 AM – 12:00 PM · Almuerzo Temprano & Gasolina Súper</span>
+            <span class="tl-badge food">Último bocado típico</span>
+          </div>
+          <div class="tl-text">
+            Almuerzo temprano de despedida y <b>llenar el tanque con gasolina Súper en Cuenca</b> antes de tomar la Panamericana.
+          </div>
+        </div>
+
+        <div class="tl-item drive">
+          <div class="tl-header">
+            <span class="tl-time">12:00 – 3:45 PM · Carretera Molleturo – Guayaquil</span>
+            <span class="tl-badge">195 km · 100% Día</span>
+          </div>
+          <div class="tl-text">
+            Viaje de retorno a Guayaquil. Cruzan la montaña con sol del mediodía y cero neblina, llegando a Guayaquil alrededor de las 3:45 – 4:00 PM.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div style="text-align:center;margin:24px 0 8px 0;">
+      <a href="https://www.google.com/maps/place/2%C2%B053'40.6%22S+78%C2%B057'50.1%22W/@-2.8951576,-78.9671131,16z/data=!4m4!3m3!8m2!3d-2.8946111!4d-78.9639167?entry=ttu&g_ep=EgoyMDI2MDgzMS4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener" class="btn-print" style="text-decoration:none;background:var(--blue-deep);color:#fff;font-weight:700;padding:8px 18px;display:inline-flex;align-items:center;gap:6px;">📍 Ubicación del Departamento ANICÁ en Google Maps ↗</a>
+    </div>
+  </div>
+
+  <!-- ==================== PESTAÑA 2: CUENTAS & RULETA ==================== -->
+  <div class="main-tab-view" id="tab-cuentas">
+    <div class="section-head">
+      <div class="section-title-wrap">
+        <span class="section-tag">02 — Cuentas & Decisiones</span>
+        <span class="section-title">Divisor de Gastos Táctil & Ruleta</span>
+      </div>
+    </div>
+
+    <div class="tools-grid">
+      <!-- DIVISOR TACTIL LIMPIO E INTELIGENTE -->
+      <div class="tool-card">
+        <div>
+          <div class="tool-header">
+            <div class="tool-header-left">
+              <span style="font-size:22px;">⚡</span>
+              <h3>Divisor de Gastos</h3>
+            </div>
+          </div>
+
+          <!-- PASO 1: CATEGORÍAS TÁCTILES -->
+          <div class="section-label-small">1. Toca la Categoría:</div>
+          <div class="category-strip" id="categoryStrip">
+            <button class="cat-pill active" onclick="selectCategory('⛽ Gasolina Súper', this)">⛽ Gasolina</button>
+            <button class="cat-pill" onclick="selectCategory('🛣️ Peajes', this)">🛣️ Peajes</button>
+            <button class="cat-pill" onclick="selectCategory('🥘 Comida / Almuerzo', this)">🥘 Comida</button>
+            <button class="cat-pill" onclick="selectCategory('☕ Canelazos Turi', this)">☕ Canelazos</button>
+            <button class="cat-pill" onclick="selectCategory('🍻 Bar / Tragos', this)">🍻 Bar/Tragos</button>
+            <button class="cat-pill" onclick="selectCategory('🥤 Snacks Carretera', this)">🥤 Snacks</button>
+            <button class="cat-pill" onclick="selectCategory('🛒 Supermercado Depa', this)">🛒 Supermercado</button>
+            <button class="cat-pill" onclick="selectCategory('✨ Otro Gasto', this)">✨ Otro</button>
+          </div>
+
+          <!-- PASO 2: QUIÉN PAGÓ -->
+          <div class="section-label-small">2. ¿Quién pagó el gasto?</div>
+          <div class="payer-strip" id="payerStrip">
+            <button class="payer-pill active" onclick="selectPayer('Alan', this)">Alan</button>
+            <button class="payer-pill" onclick="selectPayer('Ashley', this)">Ashley</button>
+            <button class="payer-pill" onclick="selectPayer('Jahaira', this)">Jahaira</button>
+            <button class="payer-pill" onclick="selectPayer('Douglas', this)">Douglas</button>
+          </div>
+
+          <!-- PASO 3: CONCEPTO Y MONTO MANUAL -->
+          <div class="section-label-small">3. Detalle y Monto ($):</div>
+          <div class="expense-entry-grid">
+            <input type="text" id="expName" value="Gasolina Súper" placeholder="Detalle del gasto...">
+            <input type="number" id="expVal" placeholder="$ Ingrese Monto (ej: 15.00)" min="0" step="0.01" inputmode="decimal">
+            <button class="btn-add-expense" onclick="addExpenseTactile()">➕ Agregar Gasto</button>
+          </div>
+
+          <div class="expense-list" id="expenseList"></div>
+        </div>
+
+        <!-- RESOLUCIÓN INTELIGENTE DE DEUDAS -->
+        <div class="settle-matrix" id="settleMatrix">
+          <div class="settle-title">📊 Balance & Transferencias Mínimas:</div>
+          <div id="settleResults">Aún no hay gastos registrados. Usa los botones arriba para empezar.</div>
+        </div>
+      </div>
+
+      <!-- RULETA DE DECISIONES CON IA -->
+      <div class="tool-card">
+        <div>
+          <div class="tool-header">
+            <div class="tool-header-left">
+              <span style="font-size:22px;">🎯</span>
+              <h3>Ruleta y Retos</h3>
+            </div>
+          </div>
+          
+          <div class="roulette-box" id="rouletteBox">
+            <div class="roulette-name" id="rouletteName">¿Quién empieza?</div>
+            <div class="roulette-action" id="rouletteSub">Toca un botón abajo para sortear</div>
+          </div>
+
+          <div class="roulette-buttons">
+            <button class="btn-roulette purple" onclick="spinPerson()" title="Sortea quién hace una tarea del grupo">🙋 Sortear Amigo</button>
+            <button class="btn-roulette" onclick="spinGame()" title="Elige al azar qué juego jugar">🎲 Sortear Juego</button>
+            <button class="btn-roulette" style="background:#22754D;" onclick="spinFood()" title="Elige qué comida típica probar">🍲 Sortear Comida</button>
+            <button class="btn-roulette" style="background:#B5421D;" onclick="spinAiDare()" title="Genera un reto dinámico con IA">⚡ Reto con IA</button>
+            <button class="btn-roulette ai" onclick="spinAiTruth()" title="Genera una pregunta de verdad con IA">✨ Verdad con IA</button>
+          </div>
+        </div>
+
+        <!-- CLIMA CUENCA SATELITAL Y POR HORAS DE HOY -->
+        <div class="weather-container">
+          <div class="weather-header">
+            <div>
+              <div style="display:flex;align-items:center;gap:6px;">
+                <span class="weather-tag">Clima Cuenca Hoy (Satelital)</span>
+                <span id="weatherUpdatedTime" style="font-size:10.5px;font-family:'IBM Plex Mono',monospace;color:var(--ink-soft);font-weight:600;"></span>
+              </div>
+              <div class="weather-main-row">
+                <div class="weather-temp" id="liveTemp">-- °C</div>
+                <div class="weather-sub-details">
+                  <span id="liveApparent">Sensación: --°C</span> · <span id="liveHumidity">Humedad: --%</span>
+                </div>
+              </div>
+            </div>
+            <div style="display:flex;flex-direction:column;align-items:flex-end;gap:6px;">
+              <div class="weather-condition" id="liveCond">
+                <span id="liveIcon" style="font-size:24px;">⛅</span><br>
+                <span id="liveDesc">Cargando...</span>
+              </div>
+              <button class="btn-print" id="btnRefreshWeather" style="padding:2px 8px;font-size:10px;display:flex;align-items:center;gap:4px;" onclick="fetchWeather(true)">🔄 Actualizar</button>
+            </div>
+          </div>
+
+          <!-- PRONÓSTICO PRÓXIMAS HORAS (HOY) -->
+          <div class="weather-hourly-wrap">
+            <div class="weather-hourly-title">PRÓXIMAS HORAS (HOY):</div>
+            <div class="weather-hourly-strip" id="weatherHourlyStrip">
+              <div class="weather-hour-card"><span class="weather-hour-time">Cargando horas...</span></div>
+            </div>
+          </div>
+
+          <!-- AVISO DE VESTIMENTA / LLUVIA -->
+          <div class="weather-alert-box" id="weatherAlertBox">
+            💡 <i>Consultando pronóstico de lluvia y frío para Cuenca...</i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== PESTAÑA 3: SPOTS & COMIDA ==================== -->
+  <div class="main-tab-view" id="tab-spots">
+    <div class="section-head">
+      <div class="section-title-wrap">
+        <span class="section-tag">03 — Spots & Experiencias</span>
+        <span class="section-title">Miradores, Chocolates, Joyería & Bares</span>
+      </div>
+    </div>
+
+    <!-- BUSCADOR & FILTROS UNIFICADOS -->
+    <div class="search-filter-wrap">
+      <input type="text" class="search-input" id="placeSearch" placeholder="🔍 Buscar spot o comida (ej: hornado, mirador, chocolate, plata, cerveza...)" oninput="searchPlaces()">
+      <div class="place-filter">
+        <button class="filter-btn active" onclick="filterPlaces('all', this)">Todos</button>
+        <button class="filter-btn" onclick="filterPlaces('mirador', this)">🌇 Miradores</button>
+        <button class="filter-btn" onclick="filterPlaces('comida', this)">🥘 Comida Típica</button>
+        <button class="filter-btn" onclick="filterPlaces('dulces', this)">🍫 Cafés & Dulces</button>
+        <button class="filter-btn" onclick="filterPlaces('noche', this)">🍻 Bares & Noche</button>
+        <button class="filter-btn" onclick="filterPlaces('cultura', this)">🏛️ Ruinas & Cultura</button>
+        <button class="filter-btn" onclick="filterPlaces('relax', this)">🌿 Naturaleza & Relax</button>
+      </div>
+    </div>
+
+    <!-- GRID UNIFICADO DE SPOTS & EXPERIENCIAS CON HORARIOS EN VIVO -->
+    <div class="place-grid" id="placesGrid">
+
+      <!-- 1. TORRE MIRADOR DE LA LIBERTAD -->
+      <div class="place star" data-cat="mirador">
+        <div>
+          <div class="place-top">
+            <div>
+              <div class="place-name">Torre Mirador Parque de la Libertad</div>
+              <div class="place-rate">★ 4,6 · Piso de Cristal 360°</div>
+            </div>
+            <span class="radar-badge" id="badge-spot-libertad">Consultando...</span>
+          </div>
+          <p>Torre moderna de 8 pisos con ascensor panorámico y piso de cristal en la cima. Vista 360° gratuita sobre toda Cuenca.</p>
+          <div class="place-meta"><span class="pm free">100% Gratis</span><span class="pm time">10:00 – 19:30</span><span class="pm">Ascensor</span></div>
+        </div>
+        <div class="place-footer">
+          <span style="font-size:11px;color:var(--ink-soft);font-family:'IBM Plex Mono',monospace;">📍 Calle Nicanor Merchán</span>
+          <a href="https://maps.google.com/?q=Parque+de+la+Libertad+Cuenca" target="_blank" rel="noopener" class="map-link">GPS Maps ↗</a>
+        </div>
+      </div>
+
+      <!-- 2. MIRADOR DE TURI -->
+      <div class="place star" data-cat="mirador noche">
+        <div>
+          <div class="place-top">
+            <div>
+              <div class="place-name">Mirador de Turi & Kioscos de Canelazo</div>
+              <div class="place-rate">★ 4,8 · Atardecer & Noche</div>
+            </div>
+            <span class="radar-badge" id="badge-spot-turi">Consultando...</span>
+          </div>
+          <p>La postal nocturna de Cuenca. Kioscos de canelazo caliente ($1.50 – $3), fogatas, puente de cristal y columpios al vacío sobre la ciudad iluminada.</p>
+          <div class="place-meta"><span class="pm free">Mirador Gratis</span><span class="pm time">10:00 a 23:59</span><span class="pm">Atardecer 6:20 PM</span></div>
+        </div>
+        <div class="place-footer">
+          <span style="font-size:11px;color:var(--ink-soft);font-family:'IBM Plex Mono',monospace;">🚗 12 min desde ANICÁ</span>
+          <a href="https://maps.google.com/?q=Mirador+de+Turi+Cuenca" target="_blank" rel="noopener" class="map-link">GPS Maps ↗</a>
+        </div>
+      </div>
+
+      <!-- 3. MERCADO 10 DE AGOSTO -->
+      <div class="place star" data-cat="comida">
+        <div>
+          <div class="place-top">
+            <div>
+              <div class="place-name">Mercado 10 de Agosto (Hornado Cuencano)</div>
+              <div class="place-rate">★ 4,8 · Hornado Tradicional ($4 – $6)</div>
+            </div>
+            <span class="radar-badge" id="badge-spot-mercado10">Consultando...</span>
+          </div>
+          <p>Cerdo horneado a leña con cuero ultracrocante, mote pillo jugoso y llapingachos dorados con ají de tomate de árbol y jugos naturales gigantes.</p>
+          <div class="place-meta"><span class="pm time">07:00 – 16:30</span><span class="pm star">Parada Obligatoria</span><span class="pm">Planta Alta</span></div>
+        </div>
+        <div class="place-footer">
+          <span style="font-size:11px;color:var(--ink-soft);font-family:'IBM Plex Mono',monospace;">📍 Calle Larga y General Torres</span>
+          <a href="https://maps.google.com/?q=Mercado+10+de+Agosto+Cuenca" target="_blank" rel="noopener" class="map-link">GPS Maps ↗</a>
+        </div>
+      </div>
+
+      <!-- 4. RESTAURANTE RAYMIPAMPA -->
+      <div class="place" data-cat="comida">
+        <div>
+          <div class="place-top">
+            <div>
+              <div class="place-name">Restaurante Raymipampa (Plaza Central)</div>
+              <div class="place-rate">★ 4,5 · Comida Típica Tradicional ($4 – $8)</div>
+            </div>
+            <span class="radar-badge" id="badge-spot-raymipampa">Consultando...</span>
+          </div>
+          <p>El clásico frente a las cúpulas de la Catedral. Mote pillo, mote sucio con chicharrón, locro de papa caliente y carnes a la plancha.</p>
+          <div class="place-meta"><span class="pm time">08:00 – 22:00</span><span class="pm">Frente a Parque Calderón</span></div>
+        </div>
+        <div class="place-footer">
+          <span style="font-size:11px;color:var(--ink-soft);font-family:'IBM Plex Mono',monospace;">📍 Simón Bolívar y Benigno Malo</span>
+          <a href="https://maps.google.com/?q=Restaurante+Raymipampa+Cuenca" target="_blank" rel="noopener" class="map-link">GPS Maps ↗</a>
+        </div>
+      </div>
+
+      <!-- 5. CERVECERÍA LA MARÍA -->
+      <div class="place star" data-cat="noche">
+        <div>
+          <div class="place-top">
+            <div>
+              <div class="place-name">Cervecería La María (El Barranco)</div>
+              <div class="place-rate">★ 4,7 · Cerveza Artesanal & Piqueos</div>
+            </div>
+            <span class="radar-badge" id="badge-spot-lamaria">Consultando...</span>
+          </div>
+          <p>Cervezas artesanales premiadas a orillas del río Tomebamba con tablas de piqueos, pizzas y ambiente nocturno al aire libre.</p>
+          <div class="place-meta"><span class="pm time">17:00 – 01:00</span><span class="pm star">Junto al Río</span></div>
+        </div>
+        <div class="place-footer">
+          <span style="font-size:11px;color:var(--ink-soft);font-family:'IBM Plex Mono',monospace;">📍 Paseo 3 de Noviembre</span>
+          <a href="https://maps.google.com/?q=Cerveceria+La+Maria+Cuenca" target="_blank" rel="noopener" class="map-link">GPS Maps ↗</a>
+        </div>
+      </div>
+
+      <!-- 6. BARRANCO & CALLE LARGA -->
+      <div class="place" data-cat="noche">
+        <div>
+          <div class="place-top">
+            <div>
+              <div class="place-name">Barranco del Tomebamba & Calle Larga</div>
+              <div class="place-rate">★ 4,8 · Zona Bohemia</div>
+            </div>
+            <span class="radar-badge" id="badge-spot-callelarga">Consultando...</span>
+          </div>
+          <p>Casas coloniales colgantes sobre el río iluminadas, coctelería, pubs artesanales y terrazas para caminar de noche.</p>
+          <div class="place-meta"><span class="pm free">Acceso Libre</span><span class="pm time">18:00 a 02:00</span></div>
+        </div>
+        <div class="place-footer">
+          <span style="font-size:11px;color:var(--ink-soft);font-family:'IBM Plex Mono',monospace;">📍 Calle Larga & Paseo 3 de Noviembre</span>
+          <a href="https://maps.google.com/?q=El+Barranco+Cuenca" target="_blank" rel="noopener" class="map-link">GPS Maps ↗</a>
+        </div>
+      </div>
+
+      <!-- 7. PUMAPUNGO -->
+      <div class="place star" data-cat="cultura relax">
+        <div>
+          <div class="place-top">
+            <div>
+              <div class="place-name">Parque Arqueológico Pumapungo (Ruinas Incas)</div>
+              <div class="place-rate">★ 4,8 · Terrazas Incas & Jardines</div>
+            </div>
+            <span class="radar-badge" id="badge-spot-pumapungo">Consultando...</span>
+          </div>
+          <p>Antigua capital incaica de Tomebamba en pleno Cuenca. Terrazas agrícolas escalonadas, palacio inca de piedra tallada, jardín etnobotánico y centro de rescate de aves andinas.</p>
+          <div class="place-meta"><span class="pm free">100% Gratis</span><span class="pm time">08:30 – 17:00</span><span class="pm star">Foto Panorámica</span></div>
+        </div>
+        <div class="place-footer">
+          <span style="font-size:11px;color:var(--ink-soft);font-family:'IBM Plex Mono',monospace;">📍 Calle Larga y Huayna Cápac</span>
+          <a href="https://maps.google.com/?q=Museo+Pumapungo+Cuenca" target="_blank" rel="noopener" class="map-link">GPS Maps ↗</a>
+        </div>
+      </div>
+
+      <!-- 8. CHOCOLATERÍA DOS CHORRERAS -->
+      <div class="place star" data-cat="dulces">
+        <div>
+          <div class="place-top">
+            <div>
+              <div class="place-name">Chocolatería Dos Chorreras</div>
+              <div class="place-rate">★ 4,6 · Fábrica Clásica & Auto Vintage</div>
+            </div>
+            <span class="radar-badge" id="badge-spot-doschorreras">Consultando...</span>
+          </div>
+          <p>Local ambientado como fábrica de chocolate con auto clásico adentro. Chocolate caliente con queso de hacienda, dulces de higos y fotos grupales.</p>
+          <div class="place-meta"><span class="pm time">08:00 – 21:30</span><span class="pm">Centro Histórico</span></div>
+        </div>
+        <div class="place-footer">
+          <span style="font-size:11px;color:var(--ink-soft);font-family:'IBM Plex Mono',monospace;">📍 Simón Bolívar y Padre Aguirre</span>
+          <a href="https://maps.google.com/?q=Chocolateria+Dos+Chorreras+Centro+Cuenca" target="_blank" rel="noopener" class="map-link">GPS Maps ↗</a>
+        </div>
+      </div>
+
+      <!-- 9. PACARI -->
+      <div class="place star" data-cat="dulces">
+        <div>
+          <div class="place-top">
+            <div>
+              <div class="place-name">Casa Pacari Paucarbamba</div>
+              <div class="place-rate">★ 4,5 · Mejor Chocolate del Mundo</div>
+            </div>
+            <span class="radar-badge" id="badge-spot-pacari">Consultando...</span>
+          </div>
+          <p>Boutique oficial del chocolate orgánico ecuatoriano más premiado del mundo. Degustaciones de +20 sabores finos. A 6 min a pie de ANICÁ.</p>
+          <div class="place-meta"><span class="pm time">Sáb 10:00 – 18:30</span><span class="pm warn">Cierra domingos</span></div>
+        </div>
+        <div class="place-footer">
+          <span style="font-size:11px;color:var(--ink-soft);font-family:'IBM Plex Mono',monospace;">🚶 6 min caminando de ANICÁ</span>
+          <a href="https://maps.google.com/?q=Pacari+Paucarbamba+Cuenca" target="_blank" rel="noopener" class="map-link">GPS Maps ↗</a>
+        </div>
+      </div>
+
+      <!-- 10. CATEDRAL CÚPULAS -->
+      <div class="place star" data-cat="mirador cultura">
+        <div>
+          <div class="place-top">
+            <div>
+              <div class="place-name">Catedral de la Inmaculada (Cúpulas & Terrazas)</div>
+              <div class="place-rate">★ 4,9 · Símbolo de Cuenca</div>
+            </div>
+            <span class="radar-badge" id="badge-spot-catedral">Consultando...</span>
+          </div>
+          <p>Subida a las cúpulas celestes para fotos icónicas con vista panorámica a la Plaza Central y los techos coloniales de la ciudad.</p>
+          <div class="place-meta"><span class="pm time">08:30 – 16:30 (Dom hasta 13:00)</span><span class="pm">$2 entrada</span></div>
+        </div>
+        <div class="place-footer">
+          <span style="font-size:11px;color:var(--ink-soft);font-family:'IBM Plex Mono',monospace;">📍 Parque Calderón (Centro)</span>
+          <a href="https://maps.google.com/?q=Catedral+de+la+Inmaculada+Concepcion+Cuenca" target="_blank" rel="noopener" class="map-link">GPS Maps ↗</a>
+        </div>
+      </div>
+
+      <!-- 11. TERMAS PIEDRA DE AGUA -->
+      <div class="place" data-cat="relax">
+        <div>
+          <div class="place-top">
+            <div>
+              <div class="place-name">Termas Piedra de Agua (Baños de Cuenca)</div>
+              <div class="place-rate">★ 4,6 · Circuito Spa Termal</div>
+            </div>
+            <span class="radar-badge" id="badge-spot-termas">Consultando...</span>
+          </div>
+          <p>Piscinas termales subterráneas, baños de vapor en cuevas naturales de piedra y piscinas de barro volcánico. Súper relajante en grupo.</p>
+          <div class="place-meta"><span class="pm time">08:00 – 20:30</span><span class="pm">15 min desde ANICÁ</span></div>
+        </div>
+        <div class="place-footer">
+          <span style="font-size:11px;color:var(--ink-soft);font-family:'IBM Plex Mono',monospace;">📍 Baños de Cuenca</span>
+          <a href="https://maps.google.com/?q=Piedra+de+Agua+Fuente+Termal+Cuenca" target="_blank" rel="noopener" class="map-link">GPS Maps ↗</a>
+        </div>
+      </div>
+
+      <!-- 12. PARQUE NACIONAL EL CAJAS -->
+      <div class="place" data-cat="relax">
+        <div>
+          <div class="place-top">
+            <div>
+              <div class="place-name">Laguna Toreadora & Páramo (El Cajas)</div>
+              <div class="place-rate">★ 4,9 · 3.900 msnm · Páramo</div>
+            </div>
+            <span class="radar-badge" id="badge-spot-cajas">Consultando...</span>
+          </div>
+          <p>Paisajes glaciares de película, bosques de árboles de papel (Polylepis) y lagunas cristalinas. Imprescindible ropa térmica.</p>
+          <div class="place-meta"><span class="pm free">Entrada Gratis</span><span class="pm time">08:00 – 16:30</span><span class="pm warn">Frío intenso</span></div>
+        </div>
+        <div class="place-footer">
+          <span style="font-size:11px;color:var(--ink-soft);font-family:'IBM Plex Mono',monospace;">📍 Vía a Molleturo (Km 35)</span>
+          <a href="https://maps.google.com/?q=Laguna+Toreadora+Parque+Nacional+Cajas" target="_blank" rel="noopener" class="map-link">GPS Maps ↗</a>
+        </div>
+      </div>
+
+      <!-- 13. HOSTERÍA DOS CHORRERAS (TRUCHA) -->
+      <div class="place" data-cat="comida relax">
+        <div>
+          <div class="place-top">
+            <div>
+              <div class="place-name">Hostería Dos Chorreras (Trucha de Páramo)</div>
+              <div class="place-rate">★ 4,7 · Gastronomía de Altura ($8 – $14)</div>
+            </div>
+            <span class="radar-badge" id="badge-spot-trucha">Consultando...</span>
+          </div>
+          <p>Trucha arcoíris criada en aguas puras de altura, servida al ajillo con patacones crocantes en un entorno rústico con chimeneas de leña.</p>
+          <div class="place-meta"><span class="pm time">08:30 – 18:00</span><span class="pm">Vía al Cajas Km 21</span></div>
+        </div>
+        <div class="place-footer">
+          <span style="font-size:11px;color:var(--ink-soft);font-family:'IBM Plex Mono',monospace;">📍 Hostería Dos Chorreras</span>
+          <a href="https://maps.google.com/?q=Hosteria+Dos+Chorreras+Cuenca" target="_blank" rel="noopener" class="map-link">GPS Maps ↗</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ==================== PESTAÑA 4: JUEGOS ==================== -->
+  <div class="main-tab-view" id="tab-juegos">
+    <div class="section-head">
+      <div class="section-title-wrap">
+        <span class="section-tag">04 — Noches en el Depa</span>
+        <span class="section-title">Juegos Interactivos para los 5 Amigos</span>
+      </div>
+    </div>
+
+    <div class="game-grid">
+
+      <!-- DIGALO CON MIMICA CON CRONOMETRO & IA INLINE -->
+      <div class="game hero-game">
+        <div>
+          <div class="game-top">
+            <span class="game-icon">🎭</span>
+            <span class="game-name">Dígalo con Mímica (Películas, Canciones & Retos)</span>
+          </div>
+          <p>
+            <b>Cómo se juega:</b> Un amigo actúa sin hablar ni hacer ruidos mientras su equipo adivina antes de que termine el cronómetro de 60 segundos.
+          </p>
+
+          <div class="game-ai-inline-box" id="mimicTopicBox">
+            🎬 Toca el botón abajo para generar una película o frase con IA.
+          </div>
+
+          <div class="timer-box">
+            <div>Tiempo: <span class="timer-display" id="mimicTimer">60s</span></div>
+            <div style="display:flex;gap:4px;">
+              <button class="timer-btn" onclick="startTimer()">▶ Iniciar</button>
+              <button class="timer-btn" style="background:#666;" onclick="resetTimer()">↺ Reset</button>
+            </div>
+          </div>
+        </div>
+
+        <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:6px;">
+          <div class="game-meta"><span class="gm star">⭐ Favorito Grupal</span><span class="gm zero">Sin materiales</span></div>
+          <button class="btn-ai-inline" onclick="generateAiMimicTopicDirect()">✨ Generar Título con IA</button>
+        </div>
+      </div>
+
+      <!-- QUIEN SOY CON MODO HEADS UP (FRENTE) Y POST-IT -->
+      <div class="game">
+        <div>
+          <div class="game-top">
+            <span class="game-icon">🧠</span>
+            <span class="game-name">¿Quién Soy? (Post-it en la frente)</span>
+          </div>
+          <p>
+            <b>Cómo se juega:</b> Se asigna un personaje secreto. Quien lo tiene hace preguntas de Sí o No al grupo hasta adivinar. ¡Puedes ponértelo en la frente con el celular o anotarlo en papelito!
+          </p>
+
+          <div class="game-ai-inline-box" id="whoAmIBox">
+            👤 Toca <b>"Generar Personaje"</b> para crear un personaje secreto sin auto-spoilers.
+          </div>
+        </div>
+
+        <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:6px;margin-top:8px;">
+          <div class="game-meta"><span class="gm star">Modo Heads Up</span><span class="gm zero">Sin papel</span></div>
+          <button class="btn-ai-inline" style="background:var(--blue-deep);color:var(--white);font-weight:700;" onclick="generateAiCharacterDirect()">✨ Generar Personaje</button>
+        </div>
+      </div>
+
+      <!-- 1 VERDAD Y 2 MENTIRAS: CAMUFLAJE CON IA -->
+      <div class="game">
+        <div>
+          <div class="game-top">
+            <span class="game-icon">🤫</span>
+            <span class="game-name">1 Verdad y 2 Mentiras (Camuflaje con IA)</span>
+          </div>
+          <p>
+            <b>Cómo se juega:</b> El jugador escribe 1 anécdota real suya en secreto. La IA inventa 2 mentiras creíbles para camuflarla. El grupo interroga 60s y vota cuál de las 3 es la VERDAD real.
+          </p>
+
+          <!-- INPUT SECRETO ANTI-ESPÍAS -->
+          <div style="margin-top:10px;">
+            <label style="font-size:11px;font-family:'IBM Plex Mono',monospace;color:var(--blue-deep);font-weight:600;">Escribe tu anécdota real (Modo secreto anti-espías):</label>
+            <div class="truth-secret-wrap">
+              <input type="password" id="secretTruthInput" class="truth-secret-input" placeholder="Ej: De niño me tragué una moneda jugando..." onkeydown="if(event.key==='Enter') camouflageTruthWithAi()" />
+              <button type="button" id="toggleTruthMaskBtn" class="btn-mask-toggle" onmousedown="revealTruthTemporary(event)" onmouseup="hideTruthTemporary()" onmouseleave="hideTruthTemporary()" ontouchstart="revealTruthTemporary(event)" ontouchend="hideTruthTemporary()" ontouchcancel="hideTruthTemporary()" title="Mantén presionado para ver">👁️ Mantén para ver</button>
+            </div>
+          </div>
+
+          <div class="game-ai-inline-box" id="twoTruthsBox">
+            🤫 Escribe arriba tu verdad en secreto y toca <b>"Camuflar con IA"</b> para que invente 2 mentiras y las mezcle.
+          </div>
+        </div>
+
+        <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:6px;margin-top:8px;">
+          <div class="game-meta"><span class="gm star">Cómplice Secreto</span><span class="gm zero">Cero materiales</span></div>
+          <button class="btn-ai-inline" style="background:var(--blue-deep);color:var(--white);font-weight:700;" onclick="camouflageTruthWithAi()">✨ Camuflar con IA</button>
+        </div>
+      </div>
+
+      <!-- TELEFONO DESCOMPUESTO DIBUJADO CON GUIA IA -->
+      <div class="game">
+        <div>
+          <div class="game-top">
+            <span class="game-icon">✏️</span>
+            <span class="game-name">Teléfono Descompuesto Dibujado</span>
+          </div>
+          <p>
+            <b>Cómo se juega:</b>
+            <br>1. Escribe una frase absurda en una hoja y pásala al de la derecha.
+            <br>2. El siguiente dibuja la frase y dobla la hoja para tapar el texto.
+            <br>3. El tercero ve SOLO el dibujo y escribe lo que cree que es.
+            <br>Al final desdoblan la hoja y comparan la frase inicial con el resultado.
+          </p>
+
+          <div class="game-ai-inline-box" id="brokenPhoneBox">
+            📝 Toca abajo para que la IA cree una frase absurda de inicio.
+          </div>
+        </div>
+
+        <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:6px;">
+          <div class="game-meta"><span class="gm need">Hojas y lápiz</span></div>
+          <button class="btn-ai-inline" onclick="generateBrokenPhonePhrase()">✨ Frase de Inicio con IA</button>
+        </div>
+      </div>
+
+      <!-- EL IMPOSTOR EN APP -->
+      <div class="game">
+        <div>
+          <div class="game-top">
+            <span class="game-icon">🕵️</span>
+            <span class="game-name">El Impostor (En App Móvil)</span>
+          </div>
+          <p>
+            <b>Cómo se juega:</b> Todos abren la app móvil para recibir la palabra secreta menos el impostor. Por turnos dicen una palabra pista y debaten quién miente.
+          </p>
+        </div>
+        <div class="game-meta"><span class="gm zero">En App Móvil</span><span class="gm">10 min por ronda</span></div>
+      </div>
+
+      <!-- KARAOKE SMART TV -->
+      <div class="game">
+        <div>
+          <div class="game-top">
+            <span class="game-icon">📺</span>
+            <span class="game-name">Karaoke & Trivia en Smart TV</span>
+          </div>
+          <p>
+            Abren YouTube en la TV de ANICÁ y buscan pistas de karaoke o trivias musicales tipo "Adivina la canción en 5 segundos (Pop 2000s, Reggaeton clásico, Rock Latino)".
+          </p>
+        </div>
+        <div class="game-meta"><span class="gm zero">Smart TV ANICÁ</span><span class="gm">Música en sala</span></div>
+      </div>
+
+      <!-- TRIBUNAL DE LA NOCHE: QUIÉN ES MÁS PROBABLE QUE -->
+      <div class="game">
+        <div>
+          <div class="game-top">
+            <span class="game-icon">⚖️</span>
+            <span class="game-name">Tribunal: ¿Quién es más probable que...?</span>
+          </div>
+          <p>
+            <b>Cómo se juega:</b> La IA lanza un dilema cómico sobre los 5 amigos. Hay una cuenta regresiva de 3 segundos y a la de tres ¡todos apuntan con el dedo a alguien al mismo tiempo! Quien reciba más votos toma un trago o cumple una prenda.
+          </p>
+
+          <div class="game-ai-inline-box" id="tribunalBox">
+            👉 Toca <b>"Pregunta con IA"</b> para abrir el debate del tribunal.
+          </div>
+        </div>
+
+        <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:6px;margin-top:8px;">
+          <div class="game-meta"><span class="gm star">Debate & Risas</span><span class="gm zero">Sin cartas</span></div>
+          <div style="display:flex;gap:6px;flex-wrap:wrap;">
+            <button class="btn-ai-inline" onclick="generateAiTribunalQuestion()">⚡ Pregunta con IA</button>
+            <button class="btn-print" id="btnTribunalCount" style="padding:5px 10px;font-size:11px;display:none;" onclick="startTribunalCountdown()">⏱️ 3..2..1 ¡Votar!</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- EL BARMAN DEL GRUPO (COCTELERÍA CON IA) -->
+      <div class="game">
+        <div>
+          <div class="game-top">
+            <span class="game-icon">🍸</span>
+            <span class="game-name">El Barman del Grupo (Coctelería con IA)</span>
+          </div>
+          <p>
+            <b>Cómo funciona:</b> Escribe abajo los licores, bebidas o ingredientes que tienen comprados en el departamento ANICÁ y la IA les creará un cóctel exacto con nombre temático del viaje y receta en 3 pasos.
+          </p>
+
+          <div style="margin-top:8px;">
+            <input type="text" id="barmanInput" class="truth-secret-input" placeholder="Ej: Ron, Sprite, limón, maracuyá, cerveza, azúcar..." style="width:100%;font-size:12px;padding:8px 10px;" onkeydown="if(event.key==='Enter') generateBarmanCocktail()" />
+          </div>
+
+          <div class="game-ai-inline-box" id="barmanBox" style="margin-top:10px;">
+            🍹 Escribe arriba los ingredientes disponibles y toca <b>"Crear Cóctel con IA"</b>.
+          </div>
+        </div>
+
+        <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:6px;margin-top:8px;">
+          <div class="game-meta"><span class="gm star">Depa ANICÁ</span><span class="gm">Tragos a medida</span></div>
+          <button class="btn-ai-inline" style="background:var(--purple);color:#fff;" onclick="generateBarmanCocktail()">🍹 Crear Cóctel con IA</button>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- SAFARI FOTOGRÁFICO SECRETO CON IA -->
+    <div class="photo-mission-box" id="photoMissionBox">
+      <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;">
+        <div style="display:flex;align-items:center;gap:8px;">
+          <span style="font-size:24px;">📸</span>
+          <div>
+            <h3 style="font-family:'Spectral',serif;font-size:18px;color:var(--blue-deep);margin:0;">Desafío Fotográfico Secreto (Cacería con IA)</h3>
+            <span style="font-size:11.5px;color:var(--ink-soft);">Cada amigo tiene una misión secreta para cazar durante el día sin que nadie se entere.</span>
+          </div>
+        </div>
+        <button class="btn-print" onclick="toggleNightPhotoReveal()" style="padding:4px 10px;font-size:11px;">🌙 Revelar Misiones en la Noche</button>
+      </div>
+
+      <div style="margin-top:12px;">
+        <div style="font-size:11px;font-family:'IBM Plex Mono',monospace;color:var(--ink-soft);margin-bottom:6px;">TOCA TU NOMBRE PARA VER TU MISIÓN SECRETA (¡TÁPATE PARA QUE NADIE VEA!):</div>
+        <div style="display:flex;gap:6px;flex-wrap:wrap;">
+          <button class="btn-photo-traveler" onclick="openPhotoMission('Alan')">📸 Alan</button>
+          <button class="btn-photo-traveler" onclick="openPhotoMission('Dennis')">📸 Dennis</button>
+          <button class="btn-photo-traveler" onclick="openPhotoMission('Ashley')">📸 Ashley</button>
+          <button class="btn-photo-traveler" onclick="openPhotoMission('Jahaira')">📸 Jahaira</button>
+          <button class="btn-photo-traveler" onclick="openPhotoMission('Douglas')">📸 Douglas</button>
+        </div>
+      </div>
+
+      <!-- VISOR SECRETO DE MISIÓN -->
+      <div id="photoMissionViewer" style="display:none;margin-top:12px;background:var(--white);border:1px solid var(--purple-border);border-radius:var(--radius-sm);padding:14px;">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
+          <span id="photoMissionPlayerName" style="font-weight:700;color:var(--purple);font-size:13px;"></span>
+          <button class="btn-print" style="padding:2px 6px;font-size:10px;" onclick="closePhotoMission()">🔒 Ocultar misión</button>
+        </div>
+        <div id="photoMissionText" style="font-size:13.5px;font-weight:600;color:var(--ink);line-height:1.5;margin:8px 0 12px 0;"></div>
+        <div style="display:flex;gap:8px;justify-content:flex-end;flex-wrap:wrap;">
+          <button class="btn-ai-inline" id="btnGenPhotoAi" onclick="regeneratePhotoMissionWithAi()" style="font-size:11px;padding:5px 12px;">✨ Generar otra misión con IA</button>
+          <button class="btn-print" onclick="closePhotoMission()" style="background:var(--blue-deep);color:#fff;font-size:11px;padding:5px 12px;">✅ Listo para cazar</button>
+        </div>
+      </div>
+
+      <!-- REVELACIÓN NOCTURNA -->
+      <div id="photoNightReveal" style="display:none;margin-top:12px;background:var(--white);border:1px solid var(--line);border-radius:var(--radius-sm);padding:14px;">
+        <div style="font-size:13px;font-weight:700;color:var(--blue-deep);margin-bottom:4px;">🏆 Galería del Depa ANICÁ: ¿Quién cumplió su misión secreta?</div>
+        <div style="font-size:11.5px;color:var(--ink-soft);margin-bottom:12px;">Muestren las fotos en sus teléfonos. Marquen a quienes lograron su foto para que sumen automáticamente +3 puntos en el marcador:</div>
+        <div id="photoNightList" style="display:flex;flex-direction:column;gap:8px;"></div>
+      </div>
+    </div>
+
+    <!-- SCOREBOARD OFICIAL -->
+    <div class="score-card">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;">
+        <div>
+          <h3 style="font-family:'Spectral',serif;font-size:18px;color:var(--blue-deep);margin:0;">🏆 Marcador Oficial del Torneo</h3>
+          <span style="font-size:11.5px;color:var(--ink-soft);">Puntaje total del viaje. Toca +1, +2 o +3 para sumar puntos directamente sin complicaciones.</span>
+        </div>
+        <button class="btn-print" style="padding:3px 8px;font-size:10px;" onclick="resetScores()">Reiniciar</button>
+      </div>
+
+      <div class="scoreboard-direct-grid">
+        <div class="score-player-row" id="score-row-1">
+          <div class="score-player-info">
+            <span class="score-player-name" id="p1-name-cell">Alan</span>
+          </div>
+          <div class="score-player-controls">
+            <button type="button" class="btn-score-ctrl minus" onclick="quickAddScore(1, -1)">-1</button>
+            <span class="score-value" id="p1-tot">0</span> <span style="font-size:11px;color:var(--ink-soft);font-weight:600;">pts</span>
+            <button type="button" class="btn-score-ctrl plus" onclick="quickAddScore(1, 1)">+1</button>
+            <button type="button" class="btn-score-ctrl plus" onclick="quickAddScore(1, 2)">+2</button>
+            <button type="button" class="btn-score-ctrl plus" onclick="quickAddScore(1, 3)">+3</button>
+          </div>
+        </div>
+
+        <div class="score-player-row" id="score-row-2">
+          <div class="score-player-info">
+            <span class="score-player-name" id="p2-name-cell">Dennis</span>
+          </div>
+          <div class="score-player-controls">
+            <button type="button" class="btn-score-ctrl minus" onclick="quickAddScore(2, -1)">-1</button>
+            <span class="score-value" id="p2-tot">0</span> <span style="font-size:11px;color:var(--ink-soft);font-weight:600;">pts</span>
+            <button type="button" class="btn-score-ctrl plus" onclick="quickAddScore(2, 1)">+1</button>
+            <button type="button" class="btn-score-ctrl plus" onclick="quickAddScore(2, 2)">+2</button>
+            <button type="button" class="btn-score-ctrl plus" onclick="quickAddScore(2, 3)">+3</button>
+          </div>
+        </div>
+
+        <div class="score-player-row" id="score-row-3">
+          <div class="score-player-info">
+            <span class="score-player-name" id="p3-name-cell">Ashley</span>
+          </div>
+          <div class="score-player-controls">
+            <button type="button" class="btn-score-ctrl minus" onclick="quickAddScore(3, -1)">-1</button>
+            <span class="score-value" id="p3-tot">0</span> <span style="font-size:11px;color:var(--ink-soft);font-weight:600;">pts</span>
+            <button type="button" class="btn-score-ctrl plus" onclick="quickAddScore(3, 1)">+1</button>
+            <button type="button" class="btn-score-ctrl plus" onclick="quickAddScore(3, 2)">+2</button>
+            <button type="button" class="btn-score-ctrl plus" onclick="quickAddScore(3, 3)">+3</button>
+          </div>
+        </div>
+
+        <div class="score-player-row" id="score-row-4">
+          <div class="score-player-info">
+            <span class="score-player-name" id="p4-name-cell">Jahaira</span>
+          </div>
+          <div class="score-player-controls">
+            <button type="button" class="btn-score-ctrl minus" onclick="quickAddScore(4, -1)">-1</button>
+            <span class="score-value" id="p4-tot">0</span> <span style="font-size:11px;color:var(--ink-soft);font-weight:600;">pts</span>
+            <button type="button" class="btn-score-ctrl plus" onclick="quickAddScore(4, 1)">+1</button>
+            <button type="button" class="btn-score-ctrl plus" onclick="quickAddScore(4, 2)">+2</button>
+            <button type="button" class="btn-score-ctrl plus" onclick="quickAddScore(4, 3)">+3</button>
+          </div>
+        </div>
+
+        <div class="score-player-row" id="score-row-5">
+          <div class="score-player-info">
+            <span class="score-player-name" id="p5-name-cell">Douglas</span>
+          </div>
+          <div class="score-player-controls">
+            <button type="button" class="btn-score-ctrl minus" onclick="quickAddScore(5, -1)">-1</button>
+            <span class="score-value" id="p5-tot">0</span> <span style="font-size:11px;color:var(--ink-soft);font-weight:600;">pts</span>
+            <button type="button" class="btn-score-ctrl plus" onclick="quickAddScore(5, 1)">+1</button>
+            <button type="button" class="btn-score-ctrl plus" onclick="quickAddScore(5, 2)">+2</button>
+            <button type="button" class="btn-score-ctrl plus" onclick="quickAddScore(5, 3)">+3</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- PANEL DE LÍDER Y TAREA CON IA PARA EL ÚLTIMO LUGAR -->
+      <div style="margin-top:14px;background:var(--cream);border:1px dashed var(--gold-border);border-radius:var(--radius-sm);padding:12px;">
+        <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;">
+          <div>
+            👑 <b>Líder del Torneo:</b> <span id="currentLeaderName" style="color:#B45309;font-weight:700;">Empate</span>
+            <div style="font-size:11px;color:var(--ink-soft);">Elige la primera música del auto o el primer turno de ducha.</div>
+          </div>
+          <div style="text-align:right;">
+            💩 <b>Último lugar:</b> <span id="currentLastPlaceName" style="color:var(--terracotta);font-weight:700;">--</span>
+          </div>
+        </div>
+
+        <div style="margin-top:10px;padding-top:10px;border-top:1px dashed var(--line);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;">
+          <div id="lastPlaceTaskText" style="font-size:12px;font-weight:600;color:var(--ink);flex:1;min-width:200px;">
+            🧹 <b>Tarea grupal:</b> Toca el botón para sortear qué tarea útil le toca al último lugar.
+          </div>
+          <button class="btn-ai-inline" onclick="generateAiChoreForLastPlace()" style="font-size:11px;padding:5px 12px;">
+            🎲 Sortear Tarea con IA
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== PESTAÑA 5: CAMAS & LOGÍSTICA ==================== -->
+  <div class="main-tab-view" id="tab-logistica">
+    <div class="section-head">
+      <div class="section-title-wrap">
+        <span class="section-tag">05 — Logística & Equipaje</span>
+        <span class="section-title">Camas en ANICÁ & Checklist</span>
+      </div>
+    </div>
+
+    <!-- GUÍA DEL BAÚL DEL KIA SONET -->
+    <div class="trunk-card">
+      <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:6px;">
+        <div style="display:flex;align-items:center;gap:8px;">
+          <span style="font-size:22px;">🚗</span>
+          <div>
+            <h4 style="font-family:'Spectral',serif;font-size:16px;color:var(--blue-deep);margin:0;">Capacidad del Baúl: Kia Sonet (392L para 5 personas)</h4>
+            <span style="font-size:11px;color:var(--ink-soft);">Regla de oro para que entren los 5 equipajes sin tapar la luneta trasera</span>
+          </div>
+        </div>
+        <span class="room-pill" style="background:#E0F2FE;color:#0369A1;border-color:#BAE6FD;">Capacidad: 5 Maletas Blandas</span>
+      </div>
+
+      <div class="trunk-rule-grid">
+        <div class="trunk-rule-box ok">
+          <b style="color:#15803D;">✅ RECOMENDADO LLEVAR:</b>
+          <br>• Maletas de mano de tela / blandas (carry-on flexibles).
+          <br>• Mochilas medianas o bolsos deportivos.
+          <br>• 1 bulto mediano por persona + 1 bolso de mano pequeño.
+        </div>
+        <div class="trunk-rule-box warn">
+          <b style="color:#B91C1C;">❌ EVITAR TOTALMENTE:</b>
+          <br>• Maletas rígidas gigantes de 28" (no entran 5 en 392L).
+          <br>• Cajas de cartón voluminosas o hieleras duras.
+          <br>• Sobreequipaje que tape el retrovisor del conductor.
+        </div>
+      </div>
+    </div>
+
+    <!-- CAMAS EN ANICÁ -->
+    <div style="background:var(--white);border:1px solid var(--line);border-radius:var(--radius-md);padding:14px;margin-bottom:14px;box-shadow:var(--shadow-sm);">
+      <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:6px;margin-bottom:6px;">
+        <div>
+          <h4 style="font-family:'Spectral',serif;font-size:16px;color:var(--blue-deep);margin:0;">🛏️ Distribución de las 3 Habitaciones en ANICÁ</h4>
+          <span style="font-size:11.5px;color:var(--ink-soft);">Configura quién duerme en cada habitación del departamento</span>
+        </div>
+        <button class="btn-print" style="padding:4px 10px;font-size:11px;" onclick="saveBeds()">Guardar Distribución</button>
+      </div>
+
+      <div class="bed-grid">
+        <div class="room-card">
+          <div class="room-header">
+            <span class="room-title">🛌 Master Suite</span>
+            <span class="room-pill">Baño Privado</span>
+          </div>
+          <div class="room-desc">Cama Queen (2 plazas y media) con baño en suite.</div>
+          <label style="font-size:10px;font-weight:700;color:var(--ink-soft);font-family:'IBM Plex Mono',monospace;">Huésped 1:</label>
+          <select class="bed-select" id="b1_1">
+            <option value="" selected>— Sin asignar —</option>
+            <option value="Alan">Alan</option>
+            <option value="Dennis">Dennis</option>
+            <option value="Douglas">Douglas</option>
+            <option value="Ashley">Ashley</option>
+            <option value="Jahaira">Jahaira</option>
+          </select>
+          <label style="font-size:10px;font-weight:700;color:var(--ink-soft);font-family:'IBM Plex Mono',monospace;">Huésped 2:</label>
+          <select class="bed-select" id="b1_2">
+            <option value="" selected>— Sin asignar —</option>
+            <option value="Alan">Alan</option>
+            <option value="Dennis">Dennis</option>
+            <option value="Douglas">Douglas</option>
+            <option value="Ashley">Ashley</option>
+            <option value="Jahaira">Jahaira</option>
+          </select>
+        </div>
+
+        <div class="room-card">
+          <div class="room-header">
+            <span class="room-title">🛏️ Habitación 2</span>
+            <span class="room-pill">Armario Grande</span>
+          </div>
+          <div class="room-desc">Cama Doble (2 plazas) con ventana exterior.</div>
+          <label style="font-size:10px;font-weight:700;color:var(--ink-soft);font-family:'IBM Plex Mono',monospace;">Huésped 1:</label>
+          <select class="bed-select" id="b2_1">
+            <option value="" selected>— Sin asignar —</option>
+            <option value="Alan">Alan</option>
+            <option value="Dennis">Dennis</option>
+            <option value="Douglas">Douglas</option>
+            <option value="Ashley">Ashley</option>
+            <option value="Jahaira">Jahaira</option>
+          </select>
+          <label style="font-size:10px;font-weight:700;color:var(--ink-soft);font-family:'IBM Plex Mono',monospace;">Huésped 2:</label>
+          <select class="bed-select" id="b2_2">
+            <option value="" selected>— Sin asignar —</option>
+            <option value="Alan">Alan</option>
+            <option value="Dennis">Dennis</option>
+            <option value="Douglas">Douglas</option>
+            <option value="Ashley">Ashley</option>
+            <option value="Jahaira">Jahaira</option>
+          </select>
+        </div>
+
+        <div class="room-card">
+          <div class="room-header">
+            <span class="room-title">🛏️ Habitación 3</span>
+            <span class="room-pill">Vista Tranquila</span>
+          </div>
+          <div class="room-desc">Cama Doble (2 plazas) y baño compartido junto al pasillo.</div>
+          <label style="font-size:10px;font-weight:700;color:var(--ink-soft);font-family:'IBM Plex Mono',monospace;">Huésped:</label>
+          <select class="bed-select" id="b3_1">
+            <option value="" selected>— Sin asignar —</option>
+            <option value="Alan">Alan</option>
+            <option value="Dennis">Dennis</option>
+            <option value="Douglas">Douglas</option>
+            <option value="Ashley">Ashley</option>
+            <option value="Jahaira">Jahaira</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <!-- CHECKLIST -->
+    <div class="pack-container">
+      <div class="pack-progress-bar"><div class="pack-progress-fill" id="packFill"></div></div>
+      <div class="pack-progress-text">
+        <span>PROGRESO DE EQUIPAJE:</span>
+        <span id="packStats">0 elementos listos</span>
+      </div>
+
+      <div class="pack-cat">
+        <span class="pack-lbl">🧥 Ropa & Frío Sierra (9 a 22 °C)</span>
+        <div class="pack-items-list">
+          <label class="pack-item-label"><input type="checkbox" onchange="toggleItem(this)"> <span>Chompa térmica o cortaviento (frío en Turi)</span></label>
+          <label class="pack-item-label"><input type="checkbox" onchange="toggleItem(this)"> <span>Buzos abrigados y camisetas de algodón</span></label>
+          <label class="pack-item-label"><input type="checkbox" onchange="toggleItem(this)"> <span>Zapatos cómodos con buen agarre para caminar</span></label>
+          <label class="pack-item-label"><input type="checkbox" onchange="toggleItem(this)"> <span>Pantalones / Jeans cómodos</span></label>
+        </div>
+      </div>
+
+      <div class="pack-cat">
+        <span class="pack-lbl">🚗 Auto Kia Sonet & Carretera</span>
+        <div class="pack-items-list">
+          <label class="pack-item-label"><input type="checkbox" onchange="toggleItem(this)"> <span>Matrícula y licencia de conducir vigente</span></label>
+          <label class="pack-item-label"><input type="checkbox" onchange="toggleItem(this)"> <span>Cargadores de celular / Cable USB para el auto</span></label>
+          <label class="pack-item-label"><input type="checkbox" onchange="toggleItem(this)"> <span>Maletas de tela / blandas (para los 392L del baúl)</span></label>
+          <label class="pack-item-label"><input type="checkbox" onchange="toggleItem(this)"> <span>Efectivo en billetes pequeños ($1, $5 para peajes y mercados)</span></label>
+        </div>
+      </div>
+
+      <div class="pack-cat">
+        <span class="pack-lbl">💊 Salud, Altura & Fiesta</span>
+        <div class="pack-items-list">
+          <label class="pack-item-label"><input type="checkbox" onchange="toggleItem(this)"> <span>Protector solar facial FPS 50+</span></label>
+          <label class="pack-item-label"><input type="checkbox" onchange="toggleItem(this)"> <span>Pastillas para dolor de cabeza / soroche (paracetamol/ibuprofeno)</span></label>
+          <label class="pack-item-label"><input type="checkbox" onchange="toggleItem(this)"> <span>Snacks para la carretera en el Kia Sonet</span></label>
+          <label class="pack-item-label"><input type="checkbox" onchange="toggleItem(this)"> <span>Paraguas pequeño plegable para la tarde</span></label>
+        </div>
+      </div>
+
+      <div class="pack-cat">
+        <div style="display:flex;justify-content:space-between;align-items:center;">
+          <span class="pack-lbl">✨ Mis Extras Personalizados</span>
+          <button type="button" class="btn-ai-inline" onclick="addCustomPackItem()" style="font-size:10.5px;padding:3px 10px;">➕ Agregar Ítem</button>
+        </div>
+        <div class="pack-items-list" id="customPackList">
+          <!-- Items personalizados agregados dinámicamente -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+</div>
+
+<!-- AI INTERACTIVE CHAT MODAL -->
+<div class="ai-modal-overlay" id="aiModalOverlay" onclick="if(event.target===this) closeAiChat()">
+  <div class="ai-modal-card">
+    <div class="ai-modal-head">
+      <div>
+        <h3>✨ Asistente de Viaje</h3>
+        <span style="font-size:11px;opacity:0.85;font-family:'IBM Plex Mono',monospace;">Chat en vivo para el grupo</span>
+      </div>
+      <button class="ai-modal-close" onclick="closeAiChat()">×</button>
+    </div>
+    
+    <div class="ai-modal-body" id="aiChatMessages">
+      <div class="chat-msg ai">
+        👋 ¡Hola! Soy el asistente de viaje para Alan, Dennis, Ashley, Jahaira y Douglas. Puedo recomendarles restaurantes, bares, rutas o responder cualquier duda sobre Cuenca. ¿Qué necesitan saber?
+      </div>
+    </div>
+
+    <div class="ai-modal-footer">
+      <input type="text" class="ai-modal-input" id="aiChatInput" placeholder="Escribe tu consulta aquí..." onkeypress="if(event.key==='Enter') sendUserChatMessage()">
+      <button class="ai-modal-btn" onclick="sendUserChatMessage()">Enviar</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL FRENTE (HEADS UP FULLSCREEN HORIZONTAL) -->
+<div class="forehead-modal" id="foreheadModal">
+  <div class="forehead-top-actions">
+    <button type="button" class="btn-forehead-action" onclick="toggleForeheadRotation()" title="Girar pantalla si está bloqueada en vertical">🔄 Girar</button>
+    <button type="button" class="btn-forehead-action btn-forehead-exit" onclick="closeForeheadMode()">✕ Salir</button>
+  </div>
+  
+  <div id="foreheadCountdownBox" onclick="skipForeheadCountdown()" style="cursor:pointer;" title="Toca para saltar">
+    <div class="forehead-countdown" id="foreheadCountNum">3</div>
+    <div class="forehead-subcountdown">📱 ¡Ponte el celular en la frente mirando hacia el grupo!</div>
+    <div style="font-size:12px;color:#94A3B8;margin-top:8px;font-family:'IBM Plex Mono',monospace;">(Toca la pantalla para mostrar de inmediato)</div>
+  </div>
+
+  <div class="forehead-content" id="foreheadContentBox">
+    <div class="forehead-badge">¿QUIÉN SOY?</div>
+    <div class="forehead-name" id="foreheadCharName">PERSONAJE</div>
+    <div class="forehead-category" id="foreheadCharCat">(Categoría)</div>
+    <div class="forehead-clue" id="foreheadCharClue"></div>
+  </div>
+</div>
+
+<script>
+// --- CONFIG & DYNAMIC AI CONTEXT ---
+const GEMINI_API_KEY = window.atob("QVEuQWI4Uk42S3BHLV9aZ0NUZF9OZjR4Sjd2OVlwcUY4WHR6SW4tWlBFOThnSERHOXJ0Unc=");
+const GEMINI_MODEL = "gemini-3.5-flash-lite";
+const travelers = ['Alan', 'Dennis', 'Ashley', 'Jahaira', 'Douglas'];
+let currentCategory = 'Gasolina Súper';
+let currentPayer = 'Alan';
+
+function cleanFormat(text) {
+  if (!text) return "";
+  return text
+    .replace(/\*\*(.*?)\*\*/g, '<b>$1</b>')
+    .replace(/\*(.*?)\*/g, '<i>$1</i>')
+    .replace(/`([^`]+)`/g, '<code>$1</code>')
+    .trim();
+}
+
+function cleanDirectOutput(text) {
+  if (!text) return "";
+  let clean = text;
+  // Si la IA agregó preámbulos o saludos, recortar directamente al inicio del contenido útil
+  const match = text.match(/(🎬|🎭|Reto:|Verdad:|•|<b>|"[^"]+")[\s\S]*/i);
+  if (match) {
+    clean = match[0];
+  }
+  return cleanFormat(clean);
+}
+
+function formatExplanationHtml(text) {
+  if (!text) return '';
+  // Limpiar posibles saludos iniciales si se escaparon
+  let clean = text.replace(/^(¡?Hola[^!\n]*!?[^\n]*\n+)/i, '').trim();
+  let lines = clean.split('\n');
+  let html = '';
+  let inList = false;
+
+  for (let line of lines) {
+    let trimmed = line.trim();
+    if (!trimmed) {
+      if (inList) { html += '</ul>'; inList = false; }
+      html += '<div style="height:6px;"></div>';
+      continue;
+    }
+
+    let formatted = trimmed
+      .replace(/\*\*(.*?)\*\*/g, '<b>$1</b>')
+      .replace(/`([^`]+)`/g, '<code>$1</code>');
+
+    // Encabezados (### o ##)
+    if (formatted.startsWith('### ') || formatted.startsWith('## ')) {
+      if (inList) { html += '</ul>'; inList = false; }
+      let headerText = formatted.replace(/^#{2,3}\s+/, '');
+      html += `<div style="font-weight:700;color:var(--blue-deep);font-size:13px;margin-top:10px;margin-bottom:4px;">${headerText}</div>`;
+      continue;
+    }
+
+    // Título de sección tipo: * **Título:** o 1. **Título:**
+    if (/^[\*\-]?\s*<b>(.*?)<\/b>[:\s]*$/.test(formatted) || /^<b>\d+\..*?<\/b>/.test(formatted) || /^\d+\.\s*<b>/.test(formatted)) {
+      if (inList) { html += '</ul>'; inList = false; }
+      html += `<div style="font-weight:700;color:var(--blue-deep);font-size:13px;margin-top:10px;margin-bottom:4px;">${formatted.replace(/^[\*\-]\s*/, '')}</div>`;
+      continue;
+    }
+
+    // Elementos de lista (* o - o •)
+    if (formatted.startsWith('* ') || formatted.startsWith('- ') || formatted.startsWith('• ')) {
+      let itemContent = formatted.replace(/^[\*\-•]\s+/, '');
+      if (!inList) {
+        html += '<ul style="margin:4px 0 8px 18px;padding:0;list-style-type:disc;">';
+        inList = true;
+      }
+      html += `<li style="margin-bottom:4px;">${itemContent}</li>`;
+      continue;
+    }
+
+    // Párrafo normal
+    if (inList) { html += '</ul>'; inList = false; }
+    html += `<p style="margin:0 0 6px 0;">${formatted}</p>`;
+  }
+
+  if (inList) html += '</ul>';
+  return html;
+}
+
+function getDirectAiContext() {
+  return `Eres un generador directo e instantáneo de retos y juegos de fiesta entre amigos en Cuenca.
+REGLAS ESTRICTAS:
+- Devuelve ÚNICAMENTE el resultado solicitado en el formato indicado.
+- TOTALMENTE PROHIBIDO incluir saludos (como "¡Qué tal equipo!", "Hola gente", "Qué onda"), introducciones ("Aquí tienen...", "Ya estoy listo"), despedidas o comentarios de relleno.
+- TOTALMENTE PROHIBIDO mencionar nombres de departamentos (como ANICÁ) ni marcas de autos.
+- Empieza directamente en el primer carácter con el formato pedido.`;
+}
+
+function getDynamicAiContext() {
+  return `Eres el asistente de viaje para 5 buenos amigos ecuatorianos (Alan, Dennis, Ashley, Jahaira, Douglas) en su viaje a Cuenca (4 al 6 de septiembre de 2026).
+Alan y Dennis son pareja; Douglas y Ashley son pareja; Jahaira vino con ellos.
+¡Dennis es la cumpleañera y la homenajeada del viaje! Sus 4 amigos la agasajan y cubren los gastos grupales entre ellos.
+DIRECTRICES CLAVE:
+- Sé amigable, entretenido y directo. CERO saludos repetitivos de relleno como "¡Qué tal equipo!" o "Hola gente".
+- NUNCA menciones nombres de departamentos ni marcas de autos a menos que te lo pregunten.
+- Responde de forma concisa y útil al grano. Devuelve texto limpio sin asteriscos dobles.`;
+}
+
+// --- MAIN TABS SWITCHER ---
+function switchMainTab(tabId, btn) {
+  document.querySelectorAll('.main-tab-view').forEach(v => v.classList.remove('active'));
+  const target = document.getElementById('tab-' + tabId);
+  if (target) target.classList.add('active');
+
+  document.querySelectorAll('.tab-pill-btn').forEach(b => b.classList.remove('active'));
+  if (btn) {
+    btn.classList.add('active');
+  } else {
+    const matchBtn = Array.from(document.querySelectorAll('.tab-pill-btn')).find(b => b.getAttribute('onclick')?.includes(tabId));
+    if (matchBtn) matchBtn.classList.add('active');
+  }
+
+  document.querySelectorAll('.mobile-action-btn').forEach(b => b.classList.remove('active'));
+  const mobBtn = document.getElementById('mob-btn-' + tabId);
+  if (mobBtn) mobBtn.classList.add('active');
+
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// --- TABS (SÁBADO) ---
+function showTab(day, letter, btn) {
+  ['a', 'b', 'c'].forEach(l => {
+    const el = document.getElementById(day + l);
+    if (el) el.classList.remove('active');
+  });
+  const target = document.getElementById(day + letter);
+  if (target) target.classList.add('active');
+
+  const container = btn.closest('.tabs');
+  if (container) {
+    container.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+  }
+}
+
+// --- FILTER & SEARCH PLACES ---
+function filterPlaces(cat, btn) {
+  const cards = document.querySelectorAll('#placesGrid .place');
+  cards.forEach(card => {
+    if (cat === 'all') {
+      card.style.display = 'flex';
+    } else {
+      const itemCats = card.getAttribute('data-cat') || '';
+      card.style.display = itemCats.includes(cat) ? 'flex' : 'none';
+    }
+  });
+  if (btn) {
+    const container = btn.parentElement;
+    container.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+  }
+}
+
+function searchPlaces() {
+  const q = document.getElementById('placeSearch').value.toLowerCase();
+  const cards = document.querySelectorAll('#placesGrid .place');
+  cards.forEach(card => {
+    card.style.display = card.innerText.toLowerCase().includes(q) ? 'flex' : 'none';
+  });
+}
+
+// --- EXPENSE SPLITTER TÁCTIL E INTELIGENTE ---
+const expenseParticipants = ['Alan', 'Ashley', 'Jahaira', 'Douglas'];
+let expenses = [];
+
+function selectCategory(catName, btn) {
+  currentCategory = catName;
+  document.querySelectorAll('#categoryStrip .cat-pill').forEach(p => p.classList.remove('active'));
+  btn.classList.add('active');
+  
+  const cleanName = catName.replace(/^[^\w\s]+/, '').trim();
+  document.getElementById('expName').value = cleanName;
+}
+
+function selectPayer(name, btn) {
+  currentPayer = name;
+  document.querySelectorAll('#payerStrip .payer-pill').forEach(p => p.classList.remove('active'));
+  btn.classList.add('active');
+}
+
+function addExpenseTactile() {
+  const name = document.getElementById('expName').value.trim() || currentCategory;
+  const val = parseFloat(document.getElementById('expVal').value);
+  if (isNaN(val) || val <= 0) {
+    alert('Ingresa un monto numérico válido en dólares ($).');
+    return;
+  }
+  expenses.push({ name, amount: val, payer: currentPayer });
+  document.getElementById('expVal').value = '';
+  renderExpensesTactile();
+}
+
+function removeExp(idx) {
+  expenses.splice(idx, 1);
+  renderExpensesTactile();
+}
+
+function renderExpensesTactile() {
+  const list = document.getElementById('expenseList');
+  list.innerHTML = '';
+  let total = 0;
+  const paidMap = { Alan: 0, Ashley: 0, Jahaira: 0, Douglas: 0 };
+
+  expenses.forEach((item, idx) => {
+    total += item.amount;
+    if (paidMap[item.payer] !== undefined) {
+      paidMap[item.payer] += item.amount;
+    }
+    const d = document.createElement('div');
+    d.className = 'expense-item';
+    d.innerHTML = `
+      <span><b>${item.name}</b> <span style="color:var(--ink-soft);font-size:11px;">(Pagó: ${item.payer})</span></span>
+      <span>$${item.amount.toFixed(2)} <button class="del-btn" onclick="removeExp(${idx})" title="Eliminar">×</button></span>
+    `;
+    list.appendChild(d);
+  });
+
+  const perPerson = total / expenseParticipants.length;
+  calculateSmartSettlement(paidMap, perPerson, total);
+  saveExpenses();
+}
+
+function calculateSmartSettlement(paidMap, fairShare, total) {
+  const container = document.getElementById('settleResults');
+  if (total === 0 || expenses.length === 0) {
+    container.innerHTML = '<span style="color:var(--ink-soft);">Aún no hay gastos registrados. Usa los botones arriba para empezar.</span>';
+    return;
+  }
+
+  let balances = [];
+  expenseParticipants.forEach(t => {
+    const paid = paidMap[t] || 0;
+    balances.push({ name: t, balance: paid - fairShare });
+  });
+
+  let debtors = balances.filter(b => b.balance < -0.01).map(b => ({ ...b, balance: -b.balance }));
+  let creditors = balances.filter(b => b.balance > 0.01).map(b => ({ ...b }));
+
+  let transfers = [];
+  let dIdx = 0, cIdx = 0;
+
+  while (dIdx < debtors.length && cIdx < creditors.length) {
+    let debtor = debtors[dIdx];
+    let creditor = creditors[cIdx];
+    let amount = Math.min(debtor.balance, creditor.balance);
+
+    if (amount > 0.01) {
+      transfers.push(`👉 <b>${debtor.name}</b> le transfiere <b>$${amount.toFixed(2)}</b> a <b>${creditor.name}</b>`);
+    }
+
+    debtor.balance -= amount;
+    creditor.balance -= amount;
+
+    if (debtor.balance <= 0.01) dIdx++;
+    if (creditor.balance <= 0.01) cIdx++;
+  }
+
+  let html = `<div style="margin-bottom:6px;font-size:13px;">Gasto Total: <b>$${total.toFixed(2)}</b> · Cuota justa: <b>$${fairShare.toFixed(2)} c/u</b> (entre 4 amigos · Dennis invitada por cumple 🎉)</div>`;
+  if (transfers.length === 0) {
+    html += `<div>✅ ¡Todos han pagado exactamente lo mismo! Están a mano.</div>`;
+  } else {
+    html += transfers.map(t => `<div class="settle-line">${t}</div>`).join('');
+    html += `
+      <div style="margin-top:14px;padding-top:10px;border-top:1px dashed var(--line-warm);">
+        <button type="button" class="btn-ai-inline" id="btnExplainExpenses" onclick="explainExpensesWithAi()" style="background:var(--cream);border:1px solid var(--line);color:var(--blue-deep);font-weight:700;cursor:pointer;display:inline-flex;align-items:center;gap:6px;">
+          ✨ Explicar cuentas con IA
+        </button>
+        <div id="expenseAiExplanation" style="display:none;margin-top:10px;background:var(--white);border:1px solid var(--line);border-radius:var(--radius-sm);padding:14px;font-size:12.5px;line-height:1.55;color:var(--ink);"></div>
+      </div>
+    `;
+  }
+  container.innerHTML = html;
+}
+
+async function explainExpensesWithAi() {
+  const box = document.getElementById('expenseAiExplanation');
+  const btn = document.getElementById('btnExplainExpenses');
+  if (!box) return;
+
+  if (box.style.display === 'block' && box.innerHTML && !box.innerHTML.includes('Analizando')) {
+    box.style.display = 'none';
+    if (btn) btn.innerHTML = '✨ Explicar cuentas con IA';
+    return;
+  }
+
+  box.style.display = 'block';
+  box.innerHTML = '<i>🤖 Analizando los gastos y redactando una explicación clara y transparente para el grupo...</i>';
+  if (btn) btn.innerHTML = '✨ Ocultar explicación';
+
+  let total = 0;
+  let paidMap = { Alan: 0, Ashley: 0, Jahaira: 0, Douglas: 0 };
+  expenses.forEach(e => {
+    const amt = typeof e.amount === 'number' ? e.amount : (parseFloat(e.amount || e.val) || 0);
+    total += amt;
+    if (paidMap[e.payer] !== undefined) paidMap[e.payer] += amt;
+  });
+  const fairShare = total / expenseParticipants.length;
+
+  const expensesSummary = expenses.map(e => {
+    const amt = typeof e.amount === 'number' ? e.amount : (parseFloat(e.amount || e.val) || 0);
+    return `• ${e.name}: $${amt.toFixed(2)} (pagó ${e.payer})`;
+  }).join('\n');
+  const paidSummary = expenseParticipants.map(t => {
+    const p = paidMap[t] || 0;
+    const diff = p - fairShare;
+    const diffStr = diff >= 0 ? `+$${diff.toFixed(2)}` : `-$${Math.abs(diff).toFixed(2)}`;
+    return `• ${t}: puso $${p.toFixed(2)} (saldo neto: ${diffStr})`;
+  }).join('\n');
+
+  let balances = expenseParticipants.map(t => ({ name: t, balance: (paidMap[t] || 0) - fairShare }));
+  let debtors = balances.filter(b => b.balance < -0.01).map(b => ({ ...b, balance: -b.balance }));
+  let creditors = balances.filter(b => b.balance > 0.01).map(b => ({ ...b }));
+  let transfers = [];
+  let dIdx = 0, cIdx = 0;
+  while (dIdx < debtors.length && cIdx < creditors.length) {
+    let d = debtors[dIdx];
+    let c = creditors[cIdx];
+    let amt = Math.min(d.balance, c.balance);
+    if (amt > 0.01) transfers.push(`• ${d.name} le transfiere $${amt.toFixed(2)} a ${c.name}`);
+    d.balance -= amt;
+    c.balance -= amt;
+    if (d.balance <= 0.01) dIdx++;
+    if (c.balance <= 0.01) cIdx++;
+  }
+
+  const prompt = `Eres el asesor financiero amigable y transparente del reparto de gastos para 4 amigos en viaje a Cuenca (Alan, Ashley, Jahaira y Douglas).
+CONTEXTO CLAVE:
+¡Dennis es la CUMPLEAÑERA y la gran homenajeada del viaje! Por esa razón, ella no paga nada de los gastos compartidos; todo se divide en 4 partes iguales entre Alan, Ashley, Jahaira y Douglas como regalo / agasajo para ella.
+Alguien del grupo no entiende del todo por qué se hacen estas transferencias o quiere comprobar que el reparto es 100% justo.
+
+DATOS REALES DEL VIAJE:
+- Gasto total a repartir: $${total.toFixed(2)}
+- Cuota justa para cada uno de los 4: $${fairShare.toFixed(2)} (dividido en 4 partes iguales entre Alan, Ashley, Jahaira y Douglas para agasajar a la cumpleañera Dennis)
+- Gastos registrados:
+${expensesSummary}
+- Quién puso cuánto dinero:
+${paidSummary}
+- Transferencias calculadas por el algoritmo para saldar cuentas:
+${transfers.join('\n')}
+
+TU MISIÓN:
+Explica de forma muy clara, didáctica, breve y transparente (en 3 secciones con viñetas) cómo funciona esta división de cuentas entre los 4 amigos para invitar a Dennis por su cumpleaños, asegurando que todos queden 100% conformes y tranquilos.
+
+REGLAS ESTRICTAS:
+- TOTALMENTE PROHIBIDO incluir saludos tipo "¡Hola equipo!", "Qué tal amigos" o comentarios de bienvenida. Empieza directamente con el contenido útil.
+- 1. Explica quiénes pusieron dinero de más (acreedores) y quiénes aún no han puesto (deudores) entre los 4 que cubren el viaje.
+- 2. Explica con sencillez por qué los que pusieron de más NO se transfieren entre sí (porque ambos tienen saldo a favor) y por qué las transferencias van directo de los que deben hacia ellos para evitar transferencias de ida y vuelta.
+- 3. Demuestra matemáticamente que al final de las transferencias, ABSOLUTAMENTE TODOS los 4 amigos participantes terminan habiendo cubierto exactamente los mismos $${fairShare.toFixed(2)}, agasajando a la cumpleañera Dennis de forma 100% justa, sin que nadie pierda ni gane un centavo.
+- Usa negritas y viñetas para que sea muy fácil de leer en celular.`;
+
+  try {
+    const res = await callGeminiAI(prompt, true);
+    box.innerHTML = formatExplanationHtml(res);
+  } catch(err) {
+    box.innerHTML = '❌ Ocurrió un error al generar la explicación. Por favor intenta de nuevo.';
+  }
+}
+
+function saveExpenses() {
+  try { localStorage.setItem('cuenca_exp_clean_v5', JSON.stringify(expenses)); } catch(e) {}
+}
+
+function loadExpenses() {
+  try {
+    const s = localStorage.getItem('cuenca_exp_clean_v5') || localStorage.getItem('cuenca_exp_clean_v4');
+    if (s) {
+      const parsed = JSON.parse(s);
+      expenses = parsed.filter(e => expenseParticipants.includes(e.payer));
+    }
+  } catch(e) {}
+  renderExpensesTactile();
+}
+
+// --- RULETA DE DECISIONES & RETOS ---
+const actionTasks = [
+  'Turno #1 en el baño de la mañana',
+  'Prepara la primera ronda de café en el depa',
+  'Elige la música en el auto para la próxima hora',
+  'Elige el primer juego de la noche',
+  'Anota los puntos del torneo en la app',
+  'Sirve la primera ronda de canelazos calientes'
+];
+
+const gamesList = [
+  { name: '🎭 Dígalo con Mímica', desc: 'Sin hablar, 2 vs 3 con el cronómetro de 60s.' },
+  { name: '🕵️ El Impostor (App)', desc: 'Abran la App y descubran al impostor con una palabra.' },
+  { name: '🧠 ¿Quién Soy?', desc: 'Post-it en la frente y preguntas de Sí o No.' },
+  { name: '🤫 2 Verdades y 1 Mentira', desc: 'Confesiones y secretos entre amigos y parejas.' },
+  { name: '✏️ Teléfono Descompuesto', desc: 'Frase absurda → dibujo → frase. Risas al 100%.' },
+  { name: '🔢 Uno Reglas Bravas', desc: 'Acumulación de +4 y juego rápido.' },
+  { name: '📺 Karaoke en TV', desc: 'YouTube en la TV a cantar los clásicos.' }
+];
+
+const foodList = [
+  { name: '🥓 Hornado Tradicional', desc: 'Con mote pillo, llapingachos dorados y ají.' },
+  { name: '🍳 Mote Pillo & Mote Sucio', desc: 'Con huevo criollo o chicharrón crujiente.' },
+  { name: '🐟 Trucha de Páramo', desc: 'Trucha fresca al ajillo con patacones.' },
+  { name: '🍻 Cervecería La María', desc: 'Cerveza artesanal y pizzas junto al río.' },
+  { name: '☕ Chocolate con Dulce de Higos', desc: 'Chocolate espeso con higos confitados.' }
+];
+
+let lastRoulettePerson = null;
+let lastRouletteGame = null;
+let lastRouletteFood = null;
+let lastDareTraveler = null;
+const lastDareCategoryMap = {};
+let lastTruthTraveler = null;
+
+function spinPerson() {
+  const pool = travelers.filter(p => p !== lastRoulettePerson);
+  const p = pool[Math.floor(Math.random() * pool.length)];
+  lastRoulettePerson = p;
+  const task = actionTasks[Math.floor(Math.random() * actionTasks.length)];
+  animateRoulette('👤 ' + p, task);
+}
+
+function spinGame() {
+  const pool = gamesList.filter(g => g.name !== lastRouletteGame);
+  const g = pool[Math.floor(Math.random() * pool.length)];
+  lastRouletteGame = g.name;
+  animateRoulette(g.name, g.desc);
+}
+
+function spinFood() {
+  const pool = foodList.filter(f => f.name !== lastRouletteFood);
+  const f = pool[Math.floor(Math.random() * pool.length)];
+  lastRouletteFood = f.name;
+  animateRoulette(f.name, f.desc);
+}
+
+const partyRounds = {
+  Alan: ['comedia', 'imitacion', 'actuacion', 'canto', 'humor', 'expresion', 'ingenio'],
+  Dennis: ['canto', 'imitacion', 'humor', 'actuacion', 'ritmo', 'comedia'],
+  Douglas: ['actuacion', 'humor', 'canto', 'comedia', 'ritmo', 'imitacion'],
+  Jahaira: ['actuacion', 'ritmo', 'humor', 'pasarela', 'canto', 'comedia', 'imitacion'],
+  Ashley: ['ritmo', 'actuacion', 'pasarela', 'canto', 'baile', 'humor', 'comedia', 'imitacion']
+};
+
+async function spinAiDare() {
+  const pool = travelers.filter(p => p !== lastDareTraveler);
+  const t = pool[Math.floor(Math.random() * pool.length)];
+  lastDareTraveler = t;
+  animateRoulette('⚡ Generando...', `Pensando reto dinámico para ${t}...`);
+  
+  const styles = partyRounds[t] || ['comedia', 'actuacion', 'canto'];
+  const lastCat = lastDareCategoryMap[t];
+  const availableCats = styles.filter(c => c !== lastCat);
+  const style = availableCats.length > 0 ? availableCats[Math.floor(Math.random() * availableCats.length)] : styles[0];
+  lastDareCategoryMap[t] = style;
+  
+  let dynamicHint = '';
+  if (style === 'baile' || style === 'ritmo' || style === 'pasarela') {
+    dynamicHint = 'Enfoca el reto en movimiento, baile divertido o pasarela con estilo (ej: pasos de baile estilo Shakira o Bad Bunny, o desfile cómico de pasarela).';
+  } else if (style === 'expresion') {
+    dynamicHint = 'Enfoca el reto en expresión gestual o pose cómica (ej: pose de superhéroe exagerada o caminar como robot).';
+  } else if (style === 'canto') {
+    dynamicHint = 'Enfoca el reto en cantar un coro dramático o imitar la voz de un cantante famoso de forma cómica.';
+  } else if (style === 'actuacion') {
+    dynamicHint = 'Enfoca el reto en actuar una escena cómica o dramática de 15 segundos.';
+  } else if (style === 'imitacion') {
+    dynamicHint = 'Enfoca el reto en imitar a un personaje conocido o hablar con acento extranjero por un turno.';
+  } else {
+    dynamicHint = 'Enfoca el reto en una ocurrencia cómica, anécdota rápida o pequeña penitencia divertida.';
+  }
+
+  const prompt = `Genera un reto dinámico, gracioso y entretenido para ${t} en una noche de juegos entre sus amigos en Cuenca (Alan, Dennis, Ashley, Jahaira, Douglas).
+DINÁMICA: ${dynamicHint}
+REGLAS GENERALES:
+- El reto se realiza frente a todo el grupo en general, NUNCA dirigido privadamente ni como baile sensual hacia la pareja de otro.
+- PROHIBIDO lenguaje vulgar, morbo sexual explícito o decir textualmente "baile sensual".
+- Devuelve SOLO el texto del reto empezando con "Reto: ...". Sin asteriscos.`;
+
+  const result = await callGeminiAI(prompt, true);
+  animateRoulette('👤 ' + t, cleanDirectOutput(result) || 'Reto: ¡Baila como Shakira por 15 segundos frente al grupo o imita a un cantante famoso!');
+}
+
+async function spinAiTruth() {
+  const pool = travelers.filter(p => p !== lastTruthTraveler);
+  const t = pool[Math.floor(Math.random() * pool.length)];
+  lastTruthTraveler = t;
+  animateRoulette('✨ Generando...', `Pensando pregunta curiosa para ${t}...`);
+  
+  const prompt = `Genera una pregunta de verdad curiosa, entretenida y con picardía sana de amigos para ${t} en una reunión nocturna de viaje en Cuenca (Alan, Dennis, Ashley, Jahaira, Douglas).
+INSTRUCCIONES:
+- Temas: anécdotas divertidas de viajes, curiosidades de su vida, gustos peculiares, primeras impresiones o momentos graciosos de fiesta.
+- Tono entretenido de amigos y parejas, respetuoso y sin morbo sexual explícito.
+- Devuelve SOLO la pregunta empezando con "Verdad: ¿...". Sin asteriscos.`;
+  const result = await callGeminiAI(prompt, true);
+  animateRoulette('👤 ' + t, cleanDirectOutput(result) || 'Verdad: ¿Qué es lo más curioso o gracioso que te ha pasado en un viaje?');
+}
+
+function animateRoulette(name, sub) {
+  const n = document.getElementById('rouletteName');
+  const s = document.getElementById('rouletteSub');
+  n.style.opacity = '0';
+  setTimeout(() => {
+    n.innerText = name;
+    s.innerHTML = sub;
+    n.style.opacity = '1';
+  }, 120);
+}
+
+// --- JUEGOS INLINE CON ANTI-REPETICIÓN Y ROTACIÓN DE GÉNEROS ---
+const mimicGenres = [
+  'Animación (Disney, Pixar o DreamWorks)',
+  'Acción, Aventura o Superhéroes (Marvel, DC, Star Wars)',
+  'Comedia clásica o de culto',
+  'Terror, Monstruos o Suspenso',
+  'Situación cotidiana cómica o absurda',
+  'Serie de TV o Telenovela famosa',
+  'Clásicos del cine internacional',
+  'Película de ciencia ficción o misterio'
+];
+let recentMimicTopics = [];
+
+async function generateAiMimicTopicDirect() {
+  const box = document.getElementById('mimicTopicBox');
+  box.innerHTML = '<i>Generando título...</i>';
+  const genre = mimicGenres[Math.floor(Math.random() * mimicGenres.length)];
+  const avoid = ['Titanic', ...recentMimicTopics.slice(-6)].join(', ');
+  const prompt = `Genera 1 película muy famosa o situación cómica para Dígalo con Mímica en 60s.
+GÉNERO O TEMA: ${genre}.
+EXCLUSIÓN: PROHIBIDO sugerir: ${avoid}. Debe ser una opción diferente y muy divertida de actuar sin hablar.
+Formato exacto: "🎬 <b>[Título o Situación]</b> (Categoría: ...)"`;
+  const res = await callGeminiAI(prompt, true);
+  const cleaned = cleanDirectOutput(res);
+  box.innerHTML = cleaned;
+  if (cleaned) recentMimicTopics.push(cleaned.replace(/<[^>]+>/g, '').slice(0, 30));
+}
+
+const characterGenres = [
+  'Actor o actriz de Hollywood',
+  'Cantante de música pop, rock o urbana',
+  'Personaje de caricatura animada o cómic',
+  'Celebridad latina o de la televisión',
+  'Figura histórica o científico legendario',
+  'Deportista de élite mundialmente conocido'
+];
+let recentCharacters = [];
+let currentSecretCharacter = null;
+let foreheadCountdownTimer = null;
+
+async function generateAiCharacterDirect() {
+  const box = document.getElementById('whoAmIBox');
+  box.innerHTML = '<i>Generando personaje secreto...</i>';
+  const genre = characterGenres[Math.floor(Math.random() * characterGenres.length)];
+  const avoid = ['Shakira', ...recentCharacters.slice(-6)].join(', ');
+  const prompt = `Genera 1 personaje famoso para el juego de fiesta "¿Quién Soy? (Post-it en la frente)".
+CATEGORÍA: ${genre}.
+EXCLUSIÓN: PROHIBIDO sugerir: ${avoid}.
+Debe ser ampliamente reconocido por amigos ecuatorianos (figura histórica célebre, científico legendario, cantante, actor, deportista o personaje de caricatura/TV).
+
+Devuelve ÚNICAMENTE un JSON válido con este formato:
+{
+  "nombre": "Nombre del Personaje",
+  "categoria": "Categoría breve (ej. Científico legendario / Cantante Pop / Caricatura)",
+  "pista": "Pista breve por si los amigos necesitan refrescar la memoria"
+}`;
+
+  try {
+    const res = await callGeminiAI(prompt, true);
+    let charData = null;
+    try {
+      const cleanJson = res.replace(/```json/gi, '').replace(/```/g, '').trim();
+      charData = JSON.parse(cleanJson);
+    } catch(e) {
+      charData = {
+        nombre: "Albert Einstein",
+        categoria: "Científico legendario",
+        pista: "Desarrolló la teoría de la relatividad y sacaba la lengua en las fotos"
+      };
+    }
+
+    currentSecretCharacter = charData;
+    if (charData.nombre) recentCharacters.push(charData.nombre.slice(0, 30));
+
+    box.innerHTML = `
+      <div style="font-weight:700;color:var(--blue-deep);">✅ ¡Personaje secreto listo y oculto!</div>
+      <div style="font-size:12px;color:var(--ink-soft);margin-top:3px;">
+        Póntelo en la frente con el celular en horizontal (tendrás 3 segundos para colocártelo sin mirar) o míralo para anotarlo en un post-it.
+      </div>
+      <div style="display:flex;gap:6px;margin-top:10px;flex-wrap:wrap;">
+        <button class="btn-forehead-launch" onclick="launchForeheadMode()">📱 Modo Frente (Pantalla Completa)</button>
+        <button class="btn-print" style="font-size:11px;padding:6px 12px;" onclick="revealCharacterInBox()">👁️ Ver para papelito</button>
+      </div>
+    `;
+  } catch(err) {
+    box.innerHTML = '❌ Ocurrió un error al generar. Por favor intenta de nuevo.';
+  }
+}
+
+function toggleForeheadRotation() {
+  const modal = document.getElementById('foreheadModal');
+  if (modal) modal.classList.toggle('rotated');
+}
+
+function skipForeheadCountdown() {
+  clearInterval(foreheadCountdownTimer);
+  const countBox = document.getElementById('foreheadCountdownBox');
+  const contentBox = document.getElementById('foreheadContentBox');
+  if (countBox) countBox.style.display = 'none';
+  if (contentBox) contentBox.style.display = 'flex';
+}
+
+function launchForeheadMode() {
+  if (!currentSecretCharacter) {
+    alert('Primero genera un personaje secreto con el botón.');
+    return;
+  }
+  const modal = document.getElementById('foreheadModal');
+  const countBox = document.getElementById('foreheadCountdownBox');
+  const countNum = document.getElementById('foreheadCountNum');
+  const contentBox = document.getElementById('foreheadContentBox');
+
+  if (modal) {
+    modal.classList.remove('rotated');
+    modal.style.display = 'flex';
+  }
+  if (countBox) countBox.style.display = 'block';
+  if (contentBox) contentBox.style.display = 'none';
+
+  // Request Fullscreen on the modal element itself (or document fallback)
+  try {
+    if (modal && modal.requestFullscreen) {
+      modal.requestFullscreen().catch(() => {});
+    } else if (document.documentElement.requestFullscreen) {
+      document.documentElement.requestFullscreen().catch(() => {});
+    }
+  } catch(e) {}
+
+  // Request Landscape lock
+  try {
+    if (screen.orientation && screen.orientation.lock) {
+      screen.orientation.lock('landscape').catch(() => {});
+    }
+  } catch(e) {}
+
+  const nameEl = document.getElementById('foreheadCharName');
+  const catEl = document.getElementById('foreheadCharCat');
+  const clueEl = document.getElementById('foreheadCharClue');
+  if (nameEl) nameEl.innerText = currentSecretCharacter.nombre || 'Personaje';
+  if (catEl) catEl.innerText = currentSecretCharacter.categoria ? `(${currentSecretCharacter.categoria})` : '';
+  if (clueEl) clueEl.innerText = currentSecretCharacter.pista ? `Pista: ${currentSecretCharacter.pista}` : '';
+
+  let count = 3;
+  if (countNum) countNum.innerText = count;
+  clearInterval(foreheadCountdownTimer);
+  foreheadCountdownTimer = setInterval(() => {
+    count--;
+    if (count > 0) {
+      if (countNum) countNum.innerText = count;
+    } else {
+      clearInterval(foreheadCountdownTimer);
+      if (countBox) countBox.style.display = 'none';
+      if (contentBox) contentBox.style.display = 'flex';
+    }
+  }, 1000);
+}
+
+function closeForeheadMode(shouldExitFs = true) {
+  clearInterval(foreheadCountdownTimer);
+  const modal = document.getElementById('foreheadModal');
+  if (modal) {
+    modal.style.display = 'none';
+    modal.classList.remove('rotated');
+  }
+
+  if (shouldExitFs) {
+    try {
+      if (document.fullscreenElement && document.exitFullscreen) {
+        document.exitFullscreen().catch(() => {});
+      }
+    } catch(e) {}
+  }
+  try {
+    if (screen.orientation && screen.orientation.unlock) {
+      screen.orientation.unlock();
+    }
+  } catch(e) {}
+}
+
+document.addEventListener('fullscreenchange', () => {
+  if (!document.fullscreenElement) {
+    const modal = document.getElementById('foreheadModal');
+    if (modal && modal.style.display === 'flex') {
+      closeForeheadMode(false);
+    }
+  }
+});
+
+function revealCharacterInBox() {
+  if (!currentSecretCharacter) return;
+  const box = document.getElementById('whoAmIBox');
+  box.innerHTML = `
+    <span class="truth-badge real" style="background:var(--blue-deep);">PERSONAJE SECRETO</span><br>
+    🎭 <b>${currentSecretCharacter.nombre}</b> <span style="color:var(--ink-soft);font-size:12px;">(${currentSecretCharacter.categoria})</span>
+    <div style="font-size:12px;color:var(--ink-soft);margin-top:4px;">
+      — Pista: ${currentSecretCharacter.pista}
+    </div>
+    <div style="margin-top:10px;">
+      <button class="btn-forehead-launch" onclick="launchForeheadMode()">📱 Poner en la Frente</button>
+    </div>
+  `;
+}
+
+// --- 1 VERDAD Y 2 MENTIRAS: CAMUFLAJE CON IA ---
+let currentTruthOptions = [];
+let realTruthIndex = -1;
+
+function revealTruthTemporary(e) {
+  if (e && e.preventDefault && e.type === 'touchstart') e.preventDefault();
+  const inp = document.getElementById('secretTruthInput');
+  const btn = document.getElementById('toggleTruthMaskBtn');
+  if (inp) inp.type = 'text';
+  if (btn) {
+    btn.innerHTML = '👁️ Mostrando...';
+    btn.classList.add('holding');
+  }
+}
+
+function hideTruthTemporary() {
+  const inp = document.getElementById('secretTruthInput');
+  const btn = document.getElementById('toggleTruthMaskBtn');
+  if (inp) inp.type = 'password';
+  if (btn) {
+    btn.innerHTML = '👁️ Mantén para ver';
+    btn.classList.remove('holding');
+  }
+}
+
+async function camouflageTruthWithAi() {
+  const inp = document.getElementById('secretTruthInput');
+  const truth = inp ? inp.value.trim() : '';
+  const box = document.getElementById('twoTruthsBox');
+
+  if (!truth) {
+    alert('Por favor escribe primero 1 anécdota o verdad real sobre ti (permanecerá oculta con 🔒 para que nadie la espíe).');
+    if (inp) inp.focus();
+    return;
+  }
+
+  box.innerHTML = '<i>🤫 Analizando tu verdad y redactando 2 mentiras creíbles para camuflarte...</i>';
+
+  const prompt = `Eres el cómplice maestro en el juego de fiesta "1 Verdad y 2 Mentiras".
+El jugador ha escrito esta VERDAD real sobre sí mismo (puede contener errores de tipeo, minúsculas, falta de tildes o modismos):
+"${truth}"
+
+TU MISIÓN DE HOMOGENEIZACIÓN Y CAMUFLAJE TOTAL:
+Para que nadie en el grupo pueda deducir cuál es la verdad por faltas de ortografía, longitud, mayúsculas o estilo de redacción:
+1. "verdad_pulida": Reescribe la verdad real del jugador manteniendo el 100% de los hechos exactos, pero normalizándola a una redacción limpia, natural, con mayúscula inicial, puntuación correcta y sin errores ortográficos.
+2. "mentira1" y "mentira2": Inventa 2 mentiras creíbles del MISMO TEMA EXACTO (crushes o anécdotas románticas de adolescencia si la verdad es romántica; dinero si es dinero; fiesta/alcohol si es fiesta; torpezas si es torpeza).
+   IMPORTANTE: Las mentiras deben tener detalles y anécdotas propias y diferentes, NUNCA simplemente invertir los mismos nombres de la verdad.
+3. Las 3 afirmaciones deben parecer redactadas con el MISMO estilo, gramática uniforme y longitud similar.
+
+Devuelve ÚNICAMENTE un JSON válido con este formato:
+{
+  "verdad_pulida": "texto de la verdad real bien redactada",
+  "mentira1": "texto de la mentira 1",
+  "mentira2": "texto de la mentira 2"
+}`;
+
+  try {
+    const res = await callGeminiAI(prompt, true);
+    let lies = null;
+    try {
+      const cleanJson = res.replace(/```json/gi, '').replace(/```/g, '').trim();
+      lies = JSON.parse(cleanJson);
+    } catch(e) {
+      lies = {
+        verdad_pulida: truth,
+        mentira1: "En mis primeros días de colegio intenté impresionar a alguien fingiendo que sabía tocar guitarra y pasé una vergüenza terrible.",
+        mentira2: "Le envié una carta romántica anónima a una chica de otro curso y mi mejor amigo se la leyó a todos por accidente."
+      };
+    }
+
+    const cleanTruthText = (lies && lies.verdad_pulida) ? lies.verdad_pulida : truth;
+    const rawOptions = [
+      { text: cleanTruthText, isReal: true },
+      { text: (lies && lies.mentira1) ? lies.mentira1 : "Anécdota falsa de despiste", isReal: false },
+      { text: (lies && lies.mentira2) ? lies.mentira2 : "Segunda anécdota falsa de despiste", isReal: false }
+    ];
+
+    // Barajar aleatoriamente con Fisher-Yates
+    for (let i = rawOptions.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [rawOptions[i], rawOptions[j]] = [rawOptions[j], rawOptions[i]];
+    }
+
+    currentTruthOptions = rawOptions;
+    realTruthIndex = rawOptions.findIndex(o => o.isReal);
+
+    const letters = ['A', 'B', 'C'];
+    let html = `<div style="font-weight:700;color:var(--blue-deep);margin-bottom:6px;">🎭 3 Afirmaciones Mezcladas (Solo 1 es la verdad real):</div>`;
+    
+    rawOptions.forEach((opt, idx) => {
+      html += `
+        <div class="truth-option-card" id="truthOpt${idx}">
+          <span style="font-family:'IBM Plex Mono',monospace;font-weight:700;color:var(--blue);">Opción ${letters[idx]}:</span>
+          ${cleanFormat(opt.text)}
+        </div>
+      `;
+    });
+
+    html += `
+      <div style="margin-top:10px;font-size:12px;color:var(--ink-soft);line-height:1.4;">
+        👉 <b>¡Interrogatorio!</b> Tienen 60s para hacerle preguntas al jugador sobre las tres opciones. El jugador debe defender todas con cara seria. Luego voten: <b>¿Cuál es la VERDAD real?</b>
+      </div>
+      <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:10px;">
+        <button class="btn-reveal-truth" id="btnRevealTruth" onclick="revealRealTruth()">👁️ Revelar cuál era la Verdad</button>
+        <button class="btn-print" style="padding:5px 10px;font-size:11px;" onclick="resetTruthGame()">🔄 Nueva Ronda</button>
+      </div>
+    `;
+
+    box.innerHTML = html;
+    inp.value = '';
+    hideTruthTemporary();
+  } catch(err) {
+    box.innerHTML = '❌ Ocurrió un error al camuflar. Por favor intenta de nuevo.';
+  }
+}
+
+function revealRealTruth() {
+  if (!currentTruthOptions || currentTruthOptions.length === 0) return;
+  
+  currentTruthOptions.forEach((opt, idx) => {
+    const el = document.getElementById('truthOpt' + idx);
+    if (!el) return;
+    if (opt.isReal) {
+      el.classList.add('real-revealed');
+      el.innerHTML = `<span class="truth-badge real">✅ ¡ESTA ES LA VERDAD REAL!</span><br>` + el.innerHTML;
+    } else {
+      el.classList.add('lie-revealed');
+      el.innerHTML = `<span class="truth-badge lie">🤖 MENTIRA DE IA</span><br>` + el.innerHTML;
+    }
+  });
+
+  const revBtn = document.getElementById('btnRevealTruth');
+  if (revBtn) revBtn.style.display = 'none';
+}
+
+function resetTruthGame() {
+  currentTruthOptions = [];
+  realTruthIndex = -1;
+  const box = document.getElementById('twoTruthsBox');
+  if (box) box.innerHTML = '🤫 Escribe arriba tu verdad en secreto y toca <b>"Camuflar con IA"</b> para que invente 2 mentiras y las mezcle.';
+  const inp = document.getElementById('secretTruthInput');
+  if (inp) {
+    inp.value = '';
+    inp.focus();
+  }
+  hideTruthTemporary();
+}
+
+const phoneGenres = [
+  'Animales en situaciones humanas absurdas',
+  'Superhéroes con problemas cotidianos',
+  'Cosas que salieron mal en un restaurante o cocina',
+  'Alienígenas intentando entender la tierra',
+  'Profesiones extrañas en situaciones ridículas'
+];
+
+async function generateBrokenPhonePhrase() {
+  const box = document.getElementById('brokenPhoneBox');
+  box.innerHTML = '<i>Inventando frase absurda...</i>';
+  const theme = phoneGenres[Math.floor(Math.random() * phoneGenres.length)];
+  const prompt = `Genera 1 frase absurda y cómica de 5 a 8 palabras para Teléfono Descompuesto Dibujado.
+TEMA: ${theme} (ejemplo: "Un pingüino vendiendo empanadas"). Solo la frase, sin asteriscos.`;
+  const res = await callGeminiAI(prompt, true);
+  box.innerHTML = `<b>"${cleanDirectOutput(res)}"</b>`;
+}
+
+// --- CRONOMETRO MIMICA ---
+let timerInterval = null;
+let timerSeconds = 60;
+function startTimer() {
+  clearInterval(timerInterval);
+  timerSeconds = 60;
+  document.getElementById('mimicTimer').innerText = '60s';
+  timerInterval = setInterval(() => {
+    timerSeconds--;
+    document.getElementById('mimicTimer').innerText = timerSeconds + 's';
+    if (timerSeconds <= 0) {
+      clearInterval(timerInterval);
+      alert('⏰ ¡TIEMPO TERMINADO!');
+    }
+  }, 1000);
+}
+function resetTimer() {
+  clearInterval(timerInterval);
+  timerSeconds = 60;
+  document.getElementById('mimicTimer').innerText = '60s';
+}
+
+// --- AI CHAT INTERACTIVO (SIN AUTO-PETICIÓN AL ABRIR) ---
+function openAiChat() {
+  document.getElementById('aiModalOverlay').style.display = 'flex';
+  document.getElementById('aiChatInput').focus();
+}
+
+function closeAiChat() {
+  document.getElementById('aiModalOverlay').style.display = 'none';
+}
+
+async function sendUserChatMessage() {
+  const input = document.getElementById('aiChatInput');
+  const text = input.value.trim();
+  if (!text) return;
+
+  const chatContainer = document.getElementById('aiChatMessages');
+  
+  // Append user message
+  const userDiv = document.createElement('div');
+  userDiv.className = 'chat-msg user';
+  userDiv.innerText = text;
+  chatContainer.appendChild(userDiv);
+  input.value = '';
+
+  // Loading AI bubble
+  const aiDiv = document.createElement('div');
+  aiDiv.className = 'chat-msg ai';
+  aiDiv.innerHTML = '<i>Escribiendo respuesta...</i>';
+  chatContainer.appendChild(aiDiv);
+  chatContainer.scrollTop = chatContainer.scrollHeight;
+
+  const res = await callGeminiAI(text, false);
+  aiDiv.innerHTML = cleanFormat(res);
+  chatContainer.scrollTop = chatContainer.scrollHeight;
+}
+
+async function callGeminiAI(userQuery, isDirect = false) {
+  const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/${GEMINI_MODEL}:generateContent?key=${GEMINI_API_KEY}`;
+  const sysPrompt = isDirect ? getDirectAiContext() : getDynamicAiContext();
+
+  try {
+    const res = await fetch(endpoint, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        contents: [{ parts: [{ text: sysPrompt + '\n\n' + (isDirect ? 'Solicitud: ' : 'Usuario: ') + userQuery }] }],
+        generationConfig: {
+          temperature: 1.0,
+          topP: 0.95
+        }
+      })
+    });
+    
+    if (!res.ok) {
+      const fallbackEndpoint = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash-lite:generateContent?key=${GEMINI_API_KEY}`;
+      const resFallback = await fetch(fallbackEndpoint, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          contents: [{ parts: [{ text: sysPrompt + '\n\n' + (isDirect ? 'Solicitud: ' : 'Usuario: ') + userQuery }] }],
+          generationConfig: {
+            temperature: 1.0,
+            topP: 0.95
+          }
+        })
+      });
+      if (resFallback.ok) {
+        const fbData = await resFallback.json();
+        if (fbData.candidates && fbData.candidates[0].content.parts[0].text) {
+          return fbData.candidates[0].content.parts[0].text.trim();
+        }
+      }
+      throw new Error('API Error');
+    }
+
+    const data = await res.json();
+    if (data.candidates && data.candidates[0].content.parts[0].text) {
+      return data.candidates[0].content.parts[0].text.trim();
+    }
+    throw new Error('Sin contenido');
+  } catch(e) {
+    return getOfflineFallback(userQuery);
+  }
+}
+
+function getOfflineFallback(q) {
+  const query = q.toLowerCase();
+  if (query.includes('bar') || query.includes('cerveza') || query.includes('noche')) {
+    return 'Recomendado Cervecería La María en El Barranco: cervezas artesanales y pizzas junto al río Tomebamba.';
+  }
+  if (query.includes('hornado') || query.includes('comer') || query.includes('almuerzo')) {
+    return 'El mejor hornado tradicional está en el Mercado 10 de Agosto o en Mahuad con mote pillo y llapingachos.';
+  }
+  if (query.includes('chordeleg') || query.includes('plata') || query.includes('joya')) {
+    return 'En Chordeleg caminen alrededor del parque central: hay variedad de talleres de joyas de plata hechas a mano.';
+  }
+  return 'Tip: Disfruten el atardecer en Turi a las 6:20 PM con canelazos calientes y visiten la Torre de la Libertad.';
+}
+
+function getWeatherMeta(code, isDay = 1) {
+  if (code === 0) return { desc: isDay ? 'Despejado' : 'Noche despejada', icon: isDay ? '☀️' : '🌙' };
+  if (code <= 3) return { desc: isDay ? 'Parcialmente nublado' : 'Noche nublada', icon: isDay ? '⛅' : '☁️' };
+  if (code === 45 || code === 48) return { desc: 'Neblina andina', icon: '🌫️' };
+  if (code >= 51 && code <= 55) return { desc: 'Llovizna ligera', icon: '🌦️' };
+  if (code >= 61 && code <= 65) return { desc: 'Lluvia cuencana', icon: '🌧️' };
+  if (code >= 80 && code <= 82) return { desc: 'Chubasco', icon: '🌧️' };
+  if (code >= 95) return { desc: 'Tormenta eléctrica', icon: '⛈️' };
+  return { desc: 'Nublado', icon: '☁️' };
+}
+
+// --- WEATHER OPEN-METEO (EN VIVO & PRÓXIMAS HORAS DE HOY) ---
+async function fetchWeather(isManual = false) {
+  const btn = document.getElementById('btnRefreshWeather');
+  const timeEl = document.getElementById('weatherUpdatedTime');
+  if (isManual && btn) {
+    btn.innerText = '⏳ Cargando...';
+    btn.disabled = true;
+  }
+
+  try {
+    const url = 'https://api.open-meteo.com/v1/forecast?latitude=-2.9001&longitude=-79.0059&current=temperature_2m,relative_humidity_2m,apparent_temperature,weather_code&hourly=temperature_2m,precipitation_probability,weather_code&timezone=America%2FGuayaquil';
+    const res = await fetch(url);
+    if (!res.ok) throw new Error();
+    const d = await res.json();
+
+    const t = Math.round(d.current.temperature_2m);
+    const appTemp = Math.round(d.current.apparent_temperature);
+    const hum = Math.round(d.current.relative_humidity_2m);
+    const meta = getWeatherMeta(d.current.weather_code, 1);
+
+    const liveTempEl = document.getElementById('liveTemp');
+    if (liveTempEl) liveTempEl.innerText = t + ' °C';
+
+    const heroTempEl = document.getElementById('heroTemp');
+    if (heroTempEl) heroTempEl.innerText = t + ' °C';
+
+    const liveAppEl = document.getElementById('liveApparent');
+    if (liveAppEl) liveAppEl.innerText = 'Sensación: ' + appTemp + ' °C';
+
+    const liveHumEl = document.getElementById('liveHumidity');
+    if (liveHumEl) liveHumEl.innerText = 'Humedad: ' + hum + '%';
+
+    const liveIconEl = document.getElementById('liveIcon');
+    if (liveIconEl) liveIconEl.innerText = meta.icon;
+
+    const liveDescEl = document.getElementById('liveDesc');
+    if (liveDescEl) liveDescEl.innerText = meta.desc;
+
+    const now = new Date();
+    const hh = String(now.getHours()).padStart(2, '0');
+    const mm = String(now.getMinutes()).padStart(2, '0');
+    if (timeEl) timeEl.innerText = `· ${hh}:${mm} en vivo`;
+
+    const hourlyStrip = document.getElementById('weatherHourlyStrip');
+    if (hourlyStrip && d.hourly && d.hourly.time) {
+      const nowHour = now.getHours();
+      let hourlyCardsHtml = '';
+      let maxRainInNextHours = 0;
+      let minTempInNextHours = 99;
+
+      let shownCount = 0;
+      for (let i = 0; i < d.hourly.time.length && shownCount < 6; i++) {
+        const timeStr = d.hourly.time[i];
+        const hourNum = parseInt(timeStr.split('T')[1].split(':')[0], 10);
+        
+        if (hourNum >= nowHour || (nowHour >= 20 && hourNum >= 18)) {
+          const hourTemp = Math.round(d.hourly.temperature_2m[i]);
+          const hourRain = d.hourly.precipitation_probability ? d.hourly.precipitation_probability[i] : 0;
+          const hourCode = d.hourly.weather_code[i];
+          const isDay = (hourNum >= 6 && hourNum < 18) ? 1 : 0;
+          const hMeta = getWeatherMeta(hourCode, isDay);
+
+          if (hourRain > maxRainInNextHours) maxRainInNextHours = hourRain;
+          if (hourTemp < minTempInNextHours) minTempInNextHours = hourTemp;
+
+          const timeLabel = shownCount === 0 ? 'Ahora' : `${hourNum}:00`;
+          const isRainy = hourRain >= 40;
+
+          hourlyCardsHtml += `
+            <div class="weather-hour-card ${isRainy ? 'rain-high' : ''}">
+              <div class="weather-hour-time">${timeLabel}</div>
+              <span class="weather-hour-icon">${hMeta.icon}</span>
+              <span class="weather-hour-temp">${hourTemp}°</span>
+              <span class="weather-hour-rain">${hourRain}% 🌧️</span>
+            </div>
+          `;
+          shownCount++;
+        }
+      }
+
+      if (hourlyCardsHtml) hourlyStrip.innerHTML = hourlyCardsHtml;
+
+      const alertBox = document.getElementById('weatherAlertBox');
+      if (alertBox) {
+        if (maxRainInNextHours >= 45) {
+          alertBox.innerHTML = `🌧️ <b>Alerta de Lluvia (${maxRainInNextHours}%):</b> Alta probabilidad de lluvia en las próximas horas. Lleven paraguas si salen al Barranco o Calle Larga.`;
+        } else if (minTempInNextHours <= 13) {
+          alertBox.innerHTML = `🧥 <b>Clima Frío Andino (${minTempInNextHours}°C):</b> Clima seco por ahora, pero la temperatura bajará en la noche. Salgan con chompa gruesa.`;
+        } else {
+          alertBox.innerHTML = `🌤️ <b>Tarde Templada en Cuenca:</b> Buen clima para recorrer el Centro Histórico y miradores sin lluvia inminente.`;
+        }
+      }
+    }
+  } catch(e) {
+    const alertBox = document.getElementById('weatherAlertBox');
+    if (alertBox) alertBox.innerHTML = '🌤️ Clima templado de sierra (10°C - 21°C). Llevar abrigo para la noche.';
+  } finally {
+    if (btn) {
+      btn.innerText = '🔄 Actualizar';
+      btn.disabled = false;
+    }
+  }
+}
+
+// --- SEMÁFORO DE HORARIOS (EN VIVO EN CADA CARD) ---
+const spotSchedules = {
+  libertad: { open: '10:00', close: '19:30' },
+  turi: { open: '10:00', close: '23:59' },
+  mercado10: { open: '07:00', close: '16:30' },
+  raymipampa: { open: '08:00', close: '22:00' },
+  lamaria: { open: '17:00', close: '01:00', days: [2,3,4,5,6] },
+  callelarga: { open: '18:00', close: '02:00', days: [2,3,4,5,6] },
+  pumapungo: { open: '08:30', close: '17:00', weekendOpen: '09:00', weekendClose: '16:00', days: [0,2,3,4,5,6] },
+  doschorreras: { open: '08:00', close: '21:30' },
+  pacari: { open: '10:00', close: '18:30', closedSunday: true },
+  catedral: { open: '08:30', close: '16:30', sunClose: '13:00' },
+  termas: { open: '08:00', close: '20:30' },
+  cajas: { open: '08:00', close: '16:30' },
+  trucha: { open: '08:30', close: '18:00' }
+};
+
+function initScheduleRadar() {
+  const now = new Date();
+  const h = now.getHours();
+  const m = now.getMinutes();
+  const currentMinutes = h * 60 + m;
+  const day = now.getDay();
+
+  Object.keys(spotSchedules).forEach(key => {
+    const spot = spotSchedules[key];
+    const badge = document.getElementById('badge-spot-' + key);
+    if (!badge) return;
+
+    if (spot.closedSunday && day === 0) {
+      badge.className = 'radar-badge closed';
+      badge.innerText = '🔴 Cerrado domingos';
+      return;
+    }
+
+    if (spot.days && !spot.days.includes(day)) {
+      badge.className = 'radar-badge closed';
+      badge.innerText = `🔴 Cerrado hoy (Abre ${spot.open})`;
+      return;
+    }
+
+    let openStr = spot.open;
+    let closeStr = spot.close;
+    if (day === 0 && spot.sunClose) closeStr = spot.sunClose;
+    if ((day === 0 || day === 6) && spot.weekendOpen) {
+      openStr = spot.weekendOpen;
+      closeStr = spot.weekendClose;
+    }
+
+    const [oH, oM] = openStr.split(':').map(Number);
+    const [cH, cM] = closeStr.split(':').map(Number);
+    const openM = oH * 60 + oM;
+    let closeM = cH * 60 + cM;
+    if (closeM < openM) closeM += 24 * 60;
+
+    let effCurr = currentMinutes;
+    if (closeM > 24 * 60 && currentMinutes < 6 * 60) effCurr += 24 * 60;
+
+    if (effCurr >= openM && effCurr <= closeM) {
+      const remaining = closeM - effCurr;
+      if (remaining <= 45) {
+        badge.className = 'radar-badge soon';
+        badge.innerText = `🟡 Cierra pronto (${closeStr})`;
+      } else {
+        badge.className = 'radar-badge open';
+        badge.innerText = `🟢 Abierto (Cierra ${closeStr})`;
+      }
+    } else {
+      badge.className = 'radar-badge closed';
+      badge.innerText = `🔴 Cerrado (Abre ${openStr})`;
+    }
+  });
+}
+
+// --- DESAFÍO FOTOGRÁFICO SECRETO (CACERÍA CON IA) ---
+let currentPhotoPlayer = '';
+const defaultMissions = {
+  Alan: 'Tomarle una foto a Dennis distraído comiendo mote o haciendo cara de duda al probar algo nuevo.',
+  Dennis: 'Capturar una foto de Alan mirando una artesanía o sombrero con cara de querer comprarlo.',
+  Ashley: 'Selfie disimulada con un sombrero de paja toquilla puesto en una tienda sin que nadie sospeche.',
+  Jahaira: 'Grabar o fotografiar a alguien del grupo quejándose del frío andino o del viento en la calle.',
+  Douglas: 'Una foto del Kia Sonet en un ángulo épico desde abajo como si fuera comercial de televisión.'
+};
+
+function getStoredMissions() {
+  try {
+    const s = localStorage.getItem('cuenca_photo_missions_v1');
+    if (s) return JSON.parse(s);
+  } catch(e) {}
+  return { ...defaultMissions };
+}
+
+function saveMissions(m) {
+  try { localStorage.setItem('cuenca_photo_missions_v1', JSON.stringify(m)); } catch(e) {}
+}
+
+function openPhotoMission(name) {
+  currentPhotoPlayer = name;
+  const viewer = document.getElementById('photoMissionViewer');
+  const title = document.getElementById('photoMissionPlayerName');
+  const text = document.getElementById('photoMissionText');
+  if (!viewer) return;
+
+  const missions = getStoredMissions();
+  viewer.style.display = 'block';
+  title.innerText = `🤫 Misión Secreta de ${name} (¡Tápate para que nadie mire tu pantalla!):`;
+  text.innerHTML = `🎯 <b>Objetivo:</b> ${missions[name] || defaultMissions[name]}`;
+}
+
+function closePhotoMission() {
+  const viewer = document.getElementById('photoMissionViewer');
+  if (viewer) viewer.style.display = 'none';
+}
+
+async function regeneratePhotoMissionWithAi() {
+  if (!currentPhotoPlayer) return;
+  const text = document.getElementById('photoMissionText');
+  const btn = document.getElementById('btnGenPhotoAi');
+  if (!text) return;
+
+  text.innerHTML = '<i>✨ Generando nueva misión fotográfica secreta con IA...</i>';
+  if (btn) btn.disabled = true;
+
+  let history = [];
+  try {
+    const raw = localStorage.getItem('cuenca_used_photo_missions');
+    if (raw) history = JSON.parse(raw);
+  } catch(e) {}
+
+  const recentHistory = history.slice(-10).join('; ');
+
+  const prompt = `Eres el director del juego "Desafío Fotográfico Secreto" para un viaje de 5 amigos a Cuenca (Alan, Dennis, Ashley, Jahaira, Douglas).
+Genera 1 misión fotográfica secreta 100% NUEVA, diferente y cómica para ${currentPhotoPlayer}.
+REGLAS ESTRICTAS:
+${recentHistory ? `- PROHIBIDO repetir ninguna de estas misiones o ideas ya utilizadas: "${recentHistory}".` : ''}
+- Elige una de estas categorías variadas:
+  * Reacción cómica espontánea (probar algo con cara de duda, bostezar, cara de frío).
+  * Posado forzado ridículo o artístico estilo portada de revista (frente a la Catedral o en el auto).
+  * Detalle curioso o letrero gracioso de Cuenca o Chordeleg.
+  * Captura de un hábito típico entre los amigos (mirando el celular, quejándose del clima, arreglándose).
+  * Foto cómplice con una mascota vestida o artesanía extraña.
+- Cero cosas peligrosas, cero sexuales o cringe.
+- Devuelve ÚNICAMENTE la descripción de la misión en 1 línea, empezando con "Capturar..." o "Tomar una foto...".`;
+
+  try {
+    const res = await callGeminiAI(prompt, true);
+    const cleaned = cleanDirectOutput(res);
+    const missions = getStoredMissions();
+    missions[currentPhotoPlayer] = cleaned;
+    saveMissions(missions);
+
+    history.push(cleaned);
+    try { localStorage.setItem('cuenca_used_photo_missions', JSON.stringify(history)); } catch(e) {}
+
+    text.innerHTML = `🎯 <b>Objetivo:</b> ${cleaned}`;
+  } catch(e) {
+    text.innerHTML = `🎯 <b>Objetivo:</b> ${defaultMissions[currentPhotoPlayer]}`;
+  } finally {
+    if (btn) btn.disabled = false;
+  }
+}
+
+function toggleNightPhotoReveal() {
+  const box = document.getElementById('photoNightReveal');
+  if (!box) return;
+  if (box.style.display === 'block') {
+    box.style.display = 'none';
+    return;
+  }
+  box.style.display = 'block';
+  const list = document.getElementById('photoNightList');
+  const missions = getStoredMissions();
+  const playerIdx = { Alan: 1, Dennis: 2, Ashley: 3, Jahaira: 4, Douglas: 5 };
+
+  let html = '';
+  travelers.forEach(t => {
+    const m = missions[t] || defaultMissions[t];
+    html += `
+      <div style="background:var(--cream);border:1px solid var(--line);border-radius:var(--radius-sm);padding:8px 10px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;">
+        <div style="flex:1;min-width:200px;">
+          <b style="color:var(--blue-deep);">${t}:</b> <span style="font-size:12px;color:var(--ink);">${m}</span>
+        </div>
+        <button class="btn-ai-inline" style="font-size:11px;padding:3px 8px;" onclick="awardPhotoPoints('${t}', ${playerIdx[t]})">
+          ✅ Cumplió (+3 pts)
+        </button>
+      </div>
+    `;
+  });
+  list.innerHTML = html;
+}
+
+function awardPhotoPoints(name, idx) {
+  quickAddScore(idx, 3);
+  alert(`🎉 ¡Se sumaron +3 puntos a ${name} en el Marcador Oficial!`);
+}
+
+// --- TRIBUNAL DE LA NOCHE (ALTA VARIABILIDAD SIN REPETICIÓN) ---
+const tribunalTopics = [
+  '¿Quién es más probable que termine gastando todo su dinero en joyas en Chordeleg?',
+  '¿Quién es más probable que se queje del frío cada 5 minutos en el mirador de Turi?',
+  '¿Quién es más probable que se pierda buscando el baño en la Calle Larga?',
+  '¿Quién es más probable que se quede dormido en el sillón de ANICÁ con la TV encendida?',
+  '¿Quién es más probable que intente regatear el precio del hornado en el mercado?',
+  '¿Quién es más probable que se tome 40 minutos en el baño antes de salir por la mañana?',
+  '¿Quién es más probable que ponga su playlist favorita en el auto y no deje a nadie más cambiar de música?',
+  '¿Quién es más probable que sea el primero en pedir un bajón de comida a las 2 de la madrugada?'
+];
+
+async function generateAiTribunalQuestion() {
+  const box = document.getElementById('tribunalBox');
+  const countBtn = document.getElementById('btnTribunalCount');
+  box.innerHTML = '<i>Generando dilema con IA...</i>';
+  if (countBtn) countBtn.style.display = 'inline-block';
+
+  let history = [];
+  try {
+    const raw = localStorage.getItem('cuenca_used_tribunal_qs');
+    if (raw) history = JSON.parse(raw);
+  } catch(e) {}
+
+  const recentHistory = history.slice(-12).join('; ');
+
+  const prompt = `Eres el juez cómico del juego "Tribunal: ¿Quién es más probable que...?" para 5 amigos en Cuenca (Alan, Dennis, Ashley, Jahaira, Douglas).
+Alan y Dennis son pareja; Douglas y Ashley son pareja; Jahaira vino con ellos.
+Genera 1 sola pregunta cómica, picante y directa que empiece con "¿Quién es más probable que...?".
+
+REGLAS DE MÁXIMA VARIABILIDAD:
+${recentHistory ? `- PROHIBIDO repetir o hacer preguntas parecidas a estas: "${recentHistory}".` : ''}
+- ROTA OBLIGATORIAMENTE entre estos ángulos cómicos:
+  1. Dinámica de parejas y convivencia en el departamento ANICÁ.
+  2. Compras impulsivas o regateos absurdos en Chordeleg o mercados.
+  3. Despertar tarde, peleas por la ducha o demora al arreglarse.
+  4. Salidas de noche a bares en Calle Larga o canelazos en Turi.
+  5. Manejo del Kia Sonet, ser el peor copiloto o quejarse de las curvas en la carretera.
+  6. Comer demasiado hornado, dulces o quejarse de la comida con frío.
+- PROHIBIDO preguntas sexuales o cringe. PROHIBIDO saludos.
+- Devuelve ÚNICAMENTE la pregunta en negrita con un emoji cómico al inicio.`;
+
+  try {
+    const res = await callGeminiAI(prompt, true);
+    const cleaned = cleanDirectOutput(res);
+
+    history.push(cleaned);
+    try { localStorage.setItem('cuenca_used_tribunal_qs', JSON.stringify(history)); } catch(e) {}
+
+    box.innerHTML = `
+      <div style="font-size:14px;font-weight:700;color:var(--blue-deep);margin-bottom:6px;">${cleaned}</div>
+      <div style="font-size:11.5px;color:var(--ink-soft);">Toca "⏱️ 3..2..1 ¡Votar!" para contar y que todos apunten con el dedo al mismo tiempo.</div>
+    `;
+  } catch(e) {
+    const fallback = tribunalTopics[Math.floor(Math.random() * tribunalTopics.length)];
+    box.innerHTML = `
+      <div style="font-size:14px;font-weight:700;color:var(--blue-deep);margin-bottom:6px;">⚖️ ${fallback}</div>
+      <div style="font-size:11.5px;color:var(--ink-soft);">Toca "⏱️ 3..2..1 ¡Votar!" para contar y que todos apunten con el dedo al mismo tiempo.</div>
+    `;
+  }
+}
+
+let tribunalTimer = null;
+function startTribunalCountdown() {
+  const box = document.getElementById('tribunalBox');
+  const countBtn = document.getElementById('btnTribunalCount');
+  if (!box) return;
+  if (countBtn) countBtn.disabled = true;
+
+  const qHtml = box.querySelector('div') ? box.querySelector('div').outerHTML : box.innerHTML;
+  let count = 3;
+  box.innerHTML = `
+    ${qHtml}
+    <div style="font-size:24px;font-weight:900;color:var(--terracotta);margin-top:8px;font-family:'IBM Plex Mono',monospace;" id="tribunalCountText">👉 ¡Apunten en: 3...</div>
+  `;
+
+  clearInterval(tribunalTimer);
+  tribunalTimer = setInterval(() => {
+    count--;
+    const t = document.getElementById('tribunalCountText');
+    if (count > 0) {
+      if (t) t.innerText = `👉 ¡Apunten en: ${count}...`;
+    } else {
+      clearInterval(tribunalTimer);
+      if (t) t.innerText = `👉 ¡¡YA!! ¡APUNTEN AHORA! 🎯 (El más votado cumple la penitencia/trago)`;
+      if (countBtn) countBtn.disabled = false;
+    }
+  }, 1000);
+}
+
+async function generateBarmanCocktail() {
+  const inp = document.getElementById('barmanInput');
+  const ings = inp ? inp.value.trim() : '';
+  const box = document.getElementById('barmanBox');
+  if (!box) return;
+
+  if (!ings) {
+    alert('Por favor escribe qué bebidas, licores o ingredientes tienen a la mano (ej. Ron, Sprite, limón, maracuyá, cerveza...).');
+    if (inp) inp.focus();
+    return;
+  }
+
+  box.innerHTML = '<i>🍸 El Barman del Grupo está mezclando los ingredientes y creando la receta...</i>';
+
+  const prompt = `Eres "El barman del grupo", mixólogo estrella del viaje de 5 amigos a Cuenca (en el departamento ANICÁ).
+Los amigos tienen estos ingredientes sobre la mesa:
+"${ings}"
+
+TU MISIÓN:
+Crea 1 cóctel delicioso, fácil y bien balanceado usando los ingredientes disponibles.
+Dale un nombre cómico y temático del viaje a Cuenca (ej. "El Canelazo del Cajas", "El Deslave de Molleturo", "El Secreto de ANICÁ", "La Chispa Tomebamba").
+
+FORMATO OBLIGATORIO:
+🍹 <b>[Nombre del Cóctel]</b>
+• <b>Ingredientes & Proporciones:</b> [lista clara]
+• <b>Preparación en 3 pasos:</b> [1. Paso uno. 2. Paso dos. 3. Paso tres.]
+• <b>Tip del Barman:</b> [consejo breve de servicio o brindis]
+
+REGLAS ESTRICTAS:
+- Cero saludos ni introducciones. Empieza directamente con el emoji 🍹 y el nombre.`;
+
+  try {
+    const res = await callGeminiAI(prompt, true);
+    const cleaned = cleanDirectOutput(res);
+    box.innerHTML = cleanFormat(cleaned);
+  } catch(e) {
+    box.innerHTML = `
+      🍹 <b>El Canelazo Exprés de ANICÁ</b><br>
+      • <b>Ingredientes:</b> 2 oz de licor, 4 oz de gaseosa o jugo cítrico, chorrito de limón y mucho hielo.<br>
+      • <b>Preparación:</b> 1. Llena el vaso con hielo. 2. Vierte el licor y la gaseosa. 3. Remueve 10 segundos y ¡salud por Cuenca!
+    `;
+  }
+}
+
+// --- SCOREBOARD UNIVERSAL DIRECTO & TAREAS CON IA ---
+let universalScores = [0, 0, 0, 0, 0];
+
+function quickAddScore(playerIdx, delta) {
+  universalScores[playerIdx - 1] = Math.max(0, universalScores[playerIdx - 1] + delta);
+  updateTotals();
+  saveScores();
+}
+
+function updateTotals() {
+  let scores = [];
+  for (let i = 1; i <= 5; i++) {
+    const total = universalScores[i - 1];
+    const totEl = document.getElementById('p' + i + '-tot');
+    if (totEl) totEl.innerText = total;
+    scores.push({ idx: i, name: travelers[i - 1], total });
+  }
+
+  scores.sort((a, b) => b.total - a.total);
+  const maxScore = scores[0].total;
+  const minScore = scores[scores.length - 1].total;
+
+  const leaderEl = document.getElementById('currentLeaderName');
+  const lastEl = document.getElementById('currentLastPlaceName');
+
+  for (let i = 1; i <= 5; i++) {
+    const cell = document.getElementById('p' + i + '-name-cell');
+    const row = document.getElementById('score-row-' + i);
+    const curScore = universalScores[i - 1];
+    if (cell) {
+      if (curScore === maxScore && maxScore > 0) {
+        cell.innerHTML = `${travelers[i - 1]} <span class="leader-badge">👑 Líder</span>`;
+        if (row) row.classList.add('is-leader');
+      } else {
+        cell.innerHTML = `${travelers[i - 1]}`;
+        if (row) row.classList.remove('is-leader');
+      }
+    }
+  }
+
+  if (leaderEl) {
+    if (maxScore === 0) leaderEl.innerText = 'Empate a 0';
+    else {
+      const leaders = scores.filter(s => s.total === maxScore).map(s => s.name);
+      leaderEl.innerText = leaders.join(', ') + ` (${maxScore} pts)`;
+    }
+  }
+
+  if (lastEl) {
+    if (maxScore === 0) lastEl.innerText = 'Todos empatados';
+    else {
+      const lasts = scores.filter(s => s.total === minScore).map(s => s.name);
+      lastEl.innerText = lasts.join(', ') + ` (${minScore} pts)`;
+    }
+  }
+}
+
+function resetScores() {
+  if (confirm('¿Reiniciar marcador a cero para todos los amigos?')) {
+    universalScores = [0, 0, 0, 0, 0];
+    saveScores();
+    updateTotals();
+  }
+}
+
+function saveScores() {
+  try {
+    localStorage.setItem('cuenca_v5_scores', JSON.stringify(universalScores));
+  } catch(e) {}
+}
+
+function loadScores() {
+  try {
+    const raw = localStorage.getItem('cuenca_v5_scores');
+    if (raw) {
+      universalScores = JSON.parse(raw);
+    }
+  } catch(e) {}
+  updateTotals();
+}
+
+const defaultChores = [
+  '🧹 Lavar todos los platos, tazas y cubiertos del desayuno en ANICÁ.',
+  '☕ Preparar y servir la primera ronda de café caliente a los demás.',
+  '🍹 Servir los canelazos y preparar los vasos con hielo en la noche de juegos.',
+  '🗑️ Bajar a botar la basura del departamento antes del check-out del domingo.',
+  '🚗 Ser el copiloto oficial: cambiar la música en el auto y abrir los snacks para el conductor.'
+];
+
+async function generateAiChoreForLastPlace() {
+  const box = document.getElementById('lastPlaceTaskText');
+  if (!box) return;
+
+  box.innerHTML = '<i>🎲 La IA está eligiendo una tarea grupal útil y divertida...</i>';
+
+  const prompt = `Eres el árbitro amigable del viaje de 5 amigos a Cuenca (Alan, Dennis, Ashley, Jahaira, Douglas).
+Genera 1 tarea grupal ÚTIL, justa y cómica para quien quede en ÚLTIMO LUGAR del torneo en el departamento ANICÁ.
+REGLAS:
+- Cero prendas ridículas ni vergüenzas.
+- Tareas domésticas y grupales reales del viaje: lavar platos, preparar el café en la mañana, servir tragos, ordenar la sala tras los juegos, bajar la basura al contenedor, pasar snacks en el auto, etc.
+- Devuelve 1 sola frase corta con un emoji al inicio.`;
+
+  try {
+    const res = await callGeminiAI(prompt, true);
+    const cleaned = cleanDirectOutput(res);
+    box.innerHTML = `🧹 <b>Tarea asignada:</b> ${cleaned}`;
+  } catch(e) {
+    const chore = defaultChores[Math.floor(Math.random() * defaultChores.length)];
+    box.innerHTML = `🧹 <b>Tarea asignada:</b> ${chore}`;
+  }
+}
+
+// --- BEDS & LOGISTICS ---
+function saveBeds() {
+  const data = {
+    b1_1: document.getElementById('b1_1').value,
+    b1_2: document.getElementById('b1_2').value,
+    b2_1: document.getElementById('b2_1').value,
+    b2_2: document.getElementById('b2_2').value,
+    b3_1: document.getElementById('b3_1').value,
+  };
+  try {
+    localStorage.setItem('cuenca_beds_v4', JSON.stringify(data));
+    alert('¡Distribución de habitaciones en ANICÁ guardada!');
+  } catch(e) {}
+}
+
+function loadBeds() {
+  try {
+    const raw = localStorage.getItem('cuenca_beds_v4');
+    if (raw) {
+      const d = JSON.parse(raw);
+      if (d.b1_1) document.getElementById('b1_1').value = d.b1_1;
+      if (d.b1_2) document.getElementById('b1_2').value = d.b1_2;
+      if (d.b2_1) document.getElementById('b2_1').value = d.b2_1;
+      if (d.b2_2) document.getElementById('b2_2').value = d.b2_2;
+      if (d.b3_1) document.getElementById('b3_1').value = d.b3_1;
+    }
+  } catch(e) {}
+}
+
+// --- CHECKLIST & CUSTOM PACK ITEMS ---
+let customPackItems = [];
+
+function toggleItem(cb) {
+  const lbl = cb.closest('.pack-item-label');
+  if (cb.checked) lbl.classList.add('checked');
+  else lbl.classList.remove('checked');
+  updatePack();
+}
+
+function addCustomPackItem() {
+  const item = prompt('¿Qué elemento quieres agregar a tu lista de equipaje?');
+  if (item && item.trim()) {
+    customPackItems.push({ name: item.trim(), checked: false });
+    saveCustomPackItems();
+    renderCustomPackItems();
+    updatePack();
+  }
+}
+
+function renderCustomPackItems() {
+  const container = document.getElementById('customPackList');
+  if (!container) return;
+
+  if (customPackItems.length === 0) {
+    container.innerHTML = '<span style="font-size:11px;color:var(--ink-soft);font-style:italic;">No hay extras agregados aún. Usa "+ Agregar Ítem" arriba.</span>';
+    return;
+  }
+
+  container.innerHTML = customPackItems.map((item, idx) => `
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;">
+      <label class="pack-item-label ${item.checked ? 'checked' : ''}" style="flex:1;">
+        <input type="checkbox" ${item.checked ? 'checked' : ''} onchange="toggleCustomItem(${idx}, this)">
+        <span>${item.name}</span>
+      </label>
+      <button class="del-btn" style="padding:2px 6px;font-size:12px;margin-left:6px;" onclick="deleteCustomPackItem(${idx})" title="Eliminar">×</button>
+    </div>
+  `).join('');
+}
+
+function toggleCustomItem(idx, cb) {
+  customPackItems[idx].checked = cb.checked;
+  saveCustomPackItems();
+  updatePack();
+}
+
+function deleteCustomPackItem(idx) {
+  customPackItems.splice(idx, 1);
+  saveCustomPackItems();
+  renderCustomPackItems();
+  updatePack();
+}
+
+function saveCustomPackItems() {
+  try { localStorage.setItem('cuenca_custom_pack_v1', JSON.stringify(customPackItems)); } catch(e) {}
+}
+
+function loadCustomPackItems() {
+  try {
+    const raw = localStorage.getItem('cuenca_custom_pack_v1');
+    if (raw) customPackItems = JSON.parse(raw);
+  } catch(e) {}
+  renderCustomPackItems();
+}
+
+function updatePack() {
+  const all = document.querySelectorAll('.pack-item-label input[type="checkbox"]');
+  const checked = document.querySelectorAll('.pack-item-label input[type="checkbox"]:checked');
+  const pct = all.length ? Math.round((checked.length / all.length) * 100) : 0;
+  const fillEl = document.getElementById('packFill');
+  const statsEl = document.getElementById('packStats');
+  if (fillEl) fillEl.style.width = pct + '%';
+  if (statsEl) statsEl.innerText = `${checked.length} de ${all.length} elementos (${pct}%)`;
+
+  try {
+    const states = Array.from(all).map(c => c.checked);
+    localStorage.setItem('cuenca_pack_v4', JSON.stringify(states));
+  } catch(e) {}
+}
+
+function loadPack() {
+  try {
+    const raw = localStorage.getItem('cuenca_pack_v4');
+    if (raw) {
+      const states = JSON.parse(raw);
+      const all = document.querySelectorAll('.pack-item-label input[type="checkbox"]');
+      all.forEach((c, idx) => {
+        if (states[idx]) {
+          c.checked = true;
+          c.closest('.pack-item-label').classList.add('checked');
+        }
+      });
+    }
+  } catch(e) {}
+  loadCustomPackItems();
+  updatePack();
+}
+
+// INIT
+window.addEventListener('DOMContentLoaded', () => {
+  loadExpenses();
+  loadScores();
+  loadBeds();
+  loadPack();
+  fetchWeather();
+  initScheduleRadar();
+
+  // Auto-refresco en segundo plano (cero necesidad de recargar la página)
+  setInterval(() => fetchWeather(false), 10 * 60 * 1000); // Clima satelital cada 10 min
+  setInterval(initScheduleRadar, 60 * 1000); // Semáforo de horarios cada minuto
+
+  // Registro de Service Worker para PWA
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('./sw.js').catch(() => {});
+  }
+});
+</script>
+</body>
+</html>

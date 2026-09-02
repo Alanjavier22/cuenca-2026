@@ -1,0 +1,31 @@
+{
+  "name": "Cuenca 2026 · Guía de Viaje",
+  "short_name": "Cuenca 2026",
+  "description": "Itinerario interactivo, juegos con IA, divisor de gastos y spots para el viaje a Cuenca 2026.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#F8F6F0",
+  "theme_color": "#0B2236",
+  "lang": "es-EC",
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    }
+  ]
+}
