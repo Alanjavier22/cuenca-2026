@@ -3627,7 +3627,9 @@ function loadExpenses() {
       expenses = parsed.filter(e => expenseParticipants.includes(e.payer));
     }
   } catch(e) {}
-  renderExpensesTactile();
+  // skipCloud=true: NO publicar localStorage a Firebase en el arranque.
+  // initLiveSync() traerá el estado real de la nube y sobreescribirá si hay diferencia.
+  renderExpensesTactile(true);
 }
 
 // --- RULETA DE DECISIONES & RETOS ---
@@ -4991,17 +4993,17 @@ async function pushToCloud(key, data) {
 }
 
 function applyRemoteSync(key, val) {
-  if (val === undefined || val === null) return;
+  // Para expenses, un array vacío ES un estado válido (se borraron todos los gastos)
+  if (key !== 'expenses' && (val === undefined || val === null)) return;
+  if (key === 'expenses' && !Array.isArray(val)) return;
   isSyncingFromRemote = true;
   try {
-    if (key === 'expenses' && Array.isArray(val)) {
-      const currentJson = JSON.stringify(expenses);
+    if (key === 'expenses') {
       const incoming = val.filter(e => expenseParticipants.includes(e.payer));
-      if (currentJson !== JSON.stringify(incoming)) {
-        expenses = incoming;
-        try { localStorage.setItem('cuenca_exp_clean_v5', JSON.stringify(expenses)); } catch(e) {}
-        renderExpensesTactile(true);
-      }
+      // Siempre aplicar desde la nube (sin chequear igualdad, la nube manda)
+      expenses = incoming;
+      try { localStorage.setItem('cuenca_exp_clean_v5', JSON.stringify(expenses)); } catch(e) {}
+      renderExpensesTactile(true);
     } else if (key === 'scores' && val && typeof val === 'object') {
       const currentJson = JSON.stringify(universalScores);
       const incoming = Array.isArray(val) ? val : [0, 0, 0, 0, 0];
@@ -5024,15 +5026,25 @@ function applyRemoteSync(key, val) {
 }
 
 async function initLiveSync() {
-  // 1. Snapshot inicial desde Firebase
+  // 1. Snapshot inicial desde Firebase — la nube manda, siempre.
   try {
     const res = await fetch(`${FIREBASE_SYNC_URL}.json`);
     const remote = await res.json();
-    if (remote) {
-      if (remote.expenses) applyRemoteSync('expenses', remote.expenses);
+    if (remote !== null && remote !== undefined) {
+      // Firebase tiene datos: aplicar SIEMPRE (puede ser un array vacío por un borrado)
+      if (Array.isArray(remote.expenses)) {
+        // Forzamos el reemplazo aunque sea "igual", porque la nube es la fuente de verdad
+        isSyncingFromRemote = true;
+        try {
+          expenses = remote.expenses.filter(e => expenseParticipants.includes(e.payer));
+          localStorage.setItem('cuenca_exp_clean_v5', JSON.stringify(expenses));
+          renderExpensesTactile(true);
+        } finally { isSyncingFromRemote = false; }
+      }
       if (remote.scores) applyRemoteSync('scores', remote.scores);
       if (remote.beds) applyRemoteSync('beds', remote.beds);
     } else {
+      // Firebase vacío: subir el estado local actual como punto de partida
       if (expenses.length > 0) pushToCloud('expenses', expenses);
       pushToCloud('scores', universalScores);
     }
@@ -5054,9 +5066,13 @@ async function initLiveSync() {
           const path = payload.path || '/';
           const data = payload.data;
           if (path === '/') {
-            if (data && data.expenses) applyRemoteSync('expenses', data.expenses);
+            // Ruta raíz: puede llegar con expenses como array vacío (borrado)
+            if (data !== null && Array.isArray(data.expenses)) applyRemoteSync('expenses', data.expenses);
             if (data && data.scores) applyRemoteSync('scores', data.scores);
             if (data && data.beds) applyRemoteSync('beds', data.beds);
+          } else if (path === '/expenses') {
+            // Actualización directa del nodo expenses: puede ser null (nodo eliminado) o array
+            applyRemoteSync('expenses', Array.isArray(data) ? data : []);
           } else {
             const key = path.replace(/^\//, '').split('/')[0];
             applyRemoteSync(key, data);
