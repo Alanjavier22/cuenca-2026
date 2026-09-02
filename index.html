@@ -1293,12 +1293,22 @@
   }
   .ai-modal-head h3 { font-family: 'Spectral', serif; font-size: 18px; font-weight: 700; }
   .ai-modal-close {
-    background: transparent;
+    background: rgba(255, 255, 255, 0.18);
     border: none;
     color: #fff;
-    font-size: 24px;
+    font-size: 22px;
     cursor: pointer;
     line-height: 1;
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition);
+  }
+  .ai-modal-close:hover {
+    background: rgba(255, 255, 255, 0.35);
   }
   .ai-modal-body {
     padding: 16px;
@@ -1782,6 +1792,52 @@
     .game > div:last-child div[style*="display:flex"] button {
       flex: 1;
       justify-content: center;
+    }
+
+    /* MODAL ASISTENTE IA EN MÓVIL: PANTALLA COMPLETA Y AJUSTE PERFECTO AL TECLADO */
+    .ai-modal-overlay {
+      padding: 0 !important;
+      align-items: stretch !important;
+      justify-content: stretch !important;
+      background: rgba(11, 34, 54, 0.85);
+    }
+    .ai-modal-card {
+      width: 100% !important;
+      max-width: 100% !important;
+      height: 100% !important;
+      height: 100dvh !important;
+      max-height: 100dvh !important;
+      border-radius: 0 !important;
+      box-shadow: none !important;
+      display: flex !important;
+      flex-direction: column !important;
+    }
+    .ai-modal-head {
+      padding: 12px 16px !important;
+      flex-shrink: 0 !important;
+      border-radius: 0 !important;
+    }
+    .ai-modal-body {
+      flex: 1 1 0 !important;
+      min-height: 0 !important;
+      overflow-y: auto !important;
+      -webkit-overflow-scrolling: touch;
+      padding: 14px 12px !important;
+    }
+    .ai-modal-footer {
+      flex-shrink: 0 !important;
+      padding: 10px 14px !important;
+      background: var(--white) !important;
+      border-top: 1px solid var(--line) !important;
+      padding-bottom: max(10px, env(safe-area-inset-bottom)) !important;
+    }
+    .ai-modal-input {
+      font-size: 16px !important; /* 16px previene zoom automático indeseado en móviles */
+      padding: 10px 14px !important;
+    }
+    .ai-modal-btn {
+      font-size: 13px !important;
+      padding: 0 16px !important;
     }
   }
 
@@ -4095,12 +4151,26 @@ function resetTimer() {
 
 // --- AI CHAT INTERACTIVO (SIN AUTO-PETICIÓN AL ABRIR) ---
 function openAiChat() {
-  document.getElementById('aiModalOverlay').style.display = 'flex';
-  document.getElementById('aiChatInput').focus();
+  const overlay = document.getElementById('aiModalOverlay');
+  overlay.style.display = 'flex';
+  document.body.style.overflow = 'hidden';
+
+  setTimeout(() => {
+    const chatContainer = document.getElementById('aiChatMessages');
+    if (chatContainer) chatContainer.scrollTop = chatContainer.scrollHeight;
+    if (window.innerWidth > 768) {
+      const input = document.getElementById('aiChatInput');
+      if (input) input.focus();
+    }
+  }, 100);
 }
 
 function closeAiChat() {
-  document.getElementById('aiModalOverlay').style.display = 'none';
+  const overlay = document.getElementById('aiModalOverlay');
+  overlay.style.display = 'none';
+  document.body.style.overflow = '';
+  const input = document.getElementById('aiChatInput');
+  if (input) input.blur();
 }
 
 async function sendUserChatMessage() {
@@ -5011,6 +5081,17 @@ window.addEventListener('DOMContentLoaded', () => {
   fetchWeather();
   initScheduleRadar();
   initLiveSync();
+
+  // Scroll suave al final del chat cuando el teclado virtual sube
+  const chatInput = document.getElementById('aiChatInput');
+  if (chatInput) {
+    chatInput.addEventListener('focus', () => {
+      setTimeout(() => {
+        const chatContainer = document.getElementById('aiChatMessages');
+        if (chatContainer) chatContainer.scrollTop = chatContainer.scrollHeight;
+      }, 250);
+    });
+  }
 
   // Auto-refresco en segundo plano (cero necesidad de recargar la página)
   setInterval(() => fetchWeather(false), 10 * 60 * 1000); // Clima satelital cada 10 min
