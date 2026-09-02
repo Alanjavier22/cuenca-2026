@@ -1915,6 +1915,13 @@
   @media (max-width: 480px) {
     .sync-text { display: none; }
   }
+  .live-flash {
+    animation: liveFlashAnim 1.4s ease-out;
+  }
+  @keyframes liveFlashAnim {
+    0% { outline: 2px solid #22C55E; background-color: rgba(34, 197, 94, 0.18) !important; transform: scale(1.01); }
+    100% { outline: 2px solid transparent; background-color: inherit; transform: scale(1); }
+  }
 </style>
 </head>
 <body>
@@ -3609,6 +3616,7 @@ REGLAS ESTRICTAS:
   try {
     const res = await callGeminiAI(prompt, true);
     box.innerHTML = formatExplanationHtml(res);
+    broadcastLiveCard('expenseExplainBox', box.innerHTML);
   } catch(err) {
     box.innerHTML = '❌ Ocurrió un error al generar la explicación. Por favor intenta de nuevo.';
   }
@@ -3749,15 +3757,25 @@ INSTRUCCIONES:
   animateRoulette('👤 ' + t, cleanDirectOutput(result) || 'Verdad: ¿Qué es lo más curioso o gracioso que te ha pasado en un viaje?');
 }
 
-function animateRoulette(name, sub) {
+function animateRoulette(name, sub, skipBroadcast = false) {
   const n = document.getElementById('rouletteName');
   const s = document.getElementById('rouletteSub');
+  if (!n || !s) return;
   n.style.opacity = '0';
   setTimeout(() => {
     n.innerText = name;
     s.innerHTML = sub;
     n.style.opacity = '1';
+    if (skipBroadcast && n.parentElement) {
+      n.parentElement.classList.remove('live-flash');
+      void n.parentElement.offsetWidth;
+      n.parentElement.classList.add('live-flash');
+      setTimeout(() => n.parentElement.classList.remove('live-flash'), 1500);
+    }
   }, 120);
+  if (!skipBroadcast && !name.includes('Generando')) {
+    broadcastLiveEvent('roulette', { name, sub });
+  }
 }
 
 // --- JUEGOS INLINE CON ANTI-REPETICIÓN Y ROTACIÓN DE GÉNEROS ---
@@ -4072,6 +4090,7 @@ Devuelve ÚNICAMENTE un JSON válido con este formato:
     `;
 
     box.innerHTML = html;
+    broadcastLiveEvent('truthGame', { html, options: currentTruthOptions, realIndex: realTruthIndex });
     inp.value = '';
     hideTruthTemporary();
   } catch(err) {
@@ -4079,7 +4098,7 @@ Devuelve ÚNICAMENTE un JSON válido con este formato:
   }
 }
 
-function revealRealTruth() {
+function revealRealTruth(skipBroadcast = false) {
   if (!currentTruthOptions || currentTruthOptions.length === 0) return;
   
   currentTruthOptions.forEach((opt, idx) => {
@@ -4096,6 +4115,7 @@ function revealRealTruth() {
 
   const revBtn = document.getElementById('btnRevealTruth');
   if (revBtn) revBtn.style.display = 'none';
+  if (!skipBroadcast) broadcastLiveEvent('truthReveal', {});
 }
 
 function resetTruthGame() {
@@ -4127,12 +4147,13 @@ async function generateBrokenPhonePhrase() {
 TEMA: ${theme} (ejemplo: "Un pingüino vendiendo empanadas"). Solo la frase, sin asteriscos.`;
   const res = await callGeminiAI(prompt, true);
   box.innerHTML = `<b>"${cleanDirectOutput(res)}"</b>`;
+  broadcastLiveCard('brokenPhoneBox', box.innerHTML);
 }
 
 // --- CRONOMETRO MIMICA ---
 let timerInterval = null;
 let timerSeconds = 60;
-function startTimer() {
+function startTimer(skipBroadcast = false) {
   clearInterval(timerInterval);
   timerSeconds = 60;
   document.getElementById('mimicTimer').innerText = '60s';
@@ -4144,6 +4165,7 @@ function startTimer() {
       alert('⏰ ¡TIEMPO TERMINADO!');
     }
   }, 1000);
+  if (!skipBroadcast) broadcastLiveEvent('mimicTimer', {});
 }
 function resetTimer() {
   clearInterval(timerInterval);
@@ -4181,13 +4203,17 @@ async function sendUserChatMessage() {
   if (!text) return;
 
   const chatContainer = document.getElementById('aiChatMessages');
+  input.value = '';
   
   // Append user message
   const userDiv = document.createElement('div');
   userDiv.className = 'chat-msg user';
   userDiv.innerText = text;
   chatContainer.appendChild(userDiv);
-  input.value = '';
+  chatContainer.scrollTop = chatContainer.scrollHeight;
+
+  // Transmitir pregunta del usuario en tiempo real
+  broadcastLiveEvent('chat', { sender: 'user', html: text });
 
   // Loading AI bubble
   const aiDiv = document.createElement('div');
@@ -4197,8 +4223,12 @@ async function sendUserChatMessage() {
   chatContainer.scrollTop = chatContainer.scrollHeight;
 
   const res = await callGeminiAI(text, false);
-  aiDiv.innerHTML = cleanFormat(res);
+  const formatted = cleanFormat(res);
+  aiDiv.innerHTML = formatted;
   chatContainer.scrollTop = chatContainer.scrollHeight;
+
+  // Transmitir respuesta de la IA en tiempo real
+  broadcastLiveEvent('chat', { sender: 'ai', html: formatted });
 }
 
 async function callGeminiAI(userQuery, isDirect = false) {
@@ -4628,21 +4658,27 @@ ${recentHistory ? `- PROHIBIDO repetir o hacer preguntas parecidas a estas: "${r
       <div style="font-size:14px;font-weight:700;color:var(--blue-deep);margin-bottom:6px;">${cleaned}</div>
       <div style="font-size:11.5px;color:var(--ink-soft);">Toca "⏱️ 3..2..1 ¡Votar!" para contar y que todos apunten con el dedo al mismo tiempo.</div>
     `;
+    broadcastLiveCard('tribunalBox', box.innerHTML);
   } catch(e) {
     const fallback = tribunalTopics[Math.floor(Math.random() * tribunalTopics.length)];
     box.innerHTML = `
       <div style="font-size:14px;font-weight:700;color:var(--blue-deep);margin-bottom:6px;">⚖️ ${fallback}</div>
       <div style="font-size:11.5px;color:var(--ink-soft);">Toca "⏱️ 3..2..1 ¡Votar!" para contar y que todos apunten con el dedo al mismo tiempo.</div>
     `;
+    broadcastLiveCard('tribunalBox', box.innerHTML);
   }
 }
 
 let tribunalTimer = null;
-function startTribunalCountdown() {
+function startTribunalCountdown(skipBroadcast = false) {
   const box = document.getElementById('tribunalBox');
   const countBtn = document.getElementById('btnTribunalCount');
   if (!box) return;
   if (countBtn) countBtn.disabled = true;
+
+  if (!skipBroadcast) {
+    broadcastLiveEvent('tribunalCountdown', {});
+  }
 
   const qHtml = box.querySelector('div') ? box.querySelector('div').outerHTML : box.innerHTML;
   let count = 3;
@@ -4700,12 +4736,14 @@ REGLAS ESTRICTAS:
     const res = await callGeminiAI(prompt, true);
     const cleaned = cleanDirectOutput(res);
     box.innerHTML = cleanFormat(cleaned);
+    broadcastLiveCard('barmanBox', box.innerHTML);
   } catch(e) {
     box.innerHTML = `
       🍹 <b>El Canelazo Exprés de ANICÁ</b><br>
       • <b>Ingredientes:</b> 2 oz de licor, 4 oz de gaseosa o jugo cítrico, chorrito de limón y mucho hielo.<br>
       • <b>Preparación:</b> 1. Llena el vaso con hielo. 2. Vierte el licor y la gaseosa. 3. Remueve 10 segundos y ¡salud por Cuenca!
     `;
+    broadcastLiveCard('barmanBox', box.innerHTML);
   }
 }
 
@@ -4816,9 +4854,11 @@ REGLAS:
     const res = await callGeminiAI(prompt, true);
     const cleaned = cleanDirectOutput(res);
     box.innerHTML = `🧹 <b>Tarea asignada:</b> ${cleaned}`;
+    broadcastLiveCard('lastPlaceTaskText', box.innerHTML);
   } catch(e) {
     const chore = defaultChores[Math.floor(Math.random() * defaultChores.length)];
     box.innerHTML = `🧹 <b>Tarea asignada:</b> ${chore}`;
+    broadcastLiveCard('lastPlaceTaskText', box.innerHTML);
   }
 }
 
@@ -4992,6 +5032,74 @@ async function pushToCloud(key, data) {
   }
 }
 
+async function broadcastLiveEvent(eventType, payload) {
+  if (isSyncingFromRemote) return;
+  try {
+    const body = {
+      type: eventType,
+      payload: payload,
+      ts: Date.now()
+    };
+    await fetch(`${FIREBASE_SYNC_URL}/liveAction.json`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(body)
+    });
+  } catch(e) {}
+}
+
+async function broadcastLiveCard(targetId, htmlContent) {
+  broadcastLiveEvent('cardHtml', { targetId, html: htmlContent });
+}
+
+function handleRemoteLiveAction(action) {
+  if (!action || !action.type || !action.ts) return;
+  // Solo aplicar acciones de los ultimos 60 segundos
+  if (Date.now() - action.ts > 60000) return;
+
+  const { type, payload } = action;
+
+  if (type === 'cardHtml' && payload && payload.targetId) {
+    const el = document.getElementById(payload.targetId);
+    if (el) {
+      el.innerHTML = payload.html;
+      if (el.style.display === 'none') el.style.display = 'block';
+      el.classList.remove('live-flash');
+      void el.offsetWidth;
+      el.classList.add('live-flash');
+      setTimeout(() => el.classList.remove('live-flash'), 1500);
+    }
+  } else if (type === 'tribunalCountdown') {
+    startTribunalCountdown(true);
+  } else if (type === 'mimicTimer') {
+    startTimer(true);
+  } else if (type === 'truthReveal') {
+    revealRealTruth(true);
+  } else if (type === 'roulette' && payload) {
+    animateRoulette(payload.name, payload.sub, true);
+  } else if (type === 'truthGame' && payload) {
+    const box = document.getElementById('twoTruthsBox');
+    if (box) {
+      box.innerHTML = payload.html;
+      currentTruthOptions = payload.options;
+      realTruthIndex = payload.realIndex;
+      box.classList.remove('live-flash');
+      void box.offsetWidth;
+      box.classList.add('live-flash');
+      setTimeout(() => box.classList.remove('live-flash'), 1500);
+    }
+  } else if (type === 'chat' && payload) {
+    const chatContainer = document.getElementById('aiChatMessages');
+    if (chatContainer) {
+      const div = document.createElement('div');
+      div.className = 'chat-msg ' + payload.sender;
+      div.innerHTML = payload.html;
+      chatContainer.appendChild(div);
+      chatContainer.scrollTop = chatContainer.scrollHeight;
+    }
+  }
+}
+
 function applyRemoteSync(key, val) {
   // Para expenses, un array vacío ES un estado válido (se borraron todos los gastos)
   if (key !== 'expenses' && (val === undefined || val === null)) return;
@@ -5084,12 +5192,15 @@ async function initLiveSync() {
             if (data !== null && Array.isArray(data.expenses)) applyRemoteSync('expenses', data.expenses);
             if (data && Array.isArray(data.scores)) applyRemoteSync('scores', data.scores);
             if (data && data.beds && typeof data.beds === 'object') applyRemoteSync('beds', data.beds);
+            if (data && data.liveAction) handleRemoteLiveAction(data.liveAction);
           } else if (path === '/expenses') {
             applyRemoteSync('expenses', Array.isArray(data) ? data : []);
           } else if (path === '/scores') {
             if (Array.isArray(data)) applyRemoteSync('scores', data);
           } else if (path === '/beds') {
             if (data && typeof data === 'object') applyRemoteSync('beds', data);
+          } else if (path === '/liveAction') {
+            handleRemoteLiveAction(data);
           }
           setLiveSyncBadge('live');
         } catch(err) {}
