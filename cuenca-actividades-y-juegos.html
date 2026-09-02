@@ -5029,24 +5029,38 @@ async function initLiveSync() {
   // 1. Snapshot inicial desde Firebase — la nube manda, siempre.
   try {
     const res = await fetch(`${FIREBASE_SYNC_URL}.json`);
+    if (!res.ok) throw new Error('HTTP ' + res.status);
     const remote = await res.json();
     if (remote !== null && remote !== undefined) {
-      // Firebase tiene datos: aplicar SIEMPRE (puede ser un array vacío por un borrado)
-      if (Array.isArray(remote.expenses)) {
-        // Forzamos el reemplazo aunque sea "igual", porque la nube es la fuente de verdad
-        isSyncingFromRemote = true;
-        try {
+      // Firebase tiene datos: aplicar SIEMPRE (la nube es fuente de verdad)
+      isSyncingFromRemote = true;
+      try {
+        if (Array.isArray(remote.expenses)) {
           expenses = remote.expenses.filter(e => expenseParticipants.includes(e.payer));
-          localStorage.setItem('cuenca_exp_clean_v5', JSON.stringify(expenses));
+          try { localStorage.setItem('cuenca_exp_clean_v5', JSON.stringify(expenses)); } catch(e){}
           renderExpensesTactile(true);
-        } finally { isSyncingFromRemote = false; }
-      }
-      if (remote.scores) applyRemoteSync('scores', remote.scores);
-      if (remote.beds) applyRemoteSync('beds', remote.beds);
+        }
+        if (remote.scores && Array.isArray(remote.scores)) {
+          universalScores = remote.scores;
+          try { localStorage.setItem('cuenca_v5_scores', JSON.stringify(universalScores)); } catch(e){}
+          updateTotals();
+        }
+        if (remote.beds && typeof remote.beds === 'object') {
+          const d = remote.beds;
+          if (d.b1_1 !== undefined && document.getElementById('b1_1')) document.getElementById('b1_1').value = d.b1_1;
+          if (d.b1_2 !== undefined && document.getElementById('b1_2')) document.getElementById('b1_2').value = d.b1_2;
+          if (d.b2_1 !== undefined && document.getElementById('b2_1')) document.getElementById('b2_1').value = d.b2_1;
+          if (d.b2_2 !== undefined && document.getElementById('b2_2')) document.getElementById('b2_2').value = d.b2_2;
+          if (d.b3_1 !== undefined && document.getElementById('b3_1')) document.getElementById('b3_1').value = d.b3_1;
+          try { localStorage.setItem('cuenca_beds_v4', JSON.stringify(d)); } catch(e){}
+        }
+      } finally { isSyncingFromRemote = false; }
     } else {
-      // Firebase vacío: subir el estado local actual como punto de partida
-      if (expenses.length > 0) pushToCloud('expenses', expenses);
-      pushToCloud('scores', universalScores);
+      // Firebase vacío: subir estado local como punto de partida
+      const pushOps = [];
+      if (expenses.length > 0) pushOps.push(pushToCloud('expenses', expenses));
+      pushOps.push(pushToCloud('scores', universalScores));
+      await Promise.all(pushOps);
     }
     setLiveSyncBadge('live');
   } catch(e) {
@@ -5054,9 +5068,10 @@ async function initLiveSync() {
   }
 
   // 2. Transmisión nativa en tiempo real (Server-Sent Events)
-  try {
-    if (window.EventSource) {
-      if (sseConnection) sseConnection.close();
+  function connectSSE() {
+    try {
+      if (!window.EventSource) return;
+      if (sseConnection) { try { sseConnection.close(); } catch(e){} }
       sseConnection = new EventSource(`${FIREBASE_SYNC_URL}.json`);
 
       sseConnection.addEventListener('put', (e) => {
@@ -5066,26 +5081,45 @@ async function initLiveSync() {
           const path = payload.path || '/';
           const data = payload.data;
           if (path === '/') {
-            // Ruta raíz: puede llegar con expenses como array vacío (borrado)
             if (data !== null && Array.isArray(data.expenses)) applyRemoteSync('expenses', data.expenses);
-            if (data && data.scores) applyRemoteSync('scores', data.scores);
-            if (data && data.beds) applyRemoteSync('beds', data.beds);
+            if (data && Array.isArray(data.scores)) applyRemoteSync('scores', data.scores);
+            if (data && data.beds && typeof data.beds === 'object') applyRemoteSync('beds', data.beds);
           } else if (path === '/expenses') {
-            // Actualización directa del nodo expenses: puede ser null (nodo eliminado) o array
             applyRemoteSync('expenses', Array.isArray(data) ? data : []);
-          } else {
-            const key = path.replace(/^\//, '').split('/')[0];
-            applyRemoteSync(key, data);
+          } else if (path === '/scores') {
+            if (Array.isArray(data)) applyRemoteSync('scores', data);
+          } else if (path === '/beds') {
+            if (data && typeof data === 'object') applyRemoteSync('beds', data);
           }
           setLiveSyncBadge('live');
         } catch(err) {}
       });
 
+      let reconnectDelay = 3000;
       sseConnection.onerror = () => {
         setLiveSyncBadge('offline');
+        try { sseConnection.close(); } catch(e) {}
+        // Reconexión automática con backoff
+        setTimeout(() => {
+          reconnectDelay = Math.min(reconnectDelay * 1.5, 30000);
+          connectSSE();
+        }, reconnectDelay);
       };
-    }
-  } catch(e) {}
+    } catch(e) {}
+  }
+  connectSSE();
+
+  // 3. Resync de seguridad cada 5 min (red de protección final)
+  setInterval(async () => {
+    try {
+      const res = await fetch(`${FIREBASE_SYNC_URL}.json`);
+      if (!res.ok) return;
+      const remote = await res.json();
+      if (!remote) return;
+      if (Array.isArray(remote.expenses)) applyRemoteSync('expenses', remote.expenses);
+      if (Array.isArray(remote.scores)) applyRemoteSync('scores', remote.scores);
+    } catch(e) {}
+  }, 5 * 60 * 1000);
 }
 
 // INIT
