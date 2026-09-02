@@ -3208,14 +3208,14 @@
 </div>
 
 <!-- AI INTERACTIVE CHAT MODAL -->
-<div class="ai-modal-overlay" id="aiModalOverlay" onclick="if(event.target===this) closeAiChat()">
+<div class="ai-modal-overlay" id="aiModalOverlay" role="dialog" aria-modal="true" aria-label="Asistente de Viaje Cuenca 2026" onclick="if(event.target===this) closeAiChat()" onkeydown="if(event.key==='Escape') closeAiChat()">
   <div class="ai-modal-card">
     <div class="ai-modal-head">
       <div>
         <h3>✨ Asistente de Viaje</h3>
         <span style="font-size:11px;opacity:0.85;font-family:'IBM Plex Mono',monospace;">Chat en vivo para el grupo</span>
       </div>
-      <button class="ai-modal-close" onclick="closeAiChat()">×</button>
+      <button class="ai-modal-close" onclick="closeAiChat()" aria-label="Cerrar asistente de IA">×</button>
     </div>
     
     <div class="ai-modal-body" id="aiChatMessages">
@@ -3225,20 +3225,20 @@
     </div>
 
     <div class="ai-modal-footer">
-      <input type="text" class="ai-modal-input" id="aiChatInput" placeholder="Escribe tu consulta aquí..." onkeypress="if(event.key==='Enter') sendUserChatMessage()">
+      <input type="text" class="ai-modal-input" id="aiChatInput" aria-label="Escribe tu consulta al asistente de viaje" placeholder="Escribe tu consulta aquí..." onkeypress="if(event.key==='Enter') sendUserChatMessage()">
       <button class="ai-modal-btn" onclick="sendUserChatMessage()">Enviar</button>
     </div>
   </div>
 </div>
 
 <!-- MODAL FRENTE (HEADS UP FULLSCREEN HORIZONTAL) -->
-<div class="forehead-modal" id="foreheadModal">
+<div class="forehead-modal" id="foreheadModal" role="dialog" aria-modal="true" aria-label="Modo Frente Heads Up">
   <div class="forehead-top-actions">
     <button type="button" class="btn-forehead-action" onclick="toggleForeheadRotation()" title="Girar pantalla si está bloqueada en vertical">🔄 Girar</button>
     <button type="button" class="btn-forehead-action btn-forehead-exit" onclick="closeForeheadMode()">✕ Salir</button>
   </div>
   
-  <div id="foreheadCountdownBox" onclick="skipForeheadCountdown()" style="cursor:pointer;" title="Toca para saltar">
+  <div id="foreheadCountdownBox" role="button" tabindex="0" onclick="skipForeheadCountdown()" onkeydown="if(event.key==='Enter'||event.key===' ') skipForeheadCountdown()" style="cursor:pointer;" title="Toca para saltar" aria-label="Saltar cuenta regresiva">
     <div class="forehead-countdown" id="foreheadCountNum">3</div>
     <div class="forehead-subcountdown">📱 ¡Ponte el celular en la frente mirando hacia el grupo!</div>
     <div style="font-size:12px;color:#94A3B8;margin-top:8px;font-family:'IBM Plex Mono',monospace;">(Toca la pantalla para mostrar de inmediato)</div>
