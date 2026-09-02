@@ -1818,29 +1818,46 @@
     .main-tab-view { display: block !important; }
     body { background: #fff; color: #000; padding: 0; }
   }
-  .live-sync-badge {
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 11px;
-    font-weight: 700;
-    padding: 3px 8px;
-    border-radius: var(--radius-full);
+  .sync-wrap {
     display: inline-flex;
     align-items: center;
-    gap: 4px;
-    background: #DCFCE7;
+    gap: 5px;
+    margin-left: 6px;
+    vertical-align: middle;
+  }
+  .sync-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    display: inline-block;
+    background: #22C55E;
+    box-shadow: 0 0 0 2px rgba(34, 197, 94, 0.25);
+    animation: pulseDot 2.2s infinite;
+    flex-shrink: 0;
+  }
+  @keyframes pulseDot {
+    0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.5); }
+    70% { transform: scale(1.05); box-shadow: 0 0 0 5px rgba(34, 197, 94, 0); }
+    100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(34, 197, 94, 0); }
+  }
+  .sync-dot.syncing {
+    background: #F59E0B;
+    box-shadow: 0 0 0 2px rgba(245, 158, 11, 0.3);
+    animation: none;
+  }
+  .sync-dot.offline {
+    background: #EF4444;
+    box-shadow: none;
+    animation: none;
+  }
+  .sync-text {
+    font-size: 10px;
+    font-family: 'IBM Plex Mono', monospace;
     color: #166534;
-    border: 1px solid #86EFAC;
-    transition: var(--transition);
+    font-weight: 700;
   }
-  .live-sync-badge.syncing {
-    background: #FEF3C7;
-    color: #92400E;
-    border-color: #FDE68A;
-  }
-  .live-sync-badge.offline {
-    background: #FEE2E2;
-    color: #991B1B;
-    border-color: #FECACA;
+  @media (max-width: 480px) {
+    .sync-text { display: none; }
   }
 </style>
 </head>
@@ -1849,10 +1866,15 @@
 <!-- TOP NAV -->
 <nav class="sticky-nav">
   <div class="nav-inner">
-    <div class="nav-brand"><span>🏔️</span> CUENCA 2026</div>
+    <div class="nav-brand">
+      <span>🏔️</span> CUENCA 2026
+      <div class="sync-wrap" title="Conexión en la nube en tiempo real">
+        <span class="sync-dot live" id="liveSyncIndicator"></span>
+        <span class="sync-text" id="liveSyncText">En vivo</span>
+      </div>
+    </div>
     <div class="nav-right-actions">
-      <span class="live-sync-badge" id="liveSyncIndicator" title="Conexión en la nube en tiempo real">🟢 En vivo</span>
-      <button class="nav-ai-btn" onclick="openAiChat()">✨ Asistente de Viaje</button>
+      <button class="nav-ai-btn" onclick="openAiChat()">✨ Asistente IA</button>
     </div>
   </div>
 </nav>
@@ -4862,17 +4884,24 @@ let isSyncingFromRemote = false;
 let sseConnection = null;
 
 function setLiveSyncBadge(state, text) {
-  const badge = document.getElementById('liveSyncIndicator');
-  if (!badge) return;
-  if (state === 'live') {
-    badge.innerHTML = '🟢 ' + (text || 'En vivo');
-    badge.className = 'live-sync-badge';
-  } else if (state === 'syncing') {
-    badge.innerHTML = '🔄 Guardando...';
-    badge.className = 'live-sync-badge syncing';
-  } else {
-    badge.innerHTML = '🟡 Offline';
-    badge.className = 'live-sync-badge offline';
+  const dot = document.getElementById('liveSyncIndicator');
+  const txt = document.getElementById('liveSyncText');
+  if (dot) {
+    if (state === 'live') {
+      dot.className = 'sync-dot live';
+      if (dot.parentElement) dot.parentElement.title = text || 'Conectado a Firebase en tiempo real';
+    } else if (state === 'syncing') {
+      dot.className = 'sync-dot syncing';
+      if (dot.parentElement) dot.parentElement.title = 'Guardando cambios en la nube...';
+    } else {
+      dot.className = 'sync-dot offline';
+      if (dot.parentElement) dot.parentElement.title = 'Modo sin conexión (guardado en el teléfono)';
+    }
+  }
+  if (txt) {
+    if (state === 'live') txt.innerText = text || 'En vivo';
+    else if (state === 'syncing') txt.innerText = 'Guardando...';
+    else txt.innerText = 'Offline';
   }
 }
 
