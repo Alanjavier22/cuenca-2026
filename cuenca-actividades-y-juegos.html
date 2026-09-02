@@ -1395,10 +1395,15 @@
     background: #061522;
   }
   .forehead-modal.rotated {
-    transform: rotate(90deg);
-    transform-origin: center center;
-    width: 100vh !important;
-    height: 100vw !important;
+    position: fixed !important;
+    top: 50% !important;
+    left: 50% !important;
+    right: auto !important;
+    bottom: auto !important;
+    width: 100dvh !important;
+    height: 100dvw !important;
+    transform: translate(-50%, -50%) rotate(90deg) !important;
+    transform-origin: center center !important;
   }
   .forehead-countdown {
     font-size: clamp(65px, 20vw, 130px);
@@ -1464,7 +1469,7 @@
     right: 18px;
     display: flex;
     gap: 10px;
-    z-index: 50;
+    z-index: 100000;
   }
   .btn-forehead-action {
     background: rgba(255,255,255,0.18);
@@ -3241,8 +3246,8 @@
 <!-- MODAL FRENTE (HEADS UP FULLSCREEN HORIZONTAL) -->
 <div class="forehead-modal" id="foreheadModal" role="dialog" aria-modal="true" aria-label="Modo Frente Heads Up">
   <div class="forehead-top-actions">
-    <button type="button" class="btn-forehead-action" onclick="toggleForeheadRotation()" title="Girar pantalla si está bloqueada en vertical">🔄 Girar</button>
-    <button type="button" class="btn-forehead-action btn-forehead-exit" onclick="closeForeheadMode()">✕ Salir</button>
+    <button type="button" class="btn-forehead-action" id="btnRotateForehead" onclick="toggleForeheadRotation(event)" title="Girar pantalla si está bloqueada en vertical">🔄 Girar</button>
+    <button type="button" class="btn-forehead-action btn-forehead-exit" onclick="closeForeheadMode(true, event)">✕ Salir</button>
   </div>
   
   <div id="foreheadCountdownBox" role="button" tabindex="0" onclick="skipForeheadCountdown()" onkeydown="if(event.key==='Enter'||event.key===' ') skipForeheadCountdown()" style="cursor:pointer;" title="Toca para saltar" aria-label="Saltar cuenta regresiva">
@@ -3785,17 +3790,32 @@ let recentMimicTopics = [];
 
 async function generateAiMimicTopicDirect() {
   const box = document.getElementById('mimicTopicBox');
-  box.innerHTML = '<i>Generando título...</i>';
+  box.innerHTML = '<i>Generando título con IA...</i>';
   const genre = mimicGenres[Math.floor(Math.random() * mimicGenres.length)];
   const avoid = ['Titanic', ...recentMimicTopics.slice(-6)].join(', ');
   const prompt = `Genera 1 película muy famosa o situación cómica para Dígalo con Mímica en 60s.
 GÉNERO O TEMA: ${genre}.
 EXCLUSIÓN: PROHIBIDO sugerir: ${avoid}. Debe ser una opción diferente y muy divertida de actuar sin hablar.
 Formato exacto: "🎬 <b>[Título o Situación]</b> (Categoría: ...)"`;
-  const res = await callGeminiAI(prompt, true);
-  const cleaned = cleanDirectOutput(res);
-  box.innerHTML = cleaned;
-  if (cleaned) recentMimicTopics.push(cleaned.replace(/<[^>]+>/g, '').slice(0, 30));
+  try {
+    const res = await callGeminiAI(prompt, true);
+    const cleaned = cleanDirectOutput(res);
+    box.innerHTML = cleaned;
+    if (cleaned) recentMimicTopics.push(cleaned.replace(/<[^>]+>/g, '').slice(0, 30));
+    broadcastLiveCard('mimicTopicBox', box.innerHTML);
+  } catch(e) {
+    const fallbacks = [
+      '🎬 <b>Titanic</b> (Categoría: Película Clásica)',
+      '🎬 <b>El Rey León</b> (Categoría: Animación)',
+      '🎬 <b>Misión Imposible</b> (Categoría: Acción)',
+      '🎬 <b>Shrek</b> (Categoría: Comedia)',
+      '🎬 <b>Jurassic Park</b> (Categoría: Aventura)',
+      '🎬 <b>Matrix</b> (Categoría: Ciencia Ficción)'
+    ];
+    const fb = fallbacks[Math.floor(Math.random() * fallbacks.length)];
+    box.innerHTML = fb;
+    broadcastLiveCard('mimicTopicBox', box.innerHTML);
+  }
 }
 
 const characterGenres = [
@@ -3854,14 +3874,19 @@ Devuelve ÚNICAMENTE un JSON válido con este formato:
         <button class="btn-print" style="font-size:11px;padding:6px 12px;" onclick="revealCharacterInBox()">👁️ Ver para papelito</button>
       </div>
     `;
+    broadcastLiveEvent('whoAmIGenerated', { charData, html: box.innerHTML });
   } catch(err) {
     box.innerHTML = '❌ Ocurrió un error al generar. Por favor intenta de nuevo.';
   }
 }
 
-function toggleForeheadRotation() {
+function toggleForeheadRotation(e) {
+  if (e && e.stopPropagation) e.stopPropagation();
   const modal = document.getElementById('foreheadModal');
-  if (modal) modal.classList.toggle('rotated');
+  const btn = document.getElementById('btnRotateForehead');
+  if (!modal) return;
+  const isRot = modal.classList.toggle('rotated');
+  if (btn) btn.innerHTML = isRot ? '🔄 Vertical' : '🔄 Horizontal';
 }
 
 function skipForeheadCountdown() {
@@ -3881,6 +3906,8 @@ function launchForeheadMode() {
   const countBox = document.getElementById('foreheadCountdownBox');
   const countNum = document.getElementById('foreheadCountNum');
   const contentBox = document.getElementById('foreheadContentBox');
+  const btn = document.getElementById('btnRotateForehead');
+  if (btn) btn.innerHTML = '🔄 Girar';
 
   if (modal) {
     modal.classList.remove('rotated');
@@ -3927,13 +3954,16 @@ function launchForeheadMode() {
   }, 1000);
 }
 
-function closeForeheadMode(shouldExitFs = true) {
+function closeForeheadMode(shouldExitFs = true, e = null) {
+  if (e && e.stopPropagation) e.stopPropagation();
   clearInterval(foreheadCountdownTimer);
   const modal = document.getElementById('foreheadModal');
+  const btn = document.getElementById('btnRotateForehead');
   if (modal) {
     modal.style.display = 'none';
     modal.classList.remove('rotated');
   }
+  if (btn) btn.innerHTML = '🔄 Girar';
 
   if (shouldExitFs) {
     try {
@@ -4159,10 +4189,12 @@ function startTimer(skipBroadcast = false) {
   }, 1000);
   if (!skipBroadcast) broadcastLiveEvent('mimicTimer', {});
 }
-function resetTimer() {
+function resetTimer(skipBroadcast = false) {
   clearInterval(timerInterval);
   timerSeconds = 60;
-  document.getElementById('mimicTimer').innerText = '60s';
+  const t = document.getElementById('mimicTimer');
+  if (t) t.innerText = '60s';
+  if (!skipBroadcast) broadcastLiveEvent('mimicReset', {});
 }
 
 // --- AI CHAT INTERACTIVO (SIN AUTO-PETICIÓN AL ABRIR) ---
@@ -5050,6 +5082,8 @@ function handleRemoteLiveAction(action) {
     startTribunalCountdown(true);
   } else if (type === 'mimicTimer') {
     startTimer(true);
+  } else if (type === 'mimicReset') {
+    resetTimer(true);
   } else if (type === 'truthReveal') {
     revealRealTruth(true);
   } else if (type === 'roulette' && payload) {
@@ -5060,6 +5094,16 @@ function handleRemoteLiveAction(action) {
       box.innerHTML = payload.html;
       currentTruthOptions = payload.options;
       realTruthIndex = payload.realIndex;
+      box.classList.remove('live-flash');
+      void box.offsetWidth;
+      box.classList.add('live-flash');
+      setTimeout(() => box.classList.remove('live-flash'), 1500);
+    }
+  } else if (type === 'whoAmIGenerated' && payload) {
+    currentSecretCharacter = payload.charData;
+    const box = document.getElementById('whoAmIBox');
+    if (box) {
+      box.innerHTML = payload.html;
       box.classList.remove('live-flash');
       void box.offsetWidth;
       box.classList.add('live-flash');
@@ -5245,7 +5289,7 @@ window.addEventListener('DOMContentLoaded', () => {
 });
 
 // Control de versión para auto-recarga transparente al desminimizar la app
-window.APP_VERSION = '2026.09.02.1655';
+window.APP_VERSION = '2026.09.02.1705';
 
 async function checkAppUpdate() {
   try {
