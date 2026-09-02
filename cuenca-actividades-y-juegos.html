@@ -3988,9 +3988,10 @@ document.addEventListener('fullscreenchange', () => {
   }
 });
 
-function revealCharacterInBox() {
+function revealCharacterInBox(skipBroadcast = false) {
   if (!currentSecretCharacter) return;
   const box = document.getElementById('whoAmIBox');
+  if (!box) return;
   box.innerHTML = `
     <span class="truth-badge real" style="background:var(--blue-deep);">PERSONAJE SECRETO</span><br>
     🎭 <b>${currentSecretCharacter.nombre}</b> <span style="color:var(--ink-soft);font-size:12px;">(${currentSecretCharacter.categoria})</span>
@@ -4001,6 +4002,7 @@ function revealCharacterInBox() {
       <button class="btn-forehead-launch" onclick="launchForeheadMode()">📱 Poner en la Frente</button>
     </div>
   `;
+  if (!skipBroadcast) broadcastLiveEvent('revealCharacterInBox', {});
 }
 
 // --- 1 VERDAD Y 2 MENTIRAS: CAMUFLAJE CON IA ---
@@ -4140,7 +4142,7 @@ function revealRealTruth(skipBroadcast = false) {
   if (!skipBroadcast) broadcastLiveEvent('truthReveal', {});
 }
 
-function resetTruthGame() {
+function resetTruthGame(skipBroadcast = false) {
   currentTruthOptions = [];
   realTruthIndex = -1;
   const box = document.getElementById('twoTruthsBox');
@@ -4151,6 +4153,7 @@ function resetTruthGame() {
     inp.focus();
   }
   hideTruthTemporary();
+  if (!skipBroadcast) broadcastLiveEvent('truthReset', {});
 }
 
 const phoneGenres = [
@@ -4229,17 +4232,14 @@ async function sendUserChatMessage() {
   const chatContainer = document.getElementById('aiChatMessages');
   input.value = '';
   
-  // Append user message
+  // Mensaje del usuario (individual y privado para este dispositivo)
   const userDiv = document.createElement('div');
   userDiv.className = 'chat-msg user';
   userDiv.innerText = text;
   chatContainer.appendChild(userDiv);
   chatContainer.scrollTop = chatContainer.scrollHeight;
 
-  // Transmitir pregunta del usuario en tiempo real
-  broadcastLiveEvent('chat', { sender: 'user', html: text });
-
-  // Loading AI bubble
+  // Burbuja de carga de IA
   const aiDiv = document.createElement('div');
   aiDiv.className = 'chat-msg ai';
   aiDiv.innerHTML = '<i>Escribiendo respuesta...</i>';
@@ -4250,9 +4250,6 @@ async function sendUserChatMessage() {
   const formatted = cleanFormat(res);
   aiDiv.innerHTML = formatted;
   chatContainer.scrollTop = chatContainer.scrollHeight;
-
-  // Transmitir respuesta de la IA en tiempo real
-  broadcastLiveEvent('chat', { sender: 'ai', html: formatted });
 }
 
 async function callGeminiAI(userQuery, isDirect = false) {
@@ -4588,6 +4585,7 @@ ${recentHistory ? `- PROHIBIDO repetir ninguna de estas misiones o ideas ya util
     try { localStorage.setItem('cuenca_used_photo_missions', JSON.stringify(history)); } catch(e) {}
 
     text.innerHTML = `🎯 <b>Objetivo:</b> ${cleaned}`;
+    broadcastLiveEvent('photoMissionUpdated', { player: currentPhotoPlayer, mission: cleaned, missions });
   } catch(e) {
     text.innerHTML = `🎯 <b>Objetivo:</b> ${defaultMissions[currentPhotoPlayer]}`;
   } finally {
@@ -4595,15 +4593,9 @@ ${recentHistory ? `- PROHIBIDO repetir ninguna de estas misiones o ideas ya util
   }
 }
 
-function toggleNightPhotoReveal() {
-  const box = document.getElementById('photoNightReveal');
-  if (!box) return;
-  if (box.style.display === 'block') {
-    box.style.display = 'none';
-    return;
-  }
-  box.style.display = 'block';
+function renderNightPhotoList() {
   const list = document.getElementById('photoNightList');
+  if (!list) return;
   const missions = getStoredMissions();
   const playerIdx = { Alan: 1, Dennis: 2, Ashley: 3, Jahaira: 4, Douglas: 5 };
 
@@ -4622,6 +4614,19 @@ function toggleNightPhotoReveal() {
     `;
   });
   list.innerHTML = html;
+}
+
+function toggleNightPhotoReveal(skipBroadcast = false) {
+  const box = document.getElementById('photoNightReveal');
+  if (!box) return;
+  if (box.style.display === 'block') {
+    box.style.display = 'none';
+    if (!skipBroadcast) broadcastLiveEvent('nightPhotoToggle', { open: false });
+    return;
+  }
+  box.style.display = 'block';
+  renderNightPhotoList();
+  if (!skipBroadcast) broadcastLiveEvent('nightPhotoToggle', { open: true });
 }
 
 function awardPhotoPoints(name, idx) {
@@ -5086,6 +5091,8 @@ function handleRemoteLiveAction(action) {
     resetTimer(true);
   } else if (type === 'truthReveal') {
     revealRealTruth(true);
+  } else if (type === 'truthReset') {
+    resetTruthGame(true);
   } else if (type === 'roulette' && payload) {
     animateRoulette(payload.name, payload.sub, true);
   } else if (type === 'truthGame' && payload) {
@@ -5109,14 +5116,25 @@ function handleRemoteLiveAction(action) {
       box.classList.add('live-flash');
       setTimeout(() => box.classList.remove('live-flash'), 1500);
     }
-  } else if (type === 'chat' && payload) {
-    const chatContainer = document.getElementById('aiChatMessages');
-    if (chatContainer) {
-      const div = document.createElement('div');
-      div.className = 'chat-msg ' + payload.sender;
-      div.innerHTML = payload.html;
-      chatContainer.appendChild(div);
-      chatContainer.scrollTop = chatContainer.scrollHeight;
+  } else if (type === 'revealCharacterInBox') {
+    revealCharacterInBox(true);
+  } else if (type === 'photoMissionUpdated' && payload) {
+    const missions = getStoredMissions();
+    missions[payload.player] = payload.mission;
+    saveMissions(missions, true);
+    if (currentPhotoPlayer === payload.player) {
+      const text = document.getElementById('photoMissionText');
+      if (text) text.innerHTML = `🎯 <b>Objetivo:</b> ${payload.mission}`;
+    }
+    const nightBox = document.getElementById('photoNightReveal');
+    if (nightBox && nightBox.style.display === 'block') {
+      renderNightPhotoList();
+    }
+  } else if (type === 'nightPhotoToggle' && payload) {
+    const box = document.getElementById('photoNightReveal');
+    if (box) {
+      box.style.display = payload.open ? 'block' : 'none';
+      if (payload.open) renderNightPhotoList();
     }
   }
 }
@@ -5289,7 +5307,7 @@ window.addEventListener('DOMContentLoaded', () => {
 });
 
 // Control de versión para auto-recarga transparente al desminimizar la app
-window.APP_VERSION = '2026.09.02.1705';
+window.APP_VERSION = '2026.09.02.1710';
 
 async function checkAppUpdate() {
   try {
