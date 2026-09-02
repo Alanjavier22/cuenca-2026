@@ -924,41 +924,49 @@
 
   /* 1 VERDAD Y 2 MENTIRAS CAMUFLAJE */
   .truth-secret-wrap {
+    position: relative;
     display: flex;
-    gap: 6px;
-    margin: 8px 0;
     align-items: center;
+    margin: 8px 0;
+    width: 100%;
+    box-sizing: border-box;
   }
   .truth-secret-input {
-    flex: 1;
-    padding: 7px 12px;
+    width: 100%;
+    min-width: 0;
+    padding: 9px 42px 9px 12px;
     border: 1px solid var(--line);
     border-radius: var(--radius-sm);
-    font-size: 12.5px;
+    font-size: 13px;
     outline: none;
     background: var(--white);
+    box-sizing: border-box;
     transition: var(--transition);
   }
   .truth-secret-input:focus { border-color: var(--blue); }
   .btn-mask-toggle {
-    background: var(--cream);
-    border: 1px solid var(--line);
-    padding: 7px 10px;
+    position: absolute;
+    right: 4px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: transparent;
+    border: none;
+    padding: 6px 8px;
     border-radius: var(--radius-sm);
-    font-size: 11px;
-    font-family: 'IBM Plex Mono', monospace;
+    font-size: 16px;
     cursor: pointer;
     color: var(--ink-soft);
-    white-space: nowrap;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     user-select: none;
     -webkit-user-select: none;
     -webkit-touch-callout: none;
     transition: var(--transition);
   }
   .btn-mask-toggle:active, .btn-mask-toggle.holding {
-    background: var(--blue-deep);
-    color: var(--white);
-    border-color: var(--blue-deep);
+    color: var(--blue-deep);
+    transform: translateY(-50%) scale(1.15);
   }
   .truth-option-card {
     background: var(--white);
@@ -1734,6 +1742,47 @@
     .pm {
       word-break: break-word;
     }
+
+    /* JUEGOS EN MÓVIL: BOTONES AMPLIOS Y SIN COLISIONES */
+    .game {
+      width: 100%;
+      max-width: 100%;
+      box-sizing: border-box;
+      padding: 14px 12px;
+      overflow: hidden;
+    }
+    .game > div:last-child {
+      display: flex;
+      flex-direction: column;
+      align-items: stretch !important;
+      gap: 8px;
+      margin-top: 10px;
+      width: 100%;
+    }
+    .game-meta {
+      display: flex;
+      gap: 5px;
+      flex-wrap: wrap;
+      width: 100%;
+    }
+    .game > div:last-child .btn-ai-inline {
+      width: 100%;
+      justify-content: center;
+      padding: 10px 14px;
+      font-size: 13px;
+      font-weight: 700;
+      box-sizing: border-box;
+      border-radius: var(--radius-sm);
+    }
+    .game > div:last-child div[style*="display:flex"] {
+      width: 100%;
+      display: flex;
+      gap: 6px;
+    }
+    .game > div:last-child div[style*="display:flex"] button {
+      flex: 1;
+      justify-content: center;
+    }
   }
 
   @media (max-width: 480px) {
@@ -2083,7 +2132,7 @@
               <span class="tl-badge rec">Noche Decisiva</span>
             </div>
             <div class="tl-text">
-              Torneo de juegos: <b>Dígalo con Mímica (con cronómetro)</b>, <b>¿Quién Soy?</b> y <b>Karaoke en el Smart TV</b>.
+              Torneo de juegos: <b>Dígalo con Mímica (con cronómetro)</b>, <b>¿Quién Soy? (Modo Frente)</b>, <b>Tribunal con IA</b> y <b>1 Verdad y 2 Mentiras</b>.
             </div>
           </div>
         </div>
@@ -2666,7 +2715,7 @@
             <label style="font-size:11px;font-family:'IBM Plex Mono',monospace;color:var(--blue-deep);font-weight:600;">Escribe tu anécdota real (Modo secreto anti-espías):</label>
             <div class="truth-secret-wrap">
               <input type="password" id="secretTruthInput" class="truth-secret-input" placeholder="Ej: De niño me tragué una moneda jugando..." onkeydown="if(event.key==='Enter') camouflageTruthWithAi()" />
-              <button type="button" id="toggleTruthMaskBtn" class="btn-mask-toggle" onmousedown="revealTruthTemporary(event)" onmouseup="hideTruthTemporary()" onmouseleave="hideTruthTemporary()" ontouchstart="revealTruthTemporary(event)" ontouchend="hideTruthTemporary()" ontouchcancel="hideTruthTemporary()" title="Mantén presionado para ver">👁️ Mantén para ver</button>
+              <button type="button" id="toggleTruthMaskBtn" class="btn-mask-toggle" onmousedown="revealTruthTemporary(event)" onmouseup="hideTruthTemporary()" onmouseleave="hideTruthTemporary()" ontouchstart="revealTruthTemporary(event)" ontouchend="hideTruthTemporary()" ontouchcancel="hideTruthTemporary()" title="Mantén presionado para ver tu anécdota">👁️</button>
             </div>
           </div>
 
@@ -2705,34 +2754,6 @@
           <div class="game-meta"><span class="gm need">Hojas y lápiz</span></div>
           <button class="btn-ai-inline" onclick="generateBrokenPhonePhrase()">✨ Frase de Inicio con IA</button>
         </div>
-      </div>
-
-      <!-- EL IMPOSTOR EN APP -->
-      <div class="game">
-        <div>
-          <div class="game-top">
-            <span class="game-icon">🕵️</span>
-            <span class="game-name">El Impostor (En App Móvil)</span>
-          </div>
-          <p>
-            <b>Cómo se juega:</b> Todos abren la app móvil para recibir la palabra secreta menos el impostor. Por turnos dicen una palabra pista y debaten quién miente.
-          </p>
-        </div>
-        <div class="game-meta"><span class="gm zero">En App Móvil</span><span class="gm">10 min por ronda</span></div>
-      </div>
-
-      <!-- KARAOKE SMART TV -->
-      <div class="game">
-        <div>
-          <div class="game-top">
-            <span class="game-icon">📺</span>
-            <span class="game-name">Karaoke & Trivia en Smart TV</span>
-          </div>
-          <p>
-            Abren YouTube en la TV de ANICÁ y buscan pistas de karaoke o trivias musicales tipo "Adivina la canción en 5 segundos (Pop 2000s, Reggaeton clásico, Rock Latino)".
-          </p>
-        </div>
-        <div class="game-meta"><span class="gm zero">Smart TV ANICÁ</span><span class="gm">Música en sala</span></div>
       </div>
 
       <!-- TRIBUNAL DE LA NOCHE: QUIÉN ES MÁS PROBABLE QUE -->
@@ -3543,12 +3564,11 @@ const actionTasks = [
 
 const gamesList = [
   { name: '🎭 Dígalo con Mímica', desc: 'Sin hablar, 2 vs 3 con el cronómetro de 60s.' },
-  { name: '🕵️ El Impostor (App)', desc: 'Abran la App y descubran al impostor con una palabra.' },
-  { name: '🧠 ¿Quién Soy?', desc: 'Post-it en la frente y preguntas de Sí o No.' },
-  { name: '🤫 2 Verdades y 1 Mentira', desc: 'Confesiones y secretos entre amigos y parejas.' },
-  { name: '✏️ Teléfono Descompuesto', desc: 'Frase absurda → dibujo → frase. Risas al 100%.' },
-  { name: '🔢 Uno Reglas Bravas', desc: 'Acumulación de +4 y juego rápido.' },
-  { name: '📺 Karaoke en TV', desc: 'YouTube en la TV a cantar los clásicos.' }
+  { name: '🧠 ¿Quién Soy?', desc: 'Modo Heads Up en la frente o post-it.' },
+  { name: '🤫 1 Verdad y 2 Mentiras', desc: 'Camuflaje de anécdotas con IA.' },
+  { name: '✏️ Teléfono Descompuesto Dibujado', desc: 'Frase absurda con IA → dibujo → risas.' },
+  { name: '⚖️ Tribunal: ¿Quién es más probable que...?', desc: 'Dilemas cómicos y votación a la de 3.' },
+  { name: '🍸 El Barman del Grupo', desc: 'Coctelería temática con IA según lo que tengan en la mesa.' }
 ];
 
 const foodList = [
@@ -3873,7 +3893,7 @@ function revealTruthTemporary(e) {
   const btn = document.getElementById('toggleTruthMaskBtn');
   if (inp) inp.type = 'text';
   if (btn) {
-    btn.innerHTML = '👁️ Mostrando...';
+    btn.innerHTML = '👀';
     btn.classList.add('holding');
   }
 }
@@ -3883,7 +3903,7 @@ function hideTruthTemporary() {
   const btn = document.getElementById('toggleTruthMaskBtn');
   if (inp) inp.type = 'password';
   if (btn) {
-    btn.innerHTML = '👁️ Mantén para ver';
+    btn.innerHTML = '👁️';
     btn.classList.remove('holding');
   }
 }
