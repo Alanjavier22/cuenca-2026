@@ -2358,8 +2358,8 @@
           <!-- PASO 3: CONCEPTO Y MONTO MANUAL -->
           <div class="section-label-small">3. Detalle y Monto ($):</div>
           <div class="expense-entry-grid">
-            <input type="text" id="expName" value="Gasolina Súper" placeholder="Detalle del gasto...">
-            <input type="number" id="expVal" placeholder="$ Ingrese Monto (ej: 15.00)" min="0" step="0.01" inputmode="decimal">
+            <input type="text" id="expName" aria-label="Detalle del gasto" value="Gasolina Súper" placeholder="Detalle del gasto...">
+            <input type="number" id="expVal" aria-label="Monto del gasto en dólares" placeholder="$ Ingrese Monto (ej: 15.00)" min="0" step="0.01" inputmode="decimal">
             <button class="btn-add-expense" onclick="addExpenseTactile()">➕ Agregar Gasto</button>
           </div>
 
@@ -2449,7 +2449,7 @@
 
     <!-- BUSCADOR & FILTROS UNIFICADOS -->
     <div class="search-filter-wrap">
-      <input type="text" class="search-input" id="placeSearch" placeholder="🔍 Buscar spot o comida (ej: hornado, mirador, café, ruinas, cerveza...)" oninput="searchPlaces()">
+      <input type="text" class="search-input" id="placeSearch" aria-label="Buscar spot o comida en Cuenca" placeholder="🔍 Buscar spot o comida (ej: hornado, mirador, café, ruinas, cerveza...)" oninput="searchPlaces()">
       <div class="place-filter">
         <button class="filter-btn active" onclick="filterPlaces('all', this)">Todos</button>
         <button class="filter-btn" onclick="filterPlaces('mirador', this)">🌇 Miradores</button>
@@ -2792,7 +2792,7 @@
           <div style="margin-top:10px;">
             <label style="font-size:11px;font-family:'IBM Plex Mono',monospace;color:var(--blue-deep);font-weight:600;">Escribe tu anécdota real (Modo secreto anti-espías):</label>
             <div class="truth-secret-wrap">
-              <input type="password" id="secretTruthInput" class="truth-secret-input" placeholder="Ej: De niño me tragué una moneda jugando..." onkeydown="if(event.key==='Enter') camouflageTruthWithAi()" />
+              <input type="password" id="secretTruthInput" class="truth-secret-input" aria-label="Tu anécdota real (modo secreto)" placeholder="Ej: De niño me tragué una moneda jugando..." onkeydown="if(event.key==='Enter') camouflageTruthWithAi()" />
               <button type="button" id="toggleTruthMaskBtn" class="btn-mask-toggle" onmousedown="revealTruthTemporary(event)" onmouseup="hideTruthTemporary()" onmouseleave="hideTruthTemporary()" ontouchstart="revealTruthTemporary(event)" ontouchend="hideTruthTemporary()" ontouchcancel="hideTruthTemporary()" title="Mantén presionado para ver tu anécdota">👁️</button>
             </div>
           </div>
@@ -2871,7 +2871,7 @@
           </p>
 
           <div style="margin-top:8px;">
-            <input type="text" id="barmanInput" class="truth-secret-input" placeholder="Ej: Ron, Sprite, limón, maracuyá, cerveza, azúcar..." style="width:100%;font-size:12px;padding:8px 10px;" onkeydown="if(event.key==='Enter') generateBarmanCocktail()" />
+            <input type="text" id="barmanInput" class="truth-secret-input" aria-label="Ingredientes disponibles para el cóctel" placeholder="Ej: Ron, Sprite, limón, maracuyá, cerveza, azúcar..." style="width:100%;font-size:12px;padding:8px 10px;" onkeydown="if(event.key==='Enter') generateBarmanCocktail()" />
           </div>
 
           <div class="game-ai-inline-box" id="barmanBox" style="margin-top:10px;">
@@ -3088,8 +3088,8 @@
             <span class="room-pill">Baño Privado</span>
           </div>
           <div class="room-desc">Cama Queen (2 plazas y media) con baño en suite.</div>
-          <label style="font-size:10px;font-weight:700;color:var(--ink-soft);font-family:'IBM Plex Mono',monospace;">Huésped 1:</label>
-          <select class="bed-select" id="b1_1">
+          <label for="b1_1" style="font-size:10px;font-weight:700;color:var(--ink-soft);font-family:'IBM Plex Mono',monospace;">Huésped 1:</label>
+          <select class="bed-select" id="b1_1" aria-label="Master Suite - Huésped 1">
             <option value="" selected>— Sin asignar —</option>
             <option value="Alan">Alan</option>
             <option value="Dennis">Dennis</option>
@@ -3097,8 +3097,8 @@
             <option value="Ashley">Ashley</option>
             <option value="Jahaira">Jahaira</option>
           </select>
-          <label style="font-size:10px;font-weight:700;color:var(--ink-soft);font-family:'IBM Plex Mono',monospace;">Huésped 2:</label>
-          <select class="bed-select" id="b1_2">
+          <label for="b1_2" style="font-size:10px;font-weight:700;color:var(--ink-soft);font-family:'IBM Plex Mono',monospace;">Huésped 2:</label>
+          <select class="bed-select" id="b1_2" aria-label="Master Suite - Huésped 2">
             <option value="" selected>— Sin asignar —</option>
             <option value="Alan">Alan</option>
             <option value="Dennis">Dennis</option>
@@ -3114,8 +3114,8 @@
             <span class="room-pill">Armario Grande</span>
           </div>
           <div class="room-desc">Cama Doble (2 plazas) con ventana exterior.</div>
-          <label style="font-size:10px;font-weight:700;color:var(--ink-soft);font-family:'IBM Plex Mono',monospace;">Huésped 1:</label>
-          <select class="bed-select" id="b2_1">
+          <label for="b2_1" style="font-size:10px;font-weight:700;color:var(--ink-soft);font-family:'IBM Plex Mono',monospace;">Huésped 1:</label>
+          <select class="bed-select" id="b2_1" aria-label="Habitación 2 - Huésped 1">
             <option value="" selected>— Sin asignar —</option>
             <option value="Alan">Alan</option>
             <option value="Dennis">Dennis</option>
@@ -3123,8 +3123,8 @@
             <option value="Ashley">Ashley</option>
             <option value="Jahaira">Jahaira</option>
           </select>
-          <label style="font-size:10px;font-weight:700;color:var(--ink-soft);font-family:'IBM Plex Mono',monospace;">Huésped 2:</label>
-          <select class="bed-select" id="b2_2">
+          <label for="b2_2" style="font-size:10px;font-weight:700;color:var(--ink-soft);font-family:'IBM Plex Mono',monospace;">Huésped 2:</label>
+          <select class="bed-select" id="b2_2" aria-label="Habitación 2 - Huésped 2">
             <option value="" selected>— Sin asignar —</option>
             <option value="Alan">Alan</option>
             <option value="Dennis">Dennis</option>
@@ -3140,8 +3140,8 @@
             <span class="room-pill">Vista Tranquila</span>
           </div>
           <div class="room-desc">Cama Doble (2 plazas) y baño compartido junto al pasillo.</div>
-          <label style="font-size:10px;font-weight:700;color:var(--ink-soft);font-family:'IBM Plex Mono',monospace;">Huésped:</label>
-          <select class="bed-select" id="b3_1">
+          <label for="b3_1" style="font-size:10px;font-weight:700;color:var(--ink-soft);font-family:'IBM Plex Mono',monospace;">Huésped:</label>
+          <select class="bed-select" id="b3_1" aria-label="Habitación 3 - Huésped">
             <option value="" selected>— Sin asignar —</option>
             <option value="Alan">Alan</option>
             <option value="Dennis">Dennis</option>
