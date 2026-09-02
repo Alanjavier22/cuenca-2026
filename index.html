@@ -1769,6 +1769,30 @@
     .main-tab-view { display: block !important; }
     body { background: #fff; color: #000; padding: 0; }
   }
+  .live-sync-badge {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 3px 8px;
+    border-radius: var(--radius-full);
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    background: #DCFCE7;
+    color: #166534;
+    border: 1px solid #86EFAC;
+    transition: var(--transition);
+  }
+  .live-sync-badge.syncing {
+    background: #FEF3C7;
+    color: #92400E;
+    border-color: #FDE68A;
+  }
+  .live-sync-badge.offline {
+    background: #FEE2E2;
+    color: #991B1B;
+    border-color: #FECACA;
+  }
 </style>
 </head>
 <body>
@@ -1778,6 +1802,7 @@
   <div class="nav-inner">
     <div class="nav-brand"><span>🏔️</span> CUENCA 2026</div>
     <div class="nav-right-actions">
+      <span class="live-sync-badge" id="liveSyncIndicator" title="Conexión en la nube en tiempo real">🟢 En vivo</span>
       <button class="nav-ai-btn" onclick="openAiChat()">✨ Asistente de Viaje</button>
     </div>
   </div>
@@ -3329,7 +3354,7 @@ function removeExp(idx) {
   renderExpensesTactile();
 }
 
-function renderExpensesTactile() {
+function renderExpensesTactile(skipCloud = false) {
   const list = document.getElementById('expenseList');
   list.innerHTML = '';
   let total = 0;
@@ -3351,7 +3376,7 @@ function renderExpensesTactile() {
 
   const perPerson = total / expenseParticipants.length;
   calculateSmartSettlement(paidMap, perPerson, total);
-  saveExpenses();
+  saveExpenses(skipCloud);
 }
 
 function calculateSmartSettlement(paidMap, fairShare, total) {
@@ -3490,8 +3515,9 @@ REGLAS ESTRICTAS:
   }
 }
 
-function saveExpenses() {
+function saveExpenses(skipCloud = false) {
   try { localStorage.setItem('cuenca_exp_clean_v5', JSON.stringify(expenses)); } catch(e) {}
+  if (!skipCloud) pushToCloud('expenses', expenses);
 }
 
 function loadExpenses() {
@@ -4634,10 +4660,11 @@ function resetScores() {
   }
 }
 
-function saveScores() {
+function saveScores(skipCloud = false) {
   try {
     localStorage.setItem('cuenca_v5_scores', JSON.stringify(universalScores));
   } catch(e) {}
+  if (!skipCloud) pushToCloud('scores', universalScores);
 }
 
 function loadScores() {
@@ -4682,7 +4709,7 @@ REGLAS:
 }
 
 // --- BEDS & LOGISTICS ---
-function saveBeds() {
+function saveBeds(skipCloud = false) {
   const data = {
     b1_1: document.getElementById('b1_1').value,
     b1_2: document.getElementById('b1_2').value,
@@ -4692,8 +4719,9 @@ function saveBeds() {
   };
   try {
     localStorage.setItem('cuenca_beds_v4', JSON.stringify(data));
-    alert('¡Distribución de habitaciones en ANICÁ guardada!');
+    if (!skipCloud) alert('¡Distribución de habitaciones en ANICÁ guardada y sincronizada para todos!');
   } catch(e) {}
+  if (!skipCloud) pushToCloud('beds', data);
 }
 
 function loadBeds() {
@@ -4808,6 +4836,123 @@ function loadPack() {
   updatePack();
 }
 
+// --- FIREBASE REALTIME DATABASE CLOUD SYNC ---
+const FIREBASE_SYNC_URL = 'https://cuenca-2026-default-rtdb.firebaseio.com/cuenca';
+let isSyncingFromRemote = false;
+let sseConnection = null;
+
+function setLiveSyncBadge(state, text) {
+  const badge = document.getElementById('liveSyncIndicator');
+  if (!badge) return;
+  if (state === 'live') {
+    badge.innerHTML = '🟢 ' + (text || 'En vivo');
+    badge.className = 'live-sync-badge';
+  } else if (state === 'syncing') {
+    badge.innerHTML = '🔄 Guardando...';
+    badge.className = 'live-sync-badge syncing';
+  } else {
+    badge.innerHTML = '🟡 Offline';
+    badge.className = 'live-sync-badge offline';
+  }
+}
+
+async function pushToCloud(key, data) {
+  if (isSyncingFromRemote) return;
+  setLiveSyncBadge('syncing');
+  try {
+    await fetch(`${FIREBASE_SYNC_URL}/${key}.json`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data)
+    });
+    setLiveSyncBadge('live');
+  } catch(e) {
+    setLiveSyncBadge('offline');
+  }
+}
+
+function applyRemoteSync(key, val) {
+  if (val === undefined || val === null) return;
+  isSyncingFromRemote = true;
+  try {
+    if (key === 'expenses' && Array.isArray(val)) {
+      const currentJson = JSON.stringify(expenses);
+      const incoming = val.filter(e => expenseParticipants.includes(e.payer));
+      if (currentJson !== JSON.stringify(incoming)) {
+        expenses = incoming;
+        try { localStorage.setItem('cuenca_exp_clean_v5', JSON.stringify(expenses)); } catch(e) {}
+        renderExpensesTactile(true);
+      }
+    } else if (key === 'scores' && val && typeof val === 'object') {
+      const currentJson = JSON.stringify(universalScores);
+      const incoming = Array.isArray(val) ? val : [0, 0, 0, 0, 0];
+      if (currentJson !== JSON.stringify(incoming)) {
+        universalScores = incoming;
+        try { localStorage.setItem('cuenca_v5_scores', JSON.stringify(universalScores)); } catch(e) {}
+        updateTotals();
+      }
+    } else if (key === 'beds' && val && typeof val === 'object') {
+      if (val.b1_1 !== undefined && document.getElementById('b1_1') && document.getElementById('b1_1').value !== val.b1_1) document.getElementById('b1_1').value = val.b1_1;
+      if (val.b1_2 !== undefined && document.getElementById('b1_2') && document.getElementById('b1_2').value !== val.b1_2) document.getElementById('b1_2').value = val.b1_2;
+      if (val.b2_1 !== undefined && document.getElementById('b2_1') && document.getElementById('b2_1').value !== val.b2_1) document.getElementById('b2_1').value = val.b2_1;
+      if (val.b2_2 !== undefined && document.getElementById('b2_2') && document.getElementById('b2_2').value !== val.b2_2) document.getElementById('b2_2').value = val.b2_2;
+      if (val.b3_1 !== undefined && document.getElementById('b3_1') && document.getElementById('b3_1').value !== val.b3_1) document.getElementById('b3_1').value = val.b3_1;
+      try { localStorage.setItem('cuenca_beds_v4', JSON.stringify(val)); } catch(e) {}
+    }
+  } finally {
+    isSyncingFromRemote = false;
+  }
+}
+
+async function initLiveSync() {
+  // 1. Snapshot inicial desde Firebase
+  try {
+    const res = await fetch(`${FIREBASE_SYNC_URL}.json`);
+    const remote = await res.json();
+    if (remote) {
+      if (remote.expenses) applyRemoteSync('expenses', remote.expenses);
+      if (remote.scores) applyRemoteSync('scores', remote.scores);
+      if (remote.beds) applyRemoteSync('beds', remote.beds);
+    } else {
+      if (expenses.length > 0) pushToCloud('expenses', expenses);
+      pushToCloud('scores', universalScores);
+    }
+    setLiveSyncBadge('live');
+  } catch(e) {
+    setLiveSyncBadge('offline');
+  }
+
+  // 2. Transmisión nativa en tiempo real (Server-Sent Events)
+  try {
+    if (window.EventSource) {
+      if (sseConnection) sseConnection.close();
+      sseConnection = new EventSource(`${FIREBASE_SYNC_URL}.json`);
+
+      sseConnection.addEventListener('put', (e) => {
+        try {
+          const payload = JSON.parse(e.data);
+          if (!payload) return;
+          const path = payload.path || '/';
+          const data = payload.data;
+          if (path === '/') {
+            if (data && data.expenses) applyRemoteSync('expenses', data.expenses);
+            if (data && data.scores) applyRemoteSync('scores', data.scores);
+            if (data && data.beds) applyRemoteSync('beds', data.beds);
+          } else {
+            const key = path.replace(/^\//, '').split('/')[0];
+            applyRemoteSync(key, data);
+          }
+          setLiveSyncBadge('live');
+        } catch(err) {}
+      });
+
+      sseConnection.onerror = () => {
+        setLiveSyncBadge('offline');
+      };
+    }
+  } catch(e) {}
+}
+
 // INIT
 window.addEventListener('DOMContentLoaded', () => {
   loadExpenses();
@@ -4816,6 +4961,7 @@ window.addEventListener('DOMContentLoaded', () => {
   loadPack();
   fetchWeather();
   initScheduleRadar();
+  initLiveSync();
 
   // Auto-refresco en segundo plano (cero necesidad de recargar la página)
   setInterval(() => fetchWeather(false), 10 * 60 * 1000); // Clima satelital cada 10 min
