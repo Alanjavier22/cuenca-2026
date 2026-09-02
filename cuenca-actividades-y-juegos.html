@@ -3628,15 +3628,7 @@ function saveExpenses(skipCloud = false) {
 }
 
 function loadExpenses() {
-  try {
-    const s = localStorage.getItem('cuenca_exp_clean_v5') || localStorage.getItem('cuenca_exp_clean_v4');
-    if (s) {
-      const parsed = JSON.parse(s);
-      expenses = parsed.filter(e => expenseParticipants.includes(e.payer));
-    }
-  } catch(e) {}
-  // skipCloud=true: NO publicar localStorage a Firebase en el arranque.
-  // initLiveSync() traerá el estado real de la nube y sobreescribirá si hay diferencia.
+  // Inicializa la lista limpia e initLiveSync() carga de inmediato los datos directos y frescos de Firebase
   renderExpensesTactile(true);
 }
 
@@ -4820,12 +4812,7 @@ function saveScores(skipCloud = false) {
 }
 
 function loadScores() {
-  try {
-    const raw = localStorage.getItem('cuenca_v5_scores');
-    if (raw) {
-      universalScores = JSON.parse(raw);
-    }
-  } catch(e) {}
+  // initLiveSync() cargará los puntajes oficiales directamente de Firebase
   updateTotals();
 }
 
@@ -4879,17 +4866,7 @@ function saveBeds(skipCloud = false) {
 }
 
 function loadBeds() {
-  try {
-    const raw = localStorage.getItem('cuenca_beds_v4');
-    if (raw) {
-      const d = JSON.parse(raw);
-      if (d.b1_1) document.getElementById('b1_1').value = d.b1_1;
-      if (d.b1_2) document.getElementById('b1_2').value = d.b1_2;
-      if (d.b2_1) document.getElementById('b2_1').value = d.b2_1;
-      if (d.b2_2) document.getElementById('b2_2').value = d.b2_2;
-      if (d.b3_1) document.getElementById('b3_1').value = d.b3_1;
-    }
-  } catch(e) {}
+  // initLiveSync() sincroniza la asignación de camas directamente desde Firebase
 }
 
 // --- CHECKLIST & CUSTOM PACK ITEMS ---
@@ -5134,9 +5111,9 @@ function applyRemoteSync(key, val) {
 }
 
 async function initLiveSync() {
-  // 1. Snapshot inicial desde Firebase — la nube manda, siempre.
+  // 1. Snapshot inicial desde Firebase — la nube manda, siempre sin caché HTTP
   try {
-    const res = await fetch(`${FIREBASE_SYNC_URL}.json`);
+    const res = await fetch(`${FIREBASE_SYNC_URL}.json?_t=${Date.now()}`);
     if (!res.ok) throw new Error('HTTP ' + res.status);
     const remote = await res.json();
     if (remote !== null && remote !== undefined) {
@@ -5145,12 +5122,10 @@ async function initLiveSync() {
       try {
         if (Array.isArray(remote.expenses)) {
           expenses = remote.expenses.filter(e => expenseParticipants.includes(e.payer));
-          try { localStorage.setItem('cuenca_exp_clean_v5', JSON.stringify(expenses)); } catch(e){}
           renderExpensesTactile(true);
         }
         if (remote.scores && Array.isArray(remote.scores)) {
           universalScores = remote.scores;
-          try { localStorage.setItem('cuenca_v5_scores', JSON.stringify(universalScores)); } catch(e){}
           updateTotals();
         }
         if (remote.beds && typeof remote.beds === 'object') {
@@ -5160,7 +5135,6 @@ async function initLiveSync() {
           if (d.b2_1 !== undefined && document.getElementById('b2_1')) document.getElementById('b2_1').value = d.b2_1;
           if (d.b2_2 !== undefined && document.getElementById('b2_2')) document.getElementById('b2_2').value = d.b2_2;
           if (d.b3_1 !== undefined && document.getElementById('b3_1')) document.getElementById('b3_1').value = d.b3_1;
-          try { localStorage.setItem('cuenca_beds_v4', JSON.stringify(d)); } catch(e){}
         }
       } finally { isSyncingFromRemote = false; }
     } else {
@@ -5258,9 +5232,43 @@ window.addEventListener('DOMContentLoaded', () => {
   setInterval(() => fetchWeather(false), 10 * 60 * 1000); // Clima satelital cada 10 min
   setInterval(initScheduleRadar, 60 * 1000); // Semáforo de horarios cada minuto
 
-  // Registro de Service Worker para PWA
+  // Registro de Service Worker para PWA con detección activa de actualización
   if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('./sw.js').catch(() => {});
+    navigator.serviceWorker.register('./sw.js').then(reg => {
+      reg.update().catch(() => {});
+    }).catch(() => {});
+
+    navigator.serviceWorker.addEventListener('controllerchange', () => {
+      window.location.reload();
+    });
+  }
+});
+
+// Control de versión para auto-recarga transparente al desminimizar la app
+window.APP_VERSION = '2026.09.02.1655';
+
+async function checkAppUpdate() {
+  try {
+    const res = await fetch(`./index.html?_chk=${Date.now()}`, { cache: 'no-cache' });
+    if (!res.ok) return;
+    const text = await res.text();
+    const match = text.match(/window\.APP_VERSION\s*=\s*['"]([^'"]+)['"]/);
+    if (match && match[1] && match[1] !== window.APP_VERSION) {
+      window.location.reload();
+    }
+  } catch(e) {}
+}
+
+// Al salir del estado minimizado (pantalla desbloqueada o cambio de pestaña en celular)
+document.addEventListener('visibilitychange', () => {
+  if (document.visibilityState === 'visible') {
+    initLiveSync();
+    checkAppUpdate();
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.getRegistration().then(reg => {
+        if (reg) reg.update().catch(() => {});
+      });
+    }
   }
 });
 </script>

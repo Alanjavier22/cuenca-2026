@@ -1,8 +1,6 @@
-// Service Worker para Cuenca 2026 PWA
-const CACHE_NAME = 'cuenca-2026-v1';
+// Service Worker para Cuenca 2026 PWA - Versión 3
+const CACHE_NAME = 'cuenca-2026-v3';
 const ASSETS_TO_CACHE = [
-  './',
-  './index.html',
   './manifest.webmanifest',
   './icon-192.png',
   './icon-512.png',
@@ -11,10 +9,11 @@ const ASSETS_TO_CACHE = [
 ];
 
 self.addEventListener('install', event => {
+  self.skipWaiting();
   event.waitUntil(
     caches.open(CACHE_NAME).then(cache => {
       return cache.addAll(ASSETS_TO_CACHE);
-    }).then(() => self.skipWaiting())
+    })
   );
 });
 
@@ -29,27 +28,33 @@ self.addEventListener('activate', event => {
 });
 
 self.addEventListener('fetch', event => {
+  // Las páginas HTML SIEMPRE van directo a la red (sin caché intermedio cuando hay conexión)
   if (event.request.mode === 'navigate') {
     event.respondWith(
-      fetch(event.request).then(response => {
-        return caches.open(CACHE_NAME).then(cache => {
-          cache.put(event.request, response.clone());
+      fetch(event.request, { cache: 'no-cache' })
+        .then(response => {
+          if (response.ok) {
+            const clone = response.clone();
+            caches.open(CACHE_NAME).then(cache => cache.put(event.request, clone));
+          }
           return response;
-        });
-      }).catch(() => caches.match(event.request).then(res => res || caches.match('./index.html')))
+        })
+        .catch(() => caches.match(event.request).then(res => res || caches.match('./index.html')))
     );
     return;
   }
 
+  // Para assets estáticos (íconos, etc.), red primero con fallback a caché
   event.respondWith(
-    caches.match(event.request).then(cached => {
-      return cached || fetch(event.request).then(response => {
-        if (response.status === 200 && event.request.url.startsWith(self.location.origin)) {
-          const respClone = response.clone();
-          caches.open(CACHE_NAME).then(cache => cache.put(event.request, respClone));
+    fetch(event.request)
+      .then(response => {
+        if (response.ok && event.request.url.startsWith(self.location.origin)) {
+          const clone = response.clone();
+          caches.open(CACHE_NAME).then(cache => cache.put(event.request, clone));
         }
         return response;
-      });
-    }).catch(() => {})
+      })
+      .catch(() => caches.match(event.request))
   );
 });
+
