@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "node server.js",
+    "lint": "node -c server.js",
     "build": "echo 'Build complete'",
     "start": "node server.js"
   },

@@ -71,6 +71,14 @@ app.get('/sw.js', (req, res, next) => {
   next();
 });
 
+// Explicit routes for PWA manifests
+app.get(['/manifest.webmanifest', '/manifest.json'], (req, res) => {
+  res.setHeader('Content-Type', 'application/manifest+json; charset=utf-8');
+  res.setHeader('Cache-Control', 'public, max-age=3600');
+  const file = req.path.endsWith('.webmanifest') ? 'manifest.webmanifest' : 'manifest.json';
+  res.sendFile(path.join(__dirname, file));
+});
+
 // Serve static assets from project root
 app.use(express.static(__dirname));
 

@@ -14,6 +14,9 @@
 <meta property="og:description" content="Itinerario interactivo, juegos con IA, divisor de gastos y spots para el viaje a Cuenca 2026.">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="192x192" href="icon-192.png">
+<link rel="apple-touch-icon" sizes="512x512" href="icon-512.png">
 <link rel="icon" type="image/png" href="favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,600;0,700;0,800;1,400;1,600&family=Work+Sans:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -59,6 +62,7 @@
     -webkit-text-size-adjust: 100%;
     width: 100%;
     max-width: 100%;
+    overflow-x: clip;
     overflow-x: hidden;
   }
   body {
@@ -70,7 +74,20 @@
     padding-bottom: 90px;
     width: 100%;
     max-width: 100%;
+    overflow-x: clip;
     overflow-x: hidden;
+    position: relative;
+    touch-action: pan-y pinch-zoom;
+  }
+
+  /* WRAPPER MAESTRO: ENCAPSULA LA APLICACIÓN Y PREVIENE CUALQUIER DESPLAZAMIENTO HORIZONTAL EN SAFARI/IOS */
+  .app-viewport-container {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: clip;
+    overflow-x: hidden;
+    position: relative;
+    box-sizing: border-box;
   }
 
   /* TOP STICKY NAV */
@@ -78,21 +95,27 @@
     position: sticky;
     top: 0;
     z-index: 100;
+    width: 100%;
+    max-width: 100%;
     background: rgba(248, 246, 240, 0.95);
     backdrop-filter: blur(14px);
     -webkit-backdrop-filter: blur(14px);
     border-bottom: 1px solid var(--line-warm);
     padding: 8px 0;
     box-shadow: var(--shadow-sm);
+    box-sizing: border-box;
+    overflow-x: hidden;
   }
   .nav-inner {
     max-width: 1040px;
+    width: 100%;
     margin: 0 auto;
     padding: 0 16px;
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 10px;
+    box-sizing: border-box;
   }
   .nav-brand {
     font-family: 'IBM Plex Mono', monospace;
@@ -107,6 +130,22 @@
     flex-shrink: 0;
   }
   .nav-right-actions { display: flex; align-items: center; gap: 6px; }
+  .btn-install-pwa {
+    background: var(--cream);
+    color: var(--blue-deep);
+    border: 1px solid var(--line);
+    padding: 5px 10px;
+    border-radius: var(--radius-full);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    font-weight: 700;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    transition: var(--transition);
+  }
+  .btn-install-pwa:hover { background: var(--blue-light); border-color: var(--blue); }
   .nav-ai-btn {
     background: var(--purple-soft);
     color: var(--purple);
@@ -133,9 +172,14 @@
     top: 45px;
     z-index: 90;
     box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    overflow-x: hidden;
   }
   .main-tabs-inner {
     max-width: 1040px;
+    width: 100%;
     margin: 0 auto;
     padding: 0 16px;
     display: flex;
@@ -143,6 +187,8 @@
     overflow-x: auto;
     white-space: nowrap;
     scrollbar-width: none;
+    box-sizing: border-box;
+    -webkit-overflow-scrolling: touch;
   }
   .main-tabs-inner::-webkit-scrollbar { display: none; }
   .tab-pill-btn {
@@ -202,7 +248,15 @@
   .mobile-action-btn.active { color: var(--blue); }
 
   /* LAYOUT */
-  .wrap { max-width: 1040px; margin: 0 auto; padding: 0 20px; }
+  .wrap {
+    max-width: 1040px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 20px;
+    box-sizing: border-box;
+    overflow-x: clip;
+    overflow-x: hidden;
+  }
 
   /* HERO */
   .hero { text-align: center; padding: 22px 0 12px; position: relative; }
@@ -300,8 +354,20 @@
   .stat-lbl { font-size: 10.5px; color: var(--ink-soft); margin-top: 1px; }
 
   /* TAB VIEW CONTAINERS */
-  .main-tab-view { display: none; animation: fadeIn 0.25s ease; }
-  .main-tab-view.active { display: block; }
+  .main-tab-view {
+    display: none;
+    animation: fadeIn 0.25s ease;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    overflow-x: clip;
+    overflow-x: hidden;
+  }
+  .main-tab-view.active {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+  }
 
   /* SECTION HEADERS */
   .section-head {
@@ -418,6 +484,9 @@
     grid-template-columns: 1fr 120px 140px;
     gap: 8px;
     margin-bottom: 12px;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
   }
   .expense-entry-grid input {
     padding: 8px 12px;
@@ -427,6 +496,9 @@
     font-family: inherit;
     outline: none;
     background: var(--cream);
+    min-width: 0;
+    width: 100%;
+    box-sizing: border-box;
   }
   .expense-entry-grid input:focus { border-color: var(--blue); background: var(--white); }
   .btn-add-expense {
@@ -448,46 +520,112 @@
   }
   .btn-add-expense:hover { background: #14532D; }
 
-  .expense-list {
-    max-height: 140px;
-    overflow-y: auto;
+  /* ACCOUNTS DEDICATED VIEW */
+  .accounts-dedicated-wrapper {
     display: flex;
     flex-direction: column;
-    gap: 5px;
-    margin-bottom: 12px;
+    gap: 16px;
+  }
+  .accounts-entry-card {
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-md);
+    padding: 20px 22px;
+    box-shadow: var(--shadow-sm);
+  }
+  .accounts-main-grid {
+    display: grid;
+    grid-template-columns: 1.15fr 0.85fr;
+    gap: 18px;
+    align-items: start;
+  }
+  .accounts-list-card {
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-md);
+    padding: 20px 22px;
+    box-shadow: var(--shadow-sm);
+  }
+  .accounts-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 12px;
+    margin-bottom: 14px;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .accounts-settle-card {
+    position: sticky;
+    top: 76px;
+  }
+
+  .expense-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 8px;
   }
   .expense-item {
     display: flex;
     justify-content: space-between;
     align-items: center;
     background: var(--cream);
-    padding: 7px 12px;
+    padding: 10px 14px;
     border-radius: var(--radius-sm);
-    font-size: 12px;
+    font-size: 13px;
     border: 1px solid var(--line);
+    transition: var(--transition);
+  }
+  .expense-item:hover {
+    background: #F4EDE2;
+    border-color: #D8CABE;
   }
   .expense-item .del-btn {
-    border: none; background: transparent; color: var(--ink-muted); cursor: pointer; font-size: 15px; margin-left: 6px;
+    border: none;
+    background: rgba(185, 28, 28, 0.08);
+    color: var(--terracotta);
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 700;
+    margin-left: 8px;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition);
   }
-  .expense-item .del-btn:hover { color: var(--terracotta); }
+  .expense-item .del-btn:hover {
+    background: var(--terracotta);
+    color: #fff;
+  }
 
   .settle-matrix {
     background: var(--gold-soft);
     border: 1px solid var(--gold-border);
-    border-radius: var(--radius-sm);
-    padding: 12px 14px;
-    font-size: 12px;
-    margin-top: 6px;
+    border-radius: var(--radius-md);
+    padding: 16px 18px;
+    font-size: 12.5px;
+    box-shadow: var(--shadow-sm);
   }
   .settle-title {
     font-family: 'IBM Plex Mono', monospace;
     font-weight: 700;
-    font-size: 11.5px;
+    font-size: 12px;
     color: #7A510A;
-    margin-bottom: 6px;
+    margin-bottom: 10px;
     text-transform: uppercase;
   }
-  .settle-line { font-family: 'IBM Plex Mono', monospace; color: var(--ink); margin-bottom: 3px; }
+  .settle-line {
+    font-family: 'IBM Plex Mono', monospace;
+    color: var(--ink);
+    margin-bottom: 5px;
+    font-size: 12px;
+    line-height: 1.5;
+  }
 
   /* RULETA */
   .roulette-card {
@@ -554,6 +692,10 @@
     border-radius: var(--radius-md);
     padding: 14px;
     margin-top: 14px;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    overflow-x: hidden;
   }
   .weather-tag {
     font-size: 10px;
@@ -585,6 +727,10 @@
   .weather-condition { font-size: 12px; color: var(--blue-deep); font-weight: 700; text-align: right; }
   .weather-hourly-wrap {
     margin-top: 10px;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    overflow-x: hidden;
   }
   .weather-hourly-title {
     font-size: 10px;
@@ -600,6 +746,10 @@
     overflow-x: auto;
     padding-bottom: 4px;
     scrollbar-width: thin;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    -webkit-overflow-scrolling: touch;
   }
   .weather-hour-card {
     flex: 1;
@@ -1392,8 +1542,10 @@
     display: none;
     position: fixed;
     top: 0; left: 0; right: 0; bottom: 0;
-    width: 100vw;
-    height: 100vh;
+    width: 100%;
+    max-width: 100%;
+    height: 100%;
+    height: 100dvh;
     z-index: 99999;
     background: #061522;
     color: #ffffff;
@@ -1407,8 +1559,9 @@
     -webkit-user-select: none;
   }
   .forehead-modal:fullscreen {
-    width: 100vw;
-    height: 100vh;
+    width: 100%;
+    max-width: 100%;
+    height: 100%;
     background: #061522;
   }
   .forehead-modal.rotated {
@@ -1559,6 +1712,10 @@
   /* RESPONSIVE */
   @media (max-width: 860px) {
     .tools-grid { grid-template-columns: 1fr; }
+    .accounts-main-grid { grid-template-columns: 1fr; gap: 16px; }
+    .accounts-settle-card { position: static; }
+    .accounts-entry-card { padding: 16px 14px; }
+    .accounts-list-card { padding: 16px 14px; }
     .roulette-inner-grid { grid-template-columns: 1fr; gap: 10px; }
     .stat-strip { grid-template-columns: repeat(2, 1fr); }
     .place-grid, .game-grid, .food-grid, .bed-grid { grid-template-columns: 1fr; }
@@ -1890,6 +2047,122 @@
       font-size: 10.5px;
       padding: 6px 2px;
     }
+    .expense-entry-grid {
+      grid-template-columns: 1fr !important;
+      gap: 8px;
+    }
+    .btn-add-expense {
+      width: 100%;
+      padding: 10px 16px;
+      box-sizing: border-box;
+    }
+  }
+
+  /* BANNER Y MODAL DE INSTALACIÓN PWA (OPTIMIZADO PARA IPHONE Y ANDROID) */
+  .ios-install-banner {
+    display: none;
+    position: fixed;
+    bottom: 78px;
+    left: 12px;
+    right: 12px;
+    max-width: 420px;
+    margin: 0 auto;
+    background: #0B2236;
+    color: #ffffff;
+    border-radius: var(--radius-md);
+    padding: 12px 14px;
+    box-shadow: 0 8px 24px rgba(11, 34, 54, 0.4);
+    z-index: 108;
+    animation: fadeIn 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    box-sizing: border-box;
+  }
+  .ios-install-inner {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+  }
+  .ios-install-icon { font-size: 22px; line-height: 1; flex-shrink: 0; }
+  .ios-install-text { flex: 1; font-size: 12px; line-height: 1.45; }
+  .ios-install-title { font-weight: 700; font-size: 13px; margin-bottom: 2px; color: #ffffff; }
+  .ios-install-close {
+    background: transparent;
+    border: none;
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 18px;
+    cursor: pointer;
+    padding: 0 4px;
+    line-height: 1;
+  }
+  .ios-install-close:hover { color: #ffffff; }
+
+  /* MODAL DE AYUDA DE INSTALACIÓN */
+  .pwa-modal-overlay {
+    display: none;
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(11, 34, 54, 0.75);
+    z-index: 9999;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    box-sizing: border-box;
+  }
+  .pwa-modal-card {
+    background: var(--white);
+    border-radius: var(--radius-md);
+    width: 100%;
+    max-width: 440px;
+    box-shadow: var(--shadow-lg);
+    overflow: hidden;
+    animation: fadeIn 0.2s ease;
+    border: 1px solid var(--line);
+    box-sizing: border-box;
+  }
+  .pwa-modal-head {
+    background: var(--blue-deep);
+    color: #fff;
+    padding: 14px 18px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .pwa-modal-head h3 {
+    margin: 0;
+    font-family: 'Spectral', serif;
+    font-size: 17px;
+    color: #fff;
+  }
+  .pwa-modal-close {
+    background: transparent;
+    border: none;
+    color: #fff;
+    font-size: 20px;
+    cursor: pointer;
+    line-height: 1;
+  }
+  .pwa-modal-body {
+    padding: 18px;
+    font-size: 13px;
+    line-height: 1.55;
+    color: var(--ink);
+  }
+  .pwa-step-card {
+    background: var(--cream);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-sm);
+    padding: 12px;
+    margin-bottom: 10px;
+  }
+  .pwa-step-title {
+    font-weight: 700;
+    color: var(--blue-deep);
+    margin-bottom: 4px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
   }
 
   @media print {
@@ -1948,6 +2221,7 @@
 </style>
 </head>
 <body>
+<div class="app-viewport-container" id="appViewportContainer">
 
 <!-- TOP NAV -->
 <nav class="sticky-nav">
@@ -1960,6 +2234,7 @@
       </div>
     </div>
     <div class="nav-right-actions">
+      <button class="btn-install-pwa" id="btnInstallPwa" onclick="openInstallModal()" title="Instalar aplicación en tu iPhone o Android">📲 App</button>
       <button class="nav-ai-btn" onclick="openAiChat()">✨ Asistente IA</button>
     </div>
   </div>
@@ -1972,7 +2247,7 @@
     <button class="tab-pill-btn" onclick="switchMainTab('cuentas', this)">⚡ Cuentas & Gastos</button>
     <button class="tab-pill-btn" onclick="switchMainTab('spots', this)">🔥 Spots & Comida</button>
     <button class="tab-pill-btn" onclick="switchMainTab('juegos', this)">🎲 Juegos & Ruleta</button>
-    <button class="tab-pill-btn" onclick="switchMainTab('logistica', this)">🎒 Camas & Maletas</button>
+    <button class="tab-pill-btn" onclick="switchMainTab('logistica', this)">🎒 Clima & Equipaje</button>
   </div>
 </div>
 
@@ -2051,7 +2326,8 @@
         <div class="day-chips">
           <span class="chip">🛣️ 195 km · ~3h30</span>
           <span class="chip purple">🛎️ Check-in 15:00</span>
-          <span class="chip warm">🌇 Atardecer Turi 6:20 PM</span>
+          <span class="chip warm">🍫 Dos Chorreras Auto Clásico</span>
+          <span class="chip green">🎤 Karaoke & Impostor</span>
         </div>
       </div>
 
@@ -2080,7 +2356,7 @@
           <div class="tl-header">
             <span class="tl-time">1:15 – 2:35 PM · Llegada & Festín de Hornado</span>
             <span class="tl-badge food">Gastronomía Típica</span>
-            <a href="https://maps.google.com/?q=Mercado+10+de+Agosto+Cuenca" target="_blank" rel="noopener" class="tl-badge maps-btn">Mercado 10 de Agosto ↗</a>
+            <a href="https://www.google.com/maps/search/?api=1&query=Mercado+10+de+Agosto,+Calle+Larga,+Cuenca,+Ecuador" target="_blank" rel="noopener" class="tl-badge maps-btn">Mercado 10 de Agosto ↗</a>
           </div>
           <div class="tl-text">
             Llegan directo a almorzar <b>hornado con cuero crocante, mote pillo jugoso y llapingachos</b> (Mercado 10 de Agosto o Raymipampa en el Parque Calderón).
@@ -2103,43 +2379,43 @@
 
         <div class="tl-item">
           <div class="tl-header">
-            <span class="tl-time">4:15 – 5:45 PM · Chocolatería Dos Chorreras & Plaza de las Flores</span>
+            <span class="tl-time">4:15 – 6:00 PM · Chocolatería Dos Chorreras (Local Temático con Auto Vintage)</span>
             <span class="tl-badge">Tarde Dulce</span>
-            <a href="https://maps.google.com/?q=Chocolateria+Dos+Chorreras+Centro+Cuenca" target="_blank" rel="noopener" class="tl-badge maps-btn">Dos Chorreras ↗</a>
+            <a href="https://www.google.com/maps/search/?api=1&query=Chocolater%C3%ADa+Dos+Chorreras,+Sim%C3%B3n+Bol%C3%ADvar+10-09,+Cuenca,+Ecuador" target="_blank" rel="noopener" class="tl-badge maps-btn">Dos Chorreras ↗</a>
           </div>
           <div class="tl-text">
-            Paseo por el centro: chocolate caliente espumoso con queso en el local temático con auto clásico adentro, fotos bajo las cúpulas de la Catedral y agua de pitisana en la Plaza de las Flores.
-          </div>
-        </div>
-
-        <div class="tl-item drive">
-          <div class="tl-header">
-            <span class="tl-time">6:00 – 7:30 PM · Mirador de Turi & Canelazos</span>
-            <span class="tl-badge">Atardecer 6:20 PM</span>
-            <a href="https://maps.google.com/?q=Mirador+de+Turi+Cuenca" target="_blank" rel="noopener" class="tl-badge maps-btn">Mirador Turi ↗</a>
-          </div>
-          <div class="tl-text">
-            Suben a Turi (12 min) para ver caer el sol y encenderse las luces de Cuenca. <b>Canelazos calientes</b> en los kioscos y Parque Extremo para quienes quieran columpios al vacío.
-          </div>
-        </div>
-
-        <div class="tl-item food">
-          <div class="tl-header">
-            <span class="tl-time">8:00 – 10:00 PM · Cena & Cerveza Artesanal en El Barranco</span>
-            <span class="tl-badge food">Vida Nocturna</span>
-          </div>
-          <div class="tl-text">
-            Cena y tragos junto al río iluminado: <b>Cervecería La María</b>, pizzas artesanales en Fabiano's o pubs en Calle Larga.
+            Paseo por el local temático con el auto vintage en su interior: chocolate caliente espeso con queso derretido, postres de altura y sesión de fotos con el carro temático. <i>(No se avanzó a la Plaza de las Flores por tiempo, priorizando disfrutar el chocolate y regresar con calma al departamento).</i>
           </div>
         </div>
 
         <div class="tl-item home">
           <div class="tl-header">
-            <span class="tl-time">10:15 PM+ · Noche de Juegos en ANICÁ</span>
+            <span class="tl-time">6:30 – 8:15 PM · Retorno a ANICÁ & Descanso</span>
             <span class="tl-badge rec">En el Depa</span>
+            <a href="https://www.google.com/maps/place/2%C2%B053'40.6%22S+78%C2%B057'50.1%22W/@-2.8951576,-78.9671131,16z/data=!4m4!3m3!8m2!3d-2.8946111!4d-78.9639167?entry=ttu&g_ep=EgoyMDI2MDgzMS4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener" class="tl-badge maps-btn">ANICÁ ↗</a>
           </div>
           <div class="tl-text">
-            Primera sesión de juegos en la sala: <b>¿Quién Soy? (Modo Frente)</b>, <b>Tribunal ("¿Quién es más probable que...?")</b> y <b>1 Verdad y 2 Mentiras con IA</b>.
+            Regreso al departamento, ducha de agua tibia y descanso para sacudirse el cansancio del viaje y preparar el ambiente festivo nocturno.
+          </div>
+        </div>
+
+        <div class="tl-item food">
+          <div class="tl-header">
+            <span class="tl-time">8:30 – 9:45 PM · Cena Relajada & Picadas</span>
+            <span class="tl-badge food">Cena Amigos</span>
+          </div>
+          <div class="tl-text">
+            Cena y picadas compartidas en la cocina/comedor del departamento con música de fondo.
+          </div>
+        </div>
+
+        <div class="tl-item home">
+          <div class="tl-header">
+            <span class="tl-time">10:00 PM+ · Noche Épica: El Impostor, Juegos de la Web & Karaoke</span>
+            <span class="tl-badge rec">Noche de Sala</span>
+          </div>
+          <div class="tl-text">
+            Gran velada en la sala: partidas de <b>El Impostor</b>, dinámicas interactivas de la página web (Tribunal, ¿Quién Soy?), picadas y <b>Karaoke grupal</b> cantando los mejores temas hasta la madrugada.
           </div>
         </div>
       </div>
@@ -2149,123 +2425,280 @@
     <div class="day-card">
       <div class="day-head">
         <div>
-          <div class="day-name"><span>💎</span> Sábado 5 · Experiencias & Diversión</div>
-          <div class="day-date">Día 2 de 3 — Ruinas Incas, Miradores o Termas</div>
+          <div class="day-name"><span>💎</span> Sábado 5 · Pumapungo, Atardecer en Turi & Noche de Amigos</div>
+          <div class="day-date">Día 2 de 3 — Experiencias grupales a elegir (Opciones A, B o C)</div>
         </div>
         <div class="day-chips">
-          <span class="chip warm">🏛️ Ruinas Pumapungo</span>
-          <span class="chip green">🍫 Pacari Paucarbamba</span>
-          <span class="chip purple">🌇 Torre Libertad 360°</span>
+          <span class="chip warm">🍳 Desayuno 9:30–11:00</span>
+          <span class="chip purple">🏛️ Pumapungo</span>
+          <span class="chip green">🌇 Atardecer Turi 4:30–6:30</span>
         </div>
       </div>
 
       <div class="tabs">
-        <button class="tab-btn active" onclick="showTab('d2','a',this)">Opción A: Terrazas Incas Pumapungo + Torre de Vidrio 360° (Recomendada)</button>
-        <button class="tab-btn" onclick="showTab('d2','b',this)">Opción B: Páramo El Cajas & Trucha Fresca</button>
-        <button class="tab-btn" onclick="showTab('d2','c',this)">Opción C: Relax en Termas Piedra de Agua</button>
+        <button class="tab-btn active" onclick="showTab('d2','a',this)">Opción A: Pumapungo + Atardecer en Turi & Cena Panorámica (Recomendada)</button>
+        <button class="tab-btn" onclick="showTab('d2','b',this)">Opción B: Páramo El Cajas, Trucha Dos Chorreras & Atardecer Turi</button>
+        <button class="tab-btn" onclick="showTab('d2','c',this)">Opción C: Relax Termas Piedra de Agua & Atardecer Turi</button>
       </div>
 
-      <!-- TAB 2A: PUMAPUNGO + CENTRO + TORRE LIBERTAD -->
+      <!-- TAB 2A: PUMAPUNGO + ATARDECER EN TURI & CENA -->
       <div id="d2a" class="tab-panel active">
         <div class="timeline">
           <div class="tl-item food">
             <div class="tl-header">
-              <span class="tl-time">8:45 – 9:45 AM · Desayuno Cuencano</span>
-              <span class="tl-badge food">Café & Pan caliente</span>
+              <span class="tl-time">9:30 – 11:00 AM · Preparación & Desayuno en el Depa</span>
+              <span class="tl-badge food">En ANICÁ</span>
             </div>
             <div class="tl-text">
-              Desayuno con calma en el depa o en <b>San Sebas Café</b>. <i>(Baño escalonado: 2 se alistan mientras 3 preparan café)</i>.
-            </div>
-          </div>
-
-          <div class="tl-item">
-            <div class="tl-header">
-              <span class="tl-time">10:00 – 11:15 AM · Casa Pacari Paucarbamba</span>
-              <span class="tl-badge">En su barrio</span>
-              <a href="https://maps.google.com/?q=Pacari+Paucarbamba+Cuenca" target="_blank" rel="noopener" class="tl-badge maps-btn">Pacari ↗</a>
-            </div>
-            <div class="tl-text">
-              Cata y compra de recuerdos en la boutique oficial del mejor chocolate del mundo junto a ANICÁ <i>(aprovechar hoy porque mañana domingo no abre)</i>.
+              Preparación del desayuno en equipo en la cocina de ANICÁ (café recién pasado, huevos, pan fresco, fruta o compras). Desayuno con calma, música y alistamiento sin apuros.
             </div>
           </div>
 
           <div class="tl-item nature">
             <div class="tl-header">
-              <span class="tl-time">11:30 AM – 2:30 PM · Parque Arqueológico & Terrazas Pumapungo</span>
+              <span class="tl-time">11:15 AM – 2:00 PM · Parque Arqueológico & Terrazas Pumapungo</span>
               <span class="tl-badge rec">Ruinas Incas</span>
-              <a href="https://maps.google.com/?q=Museo+Pumapungo+Cuenca" target="_blank" rel="noopener" class="tl-badge maps-btn">Pumapungo ↗</a>
+              <a href="https://www.google.com/maps/search/?api=1&query=Museo+y+Parque+Arqueol%C3%B3gico+Pumapungo,+Calle+Larga,+Cuenca,+Ecuador" target="_blank" rel="noopener" class="tl-badge maps-btn">Pumapungo ↗</a>
             </div>
             <div class="tl-text">
-              Recorrido a pie por la antigua capital incaica de Tomebamba en pleno centro:
-              <br>• <b>Terrazas agrícolas escalonadas:</b> Ruinas de piedra del Palacio Inca, canales de agua sagrada y jardín etnobotánico (entrada 100% gratuita).
-              <br>• <b>Almuerzo tradicional en el Centro:</b> Almuerzo tradicional cuencano con mote pillo, locro de papa caliente y carnes típicas.
-            </div>
-          </div>
-
-          <div class="tl-item">
-            <div class="tl-header">
-              <span class="tl-time">2:45 – 5:00 PM · Paseo por el Centro Histórico & Cafés</span>
-              <span class="tl-badge">Tiempo Libre</span>
-              <a href="https://maps.google.com/?q=Parque+Calderon+Cuenca" target="_blank" rel="noopener" class="tl-badge maps-btn">Centro ↗</a>
-            </div>
-            <div class="tl-text">
-              Caminata relajada por la Calle Santa Ana, Plaza de las Flores y cafés coloniales antes de subir a la torre mirador.
-            </div>
-          </div>
-
-          <div class="tl-item">
-            <div class="tl-header">
-              <span class="tl-time">5:15 – 6:30 PM · Torre Mirador de la Libertad (Piso de Vidrio)</span>
-              <span class="tl-badge rec">Piso de Cristal 360°</span>
-              <a href="https://maps.google.com/?q=Parque+de+la+Libertad+Cuenca" target="_blank" rel="noopener" class="tl-badge maps-btn">Torre Libertad ↗</a>
-            </div>
-            <div class="tl-text">
-              Torre de 8 pisos con ascensor panorámico y piso de cristal en la cima. Vista 360° gratuita sobre toda la ciudad y la cordillera antes del anochecer.
+              Como el centro histórico ya se recorrió el viernes, van directo al imponente complejo incaico de Tomebamba:
+              <br>• <b>Terrazas agrícolas escalonadas:</b> Muros de piedra inca, canales de agua sagrada y vistas hermosas del valle.
+              <br>• <b>Jardín etnobotánico & Centro de Aves:</b> Caminata verde entre plantas nativas andinas y santuario de aves de rescate (entrada 100% gratuita).
             </div>
           </div>
 
           <div class="tl-item food">
             <div class="tl-header">
-              <span class="tl-time">8:00 – 10:30 PM · Cena Especial & Rooftop</span>
-              <span class="tl-badge food">Noche de Sábado</span>
+              <span class="tl-time">2:00 – 3:30 PM · Almuerzo Tradicional Cuencano</span>
+              <span class="tl-badge food">Gastronomía Típica</span>
+              <a href="https://www.google.com/maps/search/?api=1&query=Restaurantes,+Calle+Larga,+Cuenca,+Ecuador" target="_blank" rel="noopener" class="tl-badge maps-btn">Restaurantes ↗</a>
             </div>
             <div class="tl-text">
-              Cena de celebración en terraza con vista (Windmill Rooftop, Selina o restaurante Tiestos).
+              Almuerzo en la zona de Pumapungo / Av. Solano / Calle Larga: mote pillo, mote sucio, lomo fino o platos tradicionales en un ambiente acogedor.
             </div>
           </div>
 
           <div class="tl-item home">
             <div class="tl-header">
-              <span class="tl-time">10:45 PM+ · Noche de Juegos en ANICÁ</span>
-              <span class="tl-badge rec">Noche Decisiva</span>
+              <span class="tl-time">3:30 – 4:30 PM · Paso por ANICÁ: Abrigarse para Turi</span>
+              <span class="tl-badge rec">Parada Rápida</span>
+              <a href="https://www.google.com/maps/place/2%C2%B053'40.6%22S+78%C2%B057'50.1%22W/@-2.8951576,-78.9671131,16z/data=!4m4!3m3!8m2!3d-2.8946111!4d-78.9639167?entry=ttu&g_ep=EgoyMDI2MDgzMS4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener" class="tl-badge maps-btn">ANICÁ ↗</a>
             </div>
             <div class="tl-text">
-              Torneo de juegos: <b>Dígalo con Mímica (con cronómetro)</b>, <b>¿Quién Soy? (Modo Frente)</b>, <b>Tribunal con IA</b> y <b>1 Verdad y 2 Mentiras</b>.
+              Retorno breve al depa para recoger chompas abrigadas, bufandas o cortavientos, ya que en la colina de Turi la temperatura desciende notablemente al atardecer.
+            </div>
+          </div>
+
+          <div class="tl-item drive">
+            <div class="tl-header">
+              <span class="tl-time">4:30 – 6:30 PM · Mirador de Turi: De Día, Puesta de Sol & Canelazos</span>
+              <span class="tl-badge">Atardecer 6:20 PM</span>
+              <a href="https://www.google.com/maps/search/?api=1&query=Mirador+de+Turi,+Cuenca,+Ecuador" target="_blank" rel="noopener" class="tl-badge maps-btn">Mirador Turi ↗</a>
+            </div>
+            <div class="tl-text">
+              Subida al mirador para llegar con luz de día (4:45 PM) y disfrutar de la postal completa de Cuenca:
+              <br>• <b>Vista panorámica 360°:</b> Contemplar de día toda la arquitectura de tejas rojas y las cúpulas de la Catedral.
+              <br>• <b>Canelazos calientes & Empanadas de viento:</b> En los kioscos típicos del mirador, saboreando el canelazo con naranjilla y canela.
+              <br>• <b>Puesta de sol & Encendido de luces:</b> Ver el atardecer (6:00 – 6:25 PM) mientras la ciudad se ilumina progresivamente.
+            </div>
+          </div>
+
+          <div class="tl-item food">
+            <div class="tl-header">
+              <span class="tl-time">6:30 – 8:45 PM · Cena en el Mirador de Turi (o en El Barranco)</span>
+              <span class="tl-badge food">Cena Panorámica</span>
+              <a href="https://www.google.com/maps/search/?api=1&query=Restaurante+Cielo+Morlaco,+Mirador+de+Turi,+Cuenca,+Ecuador" target="_blank" rel="noopener" class="tl-badge maps-btn">Restaurantes Turi ↗</a>
+            </div>
+            <div class="tl-text">
+              <b>Recomendación en Turi:</b> Cenar ahí mismo para no perder la postal nocturna en restaurantes con ventanales hacia toda la ciudad iluminada:
+              <br>• <b>Cielo Morlaco / El Encuentro / VIDA Lounge:</b> Carnes a la brasa, lomo, picadas calientes, locro de papa y coctelería con la mejor vista de Cuenca.
+              <br>• <i>Alternativa si prefieren bajar:</i> Cervecería La María o pizzas artesanales en Fabiano's en El Barranco / Calle Larga.
+            </div>
+          </div>
+
+          <div class="tl-item home">
+            <div class="tl-header">
+              <span class="tl-time">9:00 PM+ · Noche de Juegos en ANICÁ</span>
+              <span class="tl-badge rec">Depa ANICÁ</span>
+            </div>
+            <div class="tl-text">
+              Ronda final de juegos en la sala: <b>Dígalo con Mímica (con cronómetro)</b>, <b>Ruleta de Retos con IA</b>, preguntas picantes y cócteles con la guía del Barman IA.
             </div>
           </div>
         </div>
       </div>
 
-      <!-- TAB 2B: CAJAS -->
+      <!-- TAB 2B: CAJAS + TRUCHA + ATARDECER EN TURI -->
       <div id="d2b" class="tab-panel">
         <div class="timeline">
-          <div class="tl-item food"><div class="tl-time">7:45 – 8:30 AM</div><div class="tl-text">Desayuno temprano. Llevar chompas térmicas, guantes y agua.</div></div>
-          <div class="tl-item drive"><div class="tl-time">8:30 – 9:30 AM</div><div class="tl-text">Subida al <b>Parque Nacional El Cajas</b> (35 km · 1h). Madrugar para ganarle a la neblina.</div></div>
-          <div class="tl-item nature"><div class="tl-time">9:30 AM – 1:00 PM</div><div class="tl-text"><b>Laguna Toreadora (3.900 msnm):</b> Caminata suave por senderos de páramo y bosque de árboles de papel (Polylepis). Fotos increíbles.</div></div>
-          <div class="tl-item food"><div class="tl-time">1:15 – 3:00 PM</div><div class="tl-text"><b>Almuerzo de Trucha Fresca</b> al ajillo en paraderos del Cajas o Hostería Dos Chorreras.</div></div>
-          <div class="tl-item"><div class="tl-time">3:45 – 6:00 PM</div><div class="tl-text">Regreso al depa, ducha caliente y tarde en la <b>Torre de la Libertad</b> o cafés de Calle Larga.</div></div>
-          <div class="tl-item food"><div class="tl-time">8:00 – 10:30 PM</div><div class="tl-text">Cena en El Barranco y juegos en el depa.</div></div>
+          <div class="tl-item food">
+            <div class="tl-header">
+              <span class="tl-time">8:30 – 9:30 AM · Desayuno Caliente en ANICÁ & Preparación</span>
+              <span class="tl-badge food">En ANICÁ</span>
+            </div>
+            <div class="tl-text">
+              Desayuno nutritivo en el departamento. Preparar chompas térmicas impermeables, bufandas, guantes y agua embotellada para el ascenso a casi 4.000 msnm.
+            </div>
+          </div>
+
+          <div class="tl-item drive">
+            <div class="tl-header">
+              <span class="tl-time">9:30 – 10:30 AM · Ascenso Panorámico en el Sonet al Parque Nacional Cajas</span>
+              <span class="tl-badge">Kia Sonet · 35 km</span>
+              <a href="https://www.google.com/maps/search/?api=1&query=Parque+Nacional+Cajas,+Azuay,+Ecuador" target="_blank" rel="noopener" class="tl-badge maps-btn">Ruta Cajas ↗</a>
+            </div>
+            <div class="tl-text">
+              Subida por la vía Molleturo hasta el corazón del Parque Nacional El Cajas, disfrutando de los valles andinos y la vegetación de páramo.
+            </div>
+          </div>
+
+          <div class="tl-item nature">
+            <div class="tl-header">
+              <span class="tl-time">10:30 AM – 1:30 PM · Laguna Toreadora (3.900 msnm) & Bosque de Polylepis</span>
+              <span class="tl-badge rec">Paisaje Glaciar</span>
+              <a href="https://www.google.com/maps/search/?api=1&query=Centro+de+Interpretaci%C3%B3n+Laguna+Toreadora,+Parque+Nacional+Cajas,+Ecuador" target="_blank" rel="noopener" class="tl-badge maps-btn">Laguna Toreadora ↗</a>
+            </div>
+            <div class="tl-text">
+              Caminata suave por senderos señalizados:
+              <br>• <b>Laguna Toreadora:</b> Espejo de agua glaciar rodeado de pajonales dorados. Entrada gratuita registrada en el Centro de Interpretación.
+              <br>• <b>Bosque de Polylepis:</b> Árboles de papel milenarios con cortezas rojizas que parecen sacados de un cuento de hadas. Sesión de fotos inolvidables.
+            </div>
+          </div>
+
+          <div class="tl-item food">
+            <div class="tl-header">
+              <span class="tl-time">1:45 – 3:30 PM · Almuerzo de Trucha Fresca en Hostería Dos Chorreras</span>
+              <span class="tl-badge food">Gastronomía de Páramo</span>
+              <a href="https://www.google.com/maps/search/?api=1&query=Hoster%C3%ADa+Dos+Chorreras,+Km+21+V%C3%ADa+al+Cajas,+Cuenca,+Ecuador" target="_blank" rel="noopener" class="tl-badge maps-btn">Dos Chorreras ↗</a>
+            </div>
+            <div class="tl-text">
+              Almuerzo en la emblemática Hostería Dos Chorreras (Km 21 vía al Cajas): trucha arcoíris fresca al ajillo con patacones crocantes junto al calor de las chimeneas de leña.
+            </div>
+          </div>
+
+          <div class="tl-item home">
+            <div class="tl-header">
+              <span class="tl-time">3:45 – 4:45 PM · Retorno a Cuenca & Ducha Caliente en ANICÁ</span>
+              <span class="tl-badge rec">Reactivación</span>
+              <a href="https://www.google.com/maps/place/2%C2%B053'40.6%22S+78%C2%B057'50.1%22W/@-2.8951576,-78.9671131,16z/data=!4m4!3m3!8m2!3d-2.8946111!4d-78.9639167?entry=ttu&g_ep=EgoyMDI2MDgzMS4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener" class="tl-badge maps-btn">ANICÁ ↗</a>
+            </div>
+            <div class="tl-text">
+              Descenso a la ciudad y llegada al departamento para una ducha de agua caliente reparadora después del frío del páramo.
+            </div>
+          </div>
+
+          <div class="tl-item drive">
+            <div class="tl-header">
+              <span class="tl-time">5:00 – 6:45 PM · Mirador de Turi: Puesta de Sol & Canelazos</span>
+              <span class="tl-badge">Atardecer Dorado</span>
+              <a href="https://www.google.com/maps/search/?api=1&query=Mirador+de+Turi,+Cuenca,+Ecuador" target="_blank" rel="noopener" class="tl-badge maps-btn">Mirador Turi ↗</a>
+            </div>
+            <div class="tl-text">
+              Subida al mirador para ver caer la tarde sobre Cuenca, tomar canelazos calientes en los kioscos y observar el encendido nocturno de la ciudad.
+            </div>
+          </div>
+
+          <div class="tl-item food">
+            <div class="tl-header">
+              <span class="tl-time">7:00 – 9:00 PM · Cena Panorámica en Turi o El Barranco</span>
+              <span class="tl-badge food">Cena Sábado</span>
+              <a href="https://www.google.com/maps/search/?api=1&query=Restaurante+Cielo+Morlaco,+Mirador+de+Turi,+Cuenca,+Ecuador" target="_blank" rel="noopener" class="tl-badge maps-btn">Restaurantes Turi ↗</a>
+            </div>
+            <div class="tl-text">
+              Cena con vista en Turi (Cielo Morlaco, El Encuentro) o bajada a la Calle Larga para disfrutar de Cervecería La María o pizzas artesanales.
+            </div>
+          </div>
+
+          <div class="tl-item home">
+            <div class="tl-header">
+              <span class="tl-time">9:30 PM+ · Noche de Juegos en ANICÁ</span>
+              <span class="tl-badge rec">Depa ANICÁ</span>
+            </div>
+            <div class="tl-text">
+              Juegos de mesa y digitales de la web en la sala, anécdotas del Cajas y descanso reparador.
+            </div>
+          </div>
         </div>
       </div>
 
-      <!-- TAB 2C: TERMAS -->
+      <!-- TAB 2C: TERMAS PIEDRA DE AGUA + ATARDECER EN TURI -->
       <div id="d2c" class="tab-panel">
         <div class="timeline">
-          <div class="tl-item food"><div class="tl-time">9:00 – 10:00 AM</div><div class="tl-text">Desayuno relajado en el departamento.</div></div>
-          <div class="tl-item nature"><div class="tl-time">10:30 AM – 2:30 PM</div><div class="tl-text"><b>Termas Piedra de Agua (Baños de Cuenca):</b> Piscinas de aguas termales subterráneas, baños de vapor en cuevas naturales y barro volcánico. Súper divertido y relajante en grupo.</div></div>
-          <div class="tl-item food"><div class="tl-time">2:45 – 4:15 PM</div><div class="tl-text">Almuerzo tardío en restaurante típico campestre.</div></div>
-          <div class="tl-item"><div class="tl-time">5:00 – 6:30 PM</div><div class="tl-text">Visita a la <b>Torre Mirador de la Libertad</b> al atardecer.</div></div>
-          <div class="tl-item food"><div class="tl-time">8:00 – 10:30 PM</div><div class="tl-text">Cena en Calle Larga y juegos en el depa.</div></div>
+          <div class="tl-item food">
+            <div class="tl-header">
+              <span class="tl-time">9:30 – 11:00 AM · Preparación & Desayuno en el Depa</span>
+              <span class="tl-badge food">En ANICÁ</span>
+            </div>
+            <div class="tl-text">
+              Desayuno relajado en la cocina de ANICÁ. Empacar trajes de baño, toallas, sandalias y ropa de cambio para la experiencia termal.
+            </div>
+          </div>
+
+          <div class="tl-item drive">
+            <div class="tl-header">
+              <span class="tl-time">11:15 – 11:45 AM · Traslado al Valle de Baños de Cuenca</span>
+              <span class="tl-badge">15 min en Sonet</span>
+              <a href="https://www.google.com/maps/search/?api=1&query=Piedra+de+Agua+Fuente+Termal+%26+Spa,+Ba%C3%B1os,+Cuenca,+Ecuador" target="_blank" rel="noopener" class="tl-badge maps-btn">Ruta Termas ↗</a>
+            </div>
+            <div class="tl-text">
+              Paseo de solo 15 minutos en el Sonet hacia la parroquia Baños, famosa por sus fuentes termales subterráneas volcánicas.
+            </div>
+          </div>
+
+          <div class="tl-item nature">
+            <div class="tl-header">
+              <span class="tl-time">11:45 AM – 3:30 PM · Circuito Spa Termal en Piedra de Agua</span>
+              <span class="tl-badge rec">Aguas Termales & Barro</span>
+              <a href="https://www.google.com/maps/search/?api=1&query=Piedra+de+Agua+Fuente+Termal+%26+Spa,+Ba%C3%B1os,+Cuenca,+Ecuador" target="_blank" rel="noopener" class="tl-badge maps-btn">Piedra de Agua ↗</a>
+            </div>
+            <div class="tl-text">
+              Experiencia completa de bienestar y relajación en grupo:
+              <br>• <b>Piscinas de agua termal:</b> Aguas volcánicas a 38°C ideales para descontracturar los músculos.
+              <br>• <b>Cuevas de vapor natural & Baño de barro:</b> Mascarilla de lodo mineral rojo y azul, exfoliación con sales y pozas de contraste térmico.
+            </div>
+          </div>
+
+          <div class="tl-item food">
+            <div class="tl-header">
+              <span class="tl-time">3:30 – 4:45 PM · Almuerzo Típico en Baños & Cambio de Ropa</span>
+              <span class="tl-badge food">Comida Campestre</span>
+            </div>
+            <div class="tl-text">
+              Almuerzo en restaurante campestre de Baños o regreso directo al departamento ANICÁ para cambiarse con ropa abrigada y cómoda para la tarde.
+            </div>
+          </div>
+
+          <div class="tl-item drive">
+            <div class="tl-header">
+              <span class="tl-time">5:00 – 6:30 PM · Mirador de Turi: Atardecer & Canelazos</span>
+              <span class="tl-badge">Atardecer 6:20 PM</span>
+              <a href="https://www.google.com/maps/search/?api=1&query=Mirador+de+Turi,+Cuenca,+Ecuador" target="_blank" rel="noopener" class="tl-badge maps-btn">Mirador Turi ↗</a>
+            </div>
+            <div class="tl-text">
+              Subida al Mirador de Turi con el cuerpo totalmente relajado por las aguas termales para apreciar el atardecer, canelazos humeantes y las vistas panorámicas.
+            </div>
+          </div>
+
+          <div class="tl-item food">
+            <div class="tl-header">
+              <span class="tl-time">6:30 – 8:30 PM · Cena Panorámica en Turi o El Barranco</span>
+              <span class="tl-badge food">Cena Sabatina</span>
+              <a href="https://www.google.com/maps/search/?api=1&query=Restaurante+Cielo+Morlaco,+Mirador+de+Turi,+Cuenca,+Ecuador" target="_blank" rel="noopener" class="tl-badge maps-btn">Restaurantes Turi ↗</a>
+            </div>
+            <div class="tl-text">
+              Cena en las terrazas de Turi (Cielo Morlaco, El Encuentro) con vista a la ciudad iluminada, o retorno a Calle Larga / El Barranco para picadas y cervezas artesanales.
+            </div>
+          </div>
+
+          <div class="tl-item home">
+            <div class="tl-header">
+              <span class="tl-time">9:00 PM+ · Noche de Juegos & Karaoke en ANICÁ</span>
+              <span class="tl-badge rec">Depa ANICÁ</span>
+            </div>
+            <div class="tl-text">
+              Velada en la sala del departamento con juegos interactivos de la app, música y noche amena entre amigos.
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -2299,7 +2732,7 @@
           <div class="tl-header">
             <span class="tl-time">9:30 – 10:30 AM · Paseo por Parque El Paraíso</span>
             <span class="tl-badge rec">A pasos del depa</span>
-            <a href="https://maps.google.com/?q=Parque+El+Paraiso+Cuenca" target="_blank" rel="noopener" class="tl-badge maps-btn">El Paraíso ↗</a>
+            <a href="https://www.google.com/maps/search/?api=1&query=Parque+El+Para%C3%ADso,+Cuenca,+Ecuador" target="_blank" rel="noopener" class="tl-badge maps-btn">El Paraíso ↗</a>
           </div>
           <div class="tl-text">
             Salen caminando del edificio: paseo junto al río Tomebamba, aire fresco y fotos finales del grupo.
@@ -2339,7 +2772,7 @@
     </div>
 
     <div style="text-align:center;margin:24px 0 8px 0;">
-      <a href="https://www.google.com/maps/place/2%C2%B053'40.6%22S+78%C2%B057'50.1%22W/@-2.8951576,-78.9671131,16z/data=!4m4!3m3!8m2!3d-2.8946111!4d-78.9639167?entry=ttu&g_ep=EgoyMDI2MDgzMS4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener" class="btn-print" style="text-decoration:none;background:var(--blue-deep);color:#fff;font-weight:700;padding:8px 18px;display:inline-flex;align-items:center;gap:6px;">📍 Ubicación del Departamento ANICÁ en Google Maps ↗</a>
+      <a href="https://www.google.com/maps/place/2%C2%B053'40.6%22S+78%C2%B057'50.1%22W/@-2.8951576,-78.9671131,16z/data=!4m4!3m3!8m2!3d-2.8946111!4d-78.9639167?entry=ttu&g_ep=EgoyMDI2MDgzMS4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener" class="btn-print" style="text-decoration:none;background:var(--blue-deep);color:#fff;font-weight:700;padding:8px 18px;display:inline-flex;align-items:center;gap:6px;max-width:100%;box-sizing:border-box;white-space:normal;text-align:center;justify-content:center;">📍 Ubicación del Departamento ANICÁ en Google Maps ↗</a>
     </div>
   </div>
 
@@ -2348,106 +2781,77 @@
     <div class="section-head">
       <div class="section-title-wrap">
         <span class="section-tag">02 — Cuentas & Gastos</span>
-        <span class="section-title">Divisor de Gastos Táctil & Clima</span>
+        <span class="section-title">Divisor de Gastos Grupal & Cuentas Claras</span>
       </div>
     </div>
 
-    <div class="tools-grid">
-      <!-- DIVISOR TACTIL LIMPIO E INTELIGENTE -->
-      <div class="tool-card">
-        <div>
-          <div class="tool-header">
-            <div class="tool-header-left">
-              <span style="font-size:22px;">⚡</span>
-              <h3>Divisor de Gastos</h3>
+    <div class="accounts-dedicated-wrapper">
+      <!-- FORMULARIO DE REGISTRO TÁCTIL (ESPACIO DEDICADO Y AMPLIO) -->
+      <div class="accounts-entry-card">
+        <div class="tool-header">
+          <div class="tool-header-left">
+            <span style="font-size:22px;">⚡</span>
+            <div>
+              <h3 style="margin:0;font-size:18px;color:var(--blue-deep);">Registrar Gasto del Grupo</h3>
+              <span style="font-size:12px;color:var(--ink-soft);">División equitativa en 4 partes (Alan, Ashley, Jahaira, Douglas · Dennis invitada por su cumpleaños 🎉)</span>
             </div>
           </div>
+        </div>
 
-          <!-- PASO 1: CATEGORÍAS TÁCTILES -->
-          <div class="section-label-small">1. Toca la Categoría:</div>
-          <div class="category-strip" id="categoryStrip">
-            <button class="cat-pill active" onclick="selectCategory('⛽ Gasolina Súper', this)">⛽ Gasolina</button>
-            <button class="cat-pill" onclick="selectCategory('🛣️ Peajes', this)">🛣️ Peajes</button>
-            <button class="cat-pill" onclick="selectCategory('🥘 Comida / Almuerzo', this)">🥘 Comida</button>
-            <button class="cat-pill" onclick="selectCategory('☕ Canelazos Turi', this)">☕ Canelazos</button>
-            <button class="cat-pill" onclick="selectCategory('🍻 Bar / Tragos', this)">🍻 Bar/Tragos</button>
-            <button class="cat-pill" onclick="selectCategory('🥤 Snacks Carretera', this)">🥤 Snacks</button>
-            <button class="cat-pill" onclick="selectCategory('🛒 Supermercado Depa', this)">🛒 Supermercado</button>
-            <button class="cat-pill" onclick="selectCategory('✨ Otro Gasto', this)">✨ Otro</button>
-          </div>
+        <!-- PASO 1: CATEGORÍAS TÁCTILES -->
+        <div class="section-label-small">1. Toca la Categoría:</div>
+        <div class="category-strip" id="categoryStrip">
+          <button class="cat-pill active" onclick="selectCategory('⛽ Gasolina Súper', this)">⛽ Gasolina</button>
+          <button class="cat-pill" onclick="selectCategory('🛣️ Peajes', this)">🛣️ Peajes</button>
+          <button class="cat-pill" onclick="selectCategory('🥘 Comida / Almuerzo', this)">🥘 Comida</button>
+          <button class="cat-pill" onclick="selectCategory('☕ Canelazos Turi', this)">☕ Canelazos</button>
+          <button class="cat-pill" onclick="selectCategory('🍻 Bar / Tragos', this)">🍻 Bar/Tragos</button>
+          <button class="cat-pill" onclick="selectCategory('🥤 Snacks Carretera', this)">🥤 Snacks</button>
+          <button class="cat-pill" onclick="selectCategory('🛒 Supermercado Depa', this)">🛒 Supermercado</button>
+          <button class="cat-pill" onclick="selectCategory('✨ Otro Gasto', this)">✨ Otro</button>
+        </div>
 
-          <!-- PASO 2: QUIÉN PAGÓ -->
-          <div class="section-label-small">2. ¿Quién pagó el gasto?</div>
-          <div class="payer-strip" id="payerStrip">
-            <button class="payer-pill active" onclick="selectPayer('Alan', this)">Alan</button>
-            <button class="payer-pill" onclick="selectPayer('Ashley', this)">Ashley</button>
-            <button class="payer-pill" onclick="selectPayer('Jahaira', this)">Jahaira</button>
-            <button class="payer-pill" onclick="selectPayer('Douglas', this)">Douglas</button>
-          </div>
+        <!-- PASO 2: QUIÉN PAGÓ -->
+        <div class="section-label-small">2. ¿Quién pagó el gasto?</div>
+        <div class="payer-strip" id="payerStrip">
+          <button class="payer-pill active" onclick="selectPayer('Alan', this)">Alan</button>
+          <button class="payer-pill" onclick="selectPayer('Ashley', this)">Ashley</button>
+          <button class="payer-pill" onclick="selectPayer('Jahaira', this)">Jahaira</button>
+          <button class="payer-pill" onclick="selectPayer('Douglas', this)">Douglas</button>
+        </div>
 
-          <!-- PASO 3: CONCEPTO Y MONTO MANUAL -->
-          <div class="section-label-small">3. Detalle y Monto ($):</div>
-          <div class="expense-entry-grid">
-            <input type="text" id="expName" aria-label="Detalle del gasto" value="Gasolina Súper" placeholder="Detalle del gasto...">
-            <input type="number" id="expVal" aria-label="Monto del gasto en dólares" placeholder="$ Ingrese Monto (ej: 15.00)" min="0" step="0.01" inputmode="decimal">
-            <button class="btn-add-expense" onclick="addExpenseTactile()">➕ Agregar Gasto</button>
+        <!-- PASO 3: CONCEPTO Y MONTO MANUAL -->
+        <div class="section-label-small">3. Detalle y Monto ($):</div>
+        <div class="expense-entry-grid">
+          <input type="text" id="expName" aria-label="Detalle del gasto" value="Gasolina Súper" placeholder="Detalle del gasto...">
+          <input type="number" id="expVal" aria-label="Monto del gasto en dólares" placeholder="$ Ingrese Monto (ej: 15.00)" min="0" step="0.01" inputmode="decimal">
+          <button class="btn-add-expense" onclick="addExpenseTactile()">➕ Agregar Gasto</button>
+        </div>
+      </div>
+
+      <!-- ESPACIO DE GASTOS INGRESADOS Y BALANCE (ESPACIO COMPLETO DEDICADO) -->
+      <div class="accounts-main-grid">
+        <!-- COLUMNA IZQUIERDA: GASTOS INGRESADOS (FLUJO VERTICAL SIN SCROLL INTERNO) -->
+        <div class="accounts-list-card">
+          <div class="accounts-card-header">
+            <div style="display:flex;align-items:center;gap:8px;">
+              <span style="font-size:20px;">📋</span>
+              <div>
+                <h4 style="font-family:'Spectral',serif;font-size:18px;color:var(--blue-deep);margin:0;">Gastos Ingresados</h4>
+                <span style="font-size:11.5px;color:var(--ink-soft);">Detalle de flujo de gastos</span>
+              </div>
+            </div>
+            <span class="room-pill" style="background:var(--cream);color:var(--ink-soft);border-color:var(--line);" id="expenseCountBadge">0 gastos</span>
           </div>
 
           <div class="expense-list" id="expenseList"></div>
         </div>
 
-        <!-- RESOLUCIÓN INTELIGENTE DE DEUDAS -->
-        <div class="settle-matrix" id="settleMatrix">
-          <div class="settle-title">📊 Balance & Transferencias Mínimas:</div>
-          <div id="settleResults">Aún no hay gastos registrados. Usa los botones arriba para empezar.</div>
-        </div>
-      </div>
-
-      <!-- CLIMA CUENCA SATELITAL Y POR HORAS DE HOY -->
-      <div class="tool-card" id="weatherCard">
-        <div>
-          <div class="tool-header">
-            <div class="tool-header-left">
-              <span style="font-size:22px;">⛅</span>
-              <h3>Clima Cuenca en Vivo</h3>
-            </div>
-          </div>
-
-          <div class="weather-container">
-            <div class="weather-header">
-              <div>
-                <div style="display:flex;align-items:center;gap:6px;">
-                  <span class="weather-tag">Clima Cuenca Hoy (Satelital)</span>
-                  <span id="weatherUpdatedTime" style="font-size:10.5px;font-family:'IBM Plex Mono',monospace;color:var(--ink-soft);font-weight:600;"></span>
-                </div>
-                <div class="weather-main-row">
-                  <div class="weather-temp" id="liveTemp">-- °C</div>
-                  <div class="weather-sub-details">
-                    <span id="liveApparent">Sensación: --°C</span> · <span id="liveHumidity">Humedad: --%</span>
-                  </div>
-                </div>
-              </div>
-              <div style="display:flex;flex-direction:column;align-items:flex-end;gap:6px;">
-                <div class="weather-condition" id="liveCond">
-                  <span id="liveIcon" style="font-size:24px;">⛅</span><br>
-                  <span id="liveDesc">Cargando...</span>
-                </div>
-                <button class="btn-print" id="btnRefreshWeather" style="padding:2px 8px;font-size:10px;display:flex;align-items:center;gap:4px;" onclick="fetchWeather(true)">🔄 Actualizar</button>
-              </div>
-            </div>
-
-            <!-- PRONÓSTICO PRÓXIMAS HORAS (HOY) -->
-            <div class="weather-hourly-wrap">
-              <div class="weather-hourly-title">PRÓXIMAS HORAS (HOY):</div>
-              <div class="weather-hourly-strip" id="weatherHourlyStrip">
-                <div class="weather-hour-card"><span class="weather-hour-time">Cargando horas...</span></div>
-              </div>
-            </div>
-
-            <!-- AVISO DE VESTIMENTA / LLUVIA -->
-            <div class="weather-alert-box" id="weatherAlertBox">
-              💡 <i>Consultando pronóstico de lluvia y frío para Cuenca...</i>
-            </div>
+        <!-- COLUMNA DERECHA: BALANCE & TRANSFERENCIAS MÍNIMAS (STICKY EN DESKTOP) -->
+        <div class="accounts-settle-card">
+          <div class="settle-matrix" id="settleMatrix">
+            <div class="settle-title">📊 Balance & Transferencias Mínimas:</div>
+            <div id="settleResults">Aún no hay gastos registrados. Usa los botones arriba para empezar.</div>
           </div>
         </div>
       </div>
@@ -2495,7 +2899,7 @@
         </div>
         <div class="place-footer">
           <span style="font-size:11px;color:var(--ink-soft);font-family:'IBM Plex Mono',monospace;">📍 Calle Nicanor Merchán</span>
-          <a href="https://maps.google.com/?q=Parque+de+la+Libertad+Cuenca" target="_blank" rel="noopener" class="map-link">GPS Maps ↗</a>
+          <a href="https://www.google.com/maps/search/?api=1&query=Parque+de+La+Libertad,+Nicanor+Merch%C3%A1n,+Cuenca,+Ecuador" target="_blank" rel="noopener" class="map-link">GPS Maps ↗</a>
         </div>
       </div>
 
@@ -2514,7 +2918,7 @@
         </div>
         <div class="place-footer">
           <span style="font-size:11px;color:var(--ink-soft);font-family:'IBM Plex Mono',monospace;">🚗 12 min desde ANICÁ</span>
-          <a href="https://maps.google.com/?q=Mirador+de+Turi+Cuenca" target="_blank" rel="noopener" class="map-link">GPS Maps ↗</a>
+          <a href="https://www.google.com/maps/search/?api=1&query=Mirador+de+Turi,+Cuenca,+Ecuador" target="_blank" rel="noopener" class="map-link">GPS Maps ↗</a>
         </div>
       </div>
 
@@ -2533,7 +2937,7 @@
         </div>
         <div class="place-footer">
           <span style="font-size:11px;color:var(--ink-soft);font-family:'IBM Plex Mono',monospace;">📍 Calle Larga y General Torres</span>
-          <a href="https://maps.google.com/?q=Mercado+10+de+Agosto+Cuenca" target="_blank" rel="noopener" class="map-link">GPS Maps ↗</a>
+          <a href="https://www.google.com/maps/search/?api=1&query=Mercado+10+de+Agosto,+Calle+Larga,+Cuenca,+Ecuador" target="_blank" rel="noopener" class="map-link">GPS Maps ↗</a>
         </div>
       </div>
 
@@ -2552,7 +2956,7 @@
         </div>
         <div class="place-footer">
           <span style="font-size:11px;color:var(--ink-soft);font-family:'IBM Plex Mono',monospace;">📍 Simón Bolívar y Benigno Malo</span>
-          <a href="https://maps.google.com/?q=Restaurante+Raymipampa+Cuenca" target="_blank" rel="noopener" class="map-link">GPS Maps ↗</a>
+          <a href="https://www.google.com/maps/search/?api=1&query=Restaurante+Raymipampa,+Benigno+Malo,+Cuenca,+Ecuador" target="_blank" rel="noopener" class="map-link">GPS Maps ↗</a>
         </div>
       </div>
 
@@ -2571,7 +2975,7 @@
         </div>
         <div class="place-footer">
           <span style="font-size:11px;color:var(--ink-soft);font-family:'IBM Plex Mono',monospace;">📍 Paseo 3 de Noviembre</span>
-          <a href="https://maps.google.com/?q=Cerveceria+La+Maria+Cuenca" target="_blank" rel="noopener" class="map-link">GPS Maps ↗</a>
+          <a href="https://www.google.com/maps/search/?api=1&query=La+Maria+Cerveceria,+Paseo+3+de+Noviembre,+Cuenca,+Ecuador" target="_blank" rel="noopener" class="map-link">GPS Maps ↗</a>
         </div>
       </div>
 
@@ -2590,7 +2994,7 @@
         </div>
         <div class="place-footer">
           <span style="font-size:11px;color:var(--ink-soft);font-family:'IBM Plex Mono',monospace;">📍 Calle Larga & Paseo 3 de Noviembre</span>
-          <a href="https://maps.google.com/?q=El+Barranco+Cuenca" target="_blank" rel="noopener" class="map-link">GPS Maps ↗</a>
+          <a href="https://www.google.com/maps/search/?api=1&query=El+Barranco,+Paseo+3+de+Noviembre,+Cuenca,+Ecuador" target="_blank" rel="noopener" class="map-link">GPS Maps ↗</a>
         </div>
       </div>
 
@@ -2609,7 +3013,7 @@
         </div>
         <div class="place-footer">
           <span style="font-size:11px;color:var(--ink-soft);font-family:'IBM Plex Mono',monospace;">📍 Calle Larga y Huayna Cápac</span>
-          <a href="https://maps.google.com/?q=Museo+Pumapungo+Cuenca" target="_blank" rel="noopener" class="map-link">GPS Maps ↗</a>
+          <a href="https://www.google.com/maps/search/?api=1&query=Museo+y+Parque+Arqueol%C3%B3gico+Pumapungo,+Calle+Larga,+Cuenca,+Ecuador" target="_blank" rel="noopener" class="map-link">GPS Maps ↗</a>
         </div>
       </div>
 
@@ -2628,7 +3032,7 @@
         </div>
         <div class="place-footer">
           <span style="font-size:11px;color:var(--ink-soft);font-family:'IBM Plex Mono',monospace;">📍 Simón Bolívar y Padre Aguirre</span>
-          <a href="https://maps.google.com/?q=Chocolateria+Dos+Chorreras+Centro+Cuenca" target="_blank" rel="noopener" class="map-link">GPS Maps ↗</a>
+          <a href="https://www.google.com/maps/search/?api=1&query=Chocolater%C3%ADa+Dos+Chorreras,+Sim%C3%B3n+Bol%C3%ADvar+10-09,+Cuenca,+Ecuador" target="_blank" rel="noopener" class="map-link">GPS Maps ↗</a>
         </div>
       </div>
 
@@ -2647,7 +3051,7 @@
         </div>
         <div class="place-footer">
           <span style="font-size:11px;color:var(--ink-soft);font-family:'IBM Plex Mono',monospace;">🚶 6 min caminando de ANICÁ</span>
-          <a href="https://maps.google.com/?q=Pacari+Paucarbamba+Cuenca" target="_blank" rel="noopener" class="map-link">GPS Maps ↗</a>
+          <a href="https://www.google.com/maps/search/?api=1&query=Pacari,+Paucarbamba+4-55,+Cuenca,+Ecuador" target="_blank" rel="noopener" class="map-link">GPS Maps ↗</a>
         </div>
       </div>
 
@@ -2666,7 +3070,7 @@
         </div>
         <div class="place-footer">
           <span style="font-size:11px;color:var(--ink-soft);font-family:'IBM Plex Mono',monospace;">📍 Parque Calderón (Centro)</span>
-          <a href="https://maps.google.com/?q=Catedral+de+la+Inmaculada+Concepcion+Cuenca" target="_blank" rel="noopener" class="map-link">GPS Maps ↗</a>
+          <a href="https://www.google.com/maps/search/?api=1&query=Catedral+de+la+Inmaculada+Concepci%C3%B3n,+Parque+Calder%C3%B3n,+Cuenca,+Ecuador" target="_blank" rel="noopener" class="map-link">GPS Maps ↗</a>
         </div>
       </div>
 
@@ -2685,7 +3089,7 @@
         </div>
         <div class="place-footer">
           <span style="font-size:11px;color:var(--ink-soft);font-family:'IBM Plex Mono',monospace;">📍 Baños de Cuenca</span>
-          <a href="https://maps.google.com/?q=Piedra+de+Agua+Fuente+Termal+Cuenca" target="_blank" rel="noopener" class="map-link">GPS Maps ↗</a>
+          <a href="https://www.google.com/maps/search/?api=1&query=Piedra+de+Agua+Fuente+Termal+%26+Spa,+Ba%C3%B1os,+Cuenca,+Ecuador" target="_blank" rel="noopener" class="map-link">GPS Maps ↗</a>
         </div>
       </div>
 
@@ -2704,7 +3108,7 @@
         </div>
         <div class="place-footer">
           <span style="font-size:11px;color:var(--ink-soft);font-family:'IBM Plex Mono',monospace;">📍 Vía a Molleturo (Km 35)</span>
-          <a href="https://maps.google.com/?q=Laguna+Toreadora+Parque+Nacional+Cajas" target="_blank" rel="noopener" class="map-link">GPS Maps ↗</a>
+          <a href="https://www.google.com/maps/search/?api=1&query=Centro+de+Interpretaci%C3%B3n+Laguna+Toreadora,+Parque+Nacional+Cajas,+Ecuador" target="_blank" rel="noopener" class="map-link">GPS Maps ↗</a>
         </div>
       </div>
 
@@ -2723,7 +3127,7 @@
         </div>
         <div class="place-footer">
           <span style="font-size:11px;color:var(--ink-soft);font-family:'IBM Plex Mono',monospace;">📍 Hostería Dos Chorreras</span>
-          <a href="https://maps.google.com/?q=Hosteria+Dos+Chorreras+Cuenca" target="_blank" rel="noopener" class="map-link">GPS Maps ↗</a>
+          <a href="https://www.google.com/maps/search/?api=1&query=Hoster%C3%ADa+Dos+Chorreras,+Km+21+V%C3%ADa+al+Cajas,+Cuenca,+Ecuador" target="_blank" rel="noopener" class="map-link">GPS Maps ↗</a>
         </div>
       </div>
 
@@ -3066,7 +3470,7 @@
         </div>
 
         <div style="margin-top:10px;padding-top:10px;border-top:1px dashed var(--line);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;">
-          <div id="lastPlaceTaskText" style="font-size:12px;font-weight:600;color:var(--ink);flex:1;min-width:200px;">
+          <div id="lastPlaceTaskText" style="font-size:12px;font-weight:600;color:var(--ink);flex:1 1 auto;min-width:0;">
             🧹 <b>Tarea grupal:</b> Toca el botón para sortear qué tarea útil le toca al último lugar.
           </div>
           <button class="btn-ai-inline" onclick="generateAiChoreForLastPlace()" style="font-size:11px;padding:5px 12px;">
@@ -3082,7 +3486,59 @@
     <div class="section-head">
       <div class="section-title-wrap">
         <span class="section-tag">05 — Logística & Equipaje</span>
-        <span class="section-title">Camas en ANICÁ & Checklist</span>
+        <span class="section-title">Clima en Vivo, Equipaje & Camas en ANICÁ</span>
+      </div>
+    </div>
+
+    <!-- CLIMA CUENCA SATELITAL Y POR HORAS DE HOY (REFERENCIA PARA EQUIPAJE & ROPA) -->
+    <div class="tool-card" id="weatherCard" style="margin-bottom:16px;">
+      <div>
+        <div class="tool-header">
+          <div class="tool-header-left">
+            <span style="font-size:22px;">⛅</span>
+            <div>
+              <h3 style="margin:0;font-size:18px;color:var(--blue-deep);">Clima Cuenca en Vivo (Referencia para Equipaje & Ropa)</h3>
+              <span style="font-size:11.5px;color:var(--ink-soft);">Pronóstico satelital en tiempo real para empacar y vestirse según la temperatura andina</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="weather-container">
+          <div class="weather-header">
+            <div>
+              <div style="display:flex;align-items:center;gap:6px;">
+                <span class="weather-tag">Clima Cuenca Hoy (Satelital)</span>
+                <span id="weatherUpdatedTime" style="font-size:10.5px;font-family:'IBM Plex Mono',monospace;color:var(--ink-soft);font-weight:600;"></span>
+              </div>
+              <div class="weather-main-row">
+                <div class="weather-temp" id="liveTemp">-- °C</div>
+                <div class="weather-sub-details">
+                  <span id="liveApparent">Sensación: --°C</span> · <span id="liveHumidity">Humedad: --%</span>
+                </div>
+              </div>
+            </div>
+            <div style="display:flex;flex-direction:column;align-items:flex-end;gap:6px;">
+              <div class="weather-condition" id="liveCond">
+                <span id="liveIcon" style="font-size:24px;">⛅</span><br>
+                <span id="liveDesc">Cargando...</span>
+              </div>
+              <button class="btn-print" id="btnRefreshWeather" style="padding:2px 8px;font-size:10px;display:flex;align-items:center;gap:4px;" onclick="fetchWeather(true)">🔄 Actualizar</button>
+            </div>
+          </div>
+
+          <!-- PRONÓSTICO PRÓXIMAS HORAS (HOY) -->
+          <div class="weather-hourly-wrap">
+            <div class="weather-hourly-title">PRÓXIMAS HORAS (HOY):</div>
+            <div class="weather-hourly-strip" id="weatherHourlyStrip">
+              <div class="weather-hour-card"><span class="weather-hour-time">Cargando horas...</span></div>
+            </div>
+          </div>
+
+          <!-- AVISO DE VESTIMENTA / LLUVIA -->
+          <div class="weather-alert-box" id="weatherAlertBox">
+            💡 <i>Consultando pronóstico de lluvia y frío para Cuenca...</i>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -3249,9 +3705,62 @@
 
 
 
+</div> <!-- /wrap -->
+
+</div> <!-- /appViewportContainer -->
+
+<!-- BANNER FLOTANTE DE INSTALACIÓN EN IOS -->
+<div class="ios-install-banner" id="iosInstallBanner" role="region" aria-label="Instalación en iPhone">
+  <div class="ios-install-inner">
+    <div class="ios-install-icon">📲</div>
+    <div class="ios-install-text">
+      <div class="ios-install-title">Instala Cuenca 2026 en tu iPhone</div>
+      <div>Toca el botón <b>Compartir</b> de Safari (<span style="display:inline-block;font-size:14px;">⎋</span> o <span style="font-weight:700;">[↑]</span>) y selecciona <b>"Agregar a inicio"</b> ➕ para tenerla a pantalla completa sin barras.</div>
+    </div>
+    <button class="ios-install-close" onclick="dismissIosBanner()" aria-label="Cerrar aviso">✕</button>
+  </div>
 </div>
 
-<!-- AI INTERACTIVE CHAT MODAL -->
+<!-- MODAL GUÍA DE INSTALACIÓN PWA -->
+<div class="pwa-modal-overlay" id="pwaModalOverlay" role="dialog" aria-modal="true" aria-label="Cómo instalar la aplicación" onclick="if(event.target===this) closeInstallModal()">
+  <div class="pwa-modal-card">
+    <div class="pwa-modal-head">
+      <div style="display:flex;align-items:center;gap:8px;">
+        <span style="font-size:20px;">📲</span>
+        <h3>Instalar App Cuenca 2026</h3>
+      </div>
+      <button class="pwa-modal-close" onclick="closeInstallModal()" aria-label="Cerrar ventana">✕</button>
+    </div>
+    <div class="pwa-modal-body">
+      <p style="margin-bottom:14px;color:var(--ink-soft);font-size:12.5px;">
+        Puedes instalar esta guía en tu celular para abrirla rápido como una aplicación nativa y sin barras del navegador:
+      </p>
+
+      <div class="pwa-step-card">
+        <div class="pwa-step-title">🍎 En iPhone / iPad (Safari)</div>
+        <ol style="margin-left:18px;margin-top:6px;display:flex;flex-direction:column;gap:5px;font-size:12px;">
+          <li>Abre esta página en <b>Safari</b>.</li>
+          <li>Toca el botón <b>Compartir</b> abajo (ícono cuadrado con flecha hacia arriba <b>[↑]</b> o <b>⎋</b>).</li>
+          <li>Desliza hacia abajo y pulsa <b>"Agregar a pantalla de inicio"</b> (➕).</li>
+          <li>Toca <b>"Agregar"</b> arriba a la derecha. ¡Listo!</li>
+        </ol>
+      </div>
+
+      <div class="pwa-step-card" style="margin-bottom:0;">
+        <div class="pwa-step-title">🤖 En Android (Chrome / Brave / Edge)</div>
+        <ol style="margin-left:18px;margin-top:6px;display:flex;flex-direction:column;gap:5px;font-size:12px;">
+          <li>Toca los tres puntos <b>⋮</b> en la esquina superior derecha.</li>
+          <li>Selecciona <b>"Instalar aplicación"</b> o <b>"Agregar a la pantalla principal"</b>.</li>
+          <li>Confirma pulsando <b>"Instalar"</b>.</li>
+        </ol>
+      </div>
+      
+      <div style="margin-top:14px;text-align:center;">
+        <button class="btn-print" onclick="closeInstallModal()" style="padding:7px 24px;border-radius:var(--radius-full);background:var(--blue-deep);color:#fff;font-size:12px;cursor:pointer;">Entendido</button>
+      </div>
+    </div>
+  </div>
+</div>
 <div class="ai-modal-overlay" id="aiModalOverlay" role="dialog" aria-modal="true" aria-label="Asistente de Viaje Cuenca 2026" onclick="if(event.target===this) closeAiChat()" onkeydown="if(event.key==='Escape') closeAiChat()">
   <div class="ai-modal-card">
     <div class="ai-modal-head">
@@ -3498,23 +4007,33 @@ function removeExp(idx) {
 
 function renderExpensesTactile(skipCloud = false) {
   const list = document.getElementById('expenseList');
+  if (!list) return;
   list.innerHTML = '';
   let total = 0;
   const paidMap = { Alan: 0, Ashley: 0, Jahaira: 0, Douglas: 0 };
 
-  expenses.forEach((item, idx) => {
-    total += item.amount;
-    if (paidMap[item.payer] !== undefined) {
-      paidMap[item.payer] += item.amount;
-    }
-    const d = document.createElement('div');
-    d.className = 'expense-item';
-    d.innerHTML = `
-      <span><b>${item.name}</b> <span style="color:var(--ink-soft);font-size:11px;">(Pagó: ${item.payer})</span></span>
-      <span>$${item.amount.toFixed(2)} <button class="del-btn" onclick="removeExp(${idx})" title="Eliminar">×</button></span>
-    `;
-    list.appendChild(d);
-  });
+  const countBadge = document.getElementById('expenseCountBadge');
+  if (countBadge) {
+    countBadge.innerText = expenses.length === 1 ? '1 gasto' : `${expenses.length} gastos`;
+  }
+
+  if (expenses.length === 0) {
+    list.innerHTML = '<div style="text-align:center;padding:26px 14px;color:var(--ink-soft);font-size:12.5px;background:var(--cream);border:1px dashed var(--line);border-radius:var(--radius-sm);">Aún no hay gastos registrados. Toca una categoría arriba y presiona <b>➕ Agregar Gasto</b>.</div>';
+  } else {
+    expenses.forEach((item, idx) => {
+      total += item.amount;
+      if (paidMap[item.payer] !== undefined) {
+        paidMap[item.payer] += item.amount;
+      }
+      const d = document.createElement('div');
+      d.className = 'expense-item';
+      d.innerHTML = `
+        <span style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;"><b>${item.name}</b> <span style="color:var(--ink-soft);font-size:11px;background:rgba(24,76,120,0.06);padding:2px 8px;border-radius:10px;">Pagó: <strong style="color:var(--blue-deep);">${item.payer}</strong></span></span>
+        <span style="font-family:'IBM Plex Mono',monospace;font-weight:700;font-size:13.5px;color:var(--ink);display:inline-flex;align-items:center;gap:6px;">$${item.amount.toFixed(2)} <button class="del-btn" onclick="removeExp(${idx})" title="Eliminar gasto" aria-label="Eliminar gasto">×</button></span>
+      `;
+      list.appendChild(d);
+    });
+  }
 
   const perPerson = total / expenseParticipants.length;
   calculateSmartSettlement(paidMap, perPerson, total);
@@ -4643,7 +5162,7 @@ function renderNightPhotoList() {
     const m = missions[t] || defaultMissions[t];
     html += `
       <div style="background:var(--cream);border:1px solid var(--line);border-radius:var(--radius-sm);padding:8px 10px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;">
-        <div style="flex:1;min-width:200px;">
+        <div style="flex:1 1 auto;min-width:0;">
           <b style="color:var(--blue-deep);">${t}:</b> <span style="font-size:12px;color:var(--ink);">${m}</span>
         </div>
         <button class="btn-ai-inline" style="font-size:11px;padding:3px 8px;" onclick="awardPhotoPoints('${t}', ${playerIdx[t]})">
@@ -5331,6 +5850,40 @@ async function initLiveSync() {
   }, 5 * 60 * 1000);
 }
 
+// --- PWA INSTALLATION HELPER (IOS & ANDROID) ---
+function openInstallModal() {
+  const modal = document.getElementById('pwaModalOverlay');
+  if (modal) modal.style.display = 'flex';
+}
+
+function closeInstallModal() {
+  const modal = document.getElementById('pwaModalOverlay');
+  if (modal) modal.style.display = 'none';
+}
+
+function checkIosInstallBanner() {
+  try {
+    const isIos = /iphone|ipad|ipod/i.test(navigator.userAgent) || 
+                  (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+    const isStandalone = window.navigator.standalone === true || 
+                         window.matchMedia('(display-mode: standalone)').matches;
+    const isDismissed = localStorage.getItem('cuenca_ios_banner_dismissed') === 'true';
+
+    if (isIos && !isStandalone && !isDismissed) {
+      const banner = document.getElementById('iosInstallBanner');
+      if (banner) banner.style.display = 'block';
+    }
+  } catch(e) {}
+}
+
+function dismissIosBanner() {
+  const banner = document.getElementById('iosInstallBanner');
+  if (banner) banner.style.display = 'none';
+  try {
+    localStorage.setItem('cuenca_ios_banner_dismissed', 'true');
+  } catch(e) {}
+}
+
 // INIT
 window.addEventListener('DOMContentLoaded', () => {
   loadExpenses();
@@ -5340,6 +5893,7 @@ window.addEventListener('DOMContentLoaded', () => {
   fetchWeather();
   initScheduleRadar();
   initLiveSync();
+  checkIosInstallBanner();
 
   // Scroll suave al final del chat cuando el teclado virtual sube
   const chatInput = document.getElementById('aiChatInput');

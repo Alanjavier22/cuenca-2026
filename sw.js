@@ -1,5 +1,5 @@
-// Service Worker para Cuenca 2026 PWA - Versión 4
-const CACHE_NAME = 'cuenca-2026-v4';
+// Service Worker para Cuenca 2026 PWA - Versión 5
+const CACHE_NAME = 'cuenca-2026-v5';
 const ASSETS_TO_CACHE = [
   './manifest.webmanifest',
   './icon-192.png',
