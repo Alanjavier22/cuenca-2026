@@ -1,0 +1,8 @@
+{
+  "name": "Cuenca 2026 · Guía de Viaje Oficial",
+  "description": "Itinerario interactivo, juegos con IA, divisor de gastos y spots para el viaje a Cuenca 2026.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

@@ -9,6 +9,9 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Cuenca 2026">
+<meta name="description" content="Itinerario interactivo, juegos con IA, divisor de gastos y spots para el viaje a Cuenca 2026.">
+<meta property="og:title" content="Cuenca 2026 · Guía de Viaje Oficial">
+<meta property="og:description" content="Itinerario interactivo, juegos con IA, divisor de gastos y spots para el viaje a Cuenca 2026.">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="icon" type="image/png" href="favicon.png">
@@ -487,13 +490,27 @@
   .settle-line { font-family: 'IBM Plex Mono', monospace; color: var(--ink); margin-bottom: 3px; }
 
   /* RULETA */
+  .roulette-card {
+    background: var(--white);
+    border: 1px solid var(--purple-border);
+    border-radius: var(--radius-md);
+    padding: 16px 18px;
+    box-shadow: var(--shadow-sm);
+    margin-bottom: 16px;
+  }
+  .roulette-inner-grid {
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    gap: 14px;
+    align-items: stretch;
+  }
   .roulette-box {
     text-align: center;
     padding: 14px 10px;
     background: var(--purple-soft);
     border: 1.5px dashed var(--purple-border);
     border-radius: var(--radius-sm);
-    margin-bottom: 10px;
+    margin-bottom: 0;
     min-height: 80px;
     display: flex;
     flex-direction: column;
@@ -508,7 +525,7 @@
     margin-bottom: 2px;
   }
   .roulette-action { font-size: 12.5px; color: var(--ink); line-height: 1.4; }
-  .roulette-buttons { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin-bottom: 10px; }
+  .roulette-buttons { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin-bottom: 0; }
   .btn-roulette {
     background: var(--blue-deep);
     color: var(--white);
@@ -1542,6 +1559,7 @@
   /* RESPONSIVE */
   @media (max-width: 860px) {
     .tools-grid { grid-template-columns: 1fr; }
+    .roulette-inner-grid { grid-template-columns: 1fr; gap: 10px; }
     .stat-strip { grid-template-columns: repeat(2, 1fr); }
     .place-grid, .game-grid, .food-grid, .bed-grid { grid-template-columns: 1fr; }
     .game.hero-game { grid-column: auto; }
@@ -1951,9 +1969,9 @@
 <div class="main-tabs-wrapper">
   <div class="main-tabs-inner">
     <button class="tab-pill-btn active" onclick="switchMainTab('itinerario', this)">📅 Itinerario por Día</button>
-    <button class="tab-pill-btn" onclick="switchMainTab('cuentas', this)">⚡ Cuentas & Ruleta</button>
+    <button class="tab-pill-btn" onclick="switchMainTab('cuentas', this)">⚡ Cuentas & Gastos</button>
     <button class="tab-pill-btn" onclick="switchMainTab('spots', this)">🔥 Spots & Comida</button>
-    <button class="tab-pill-btn" onclick="switchMainTab('juegos', this)">🎲 Juegos & Noches</button>
+    <button class="tab-pill-btn" onclick="switchMainTab('juegos', this)">🎲 Juegos & Ruleta</button>
     <button class="tab-pill-btn" onclick="switchMainTab('logistica', this)">🎒 Camas & Maletas</button>
   </div>
 </div>
@@ -2325,12 +2343,12 @@
     </div>
   </div>
 
-  <!-- ==================== PESTAÑA 2: CUENTAS & RULETA ==================== -->
+  <!-- ==================== PESTAÑA 2: CUENTAS & GASTOS ==================== -->
   <div class="main-tab-view" id="tab-cuentas">
     <div class="section-head">
       <div class="section-title-wrap">
-        <span class="section-tag">02 — Cuentas & Decisiones</span>
-        <span class="section-title">Divisor de Gastos Táctil & Ruleta</span>
+        <span class="section-tag">02 — Cuentas & Gastos</span>
+        <span class="section-title">Divisor de Gastos Táctil & Clima</span>
       </div>
     </div>
 
@@ -2385,65 +2403,51 @@
         </div>
       </div>
 
-      <!-- RULETA DE DECISIONES CON IA -->
-      <div class="tool-card">
+      <!-- CLIMA CUENCA SATELITAL Y POR HORAS DE HOY -->
+      <div class="tool-card" id="weatherCard">
         <div>
           <div class="tool-header">
             <div class="tool-header-left">
-              <span style="font-size:22px;">🎯</span>
-              <h3>Ruleta y Retos</h3>
+              <span style="font-size:22px;">⛅</span>
+              <h3>Clima Cuenca en Vivo</h3>
             </div>
           </div>
-          
-          <div class="roulette-box" id="rouletteBox">
-            <div class="roulette-name" id="rouletteName">¿Quién empieza?</div>
-            <div class="roulette-action" id="rouletteSub">Toca un botón abajo para sortear</div>
-          </div>
 
-          <div class="roulette-buttons">
-            <button class="btn-roulette purple" onclick="spinPerson()" title="Sortea quién hace una tarea del grupo">🙋 Sortear Amigo</button>
-            <button class="btn-roulette" onclick="spinGame()" title="Elige al azar qué juego jugar">🎲 Sortear Juego</button>
-            <button class="btn-roulette" style="background:#22754D;" onclick="spinFood()" title="Elige qué comida típica probar">🍲 Sortear Comida</button>
-            <button class="btn-roulette" style="background:#B5421D;" onclick="spinAiDare()" title="Genera un reto dinámico con IA">⚡ Reto con IA</button>
-            <button class="btn-roulette ai" onclick="spinAiTruth()" title="Genera una pregunta de verdad con IA">✨ Verdad con IA</button>
-          </div>
-        </div>
-
-        <!-- CLIMA CUENCA SATELITAL Y POR HORAS DE HOY -->
-        <div class="weather-container">
-          <div class="weather-header">
-            <div>
-              <div style="display:flex;align-items:center;gap:6px;">
-                <span class="weather-tag">Clima Cuenca Hoy (Satelital)</span>
-                <span id="weatherUpdatedTime" style="font-size:10.5px;font-family:'IBM Plex Mono',monospace;color:var(--ink-soft);font-weight:600;"></span>
-              </div>
-              <div class="weather-main-row">
-                <div class="weather-temp" id="liveTemp">-- °C</div>
-                <div class="weather-sub-details">
-                  <span id="liveApparent">Sensación: --°C</span> · <span id="liveHumidity">Humedad: --%</span>
+          <div class="weather-container">
+            <div class="weather-header">
+              <div>
+                <div style="display:flex;align-items:center;gap:6px;">
+                  <span class="weather-tag">Clima Cuenca Hoy (Satelital)</span>
+                  <span id="weatherUpdatedTime" style="font-size:10.5px;font-family:'IBM Plex Mono',monospace;color:var(--ink-soft);font-weight:600;"></span>
+                </div>
+                <div class="weather-main-row">
+                  <div class="weather-temp" id="liveTemp">-- °C</div>
+                  <div class="weather-sub-details">
+                    <span id="liveApparent">Sensación: --°C</span> · <span id="liveHumidity">Humedad: --%</span>
+                  </div>
                 </div>
               </div>
-            </div>
-            <div style="display:flex;flex-direction:column;align-items:flex-end;gap:6px;">
-              <div class="weather-condition" id="liveCond">
-                <span id="liveIcon" style="font-size:24px;">⛅</span><br>
-                <span id="liveDesc">Cargando...</span>
+              <div style="display:flex;flex-direction:column;align-items:flex-end;gap:6px;">
+                <div class="weather-condition" id="liveCond">
+                  <span id="liveIcon" style="font-size:24px;">⛅</span><br>
+                  <span id="liveDesc">Cargando...</span>
+                </div>
+                <button class="btn-print" id="btnRefreshWeather" style="padding:2px 8px;font-size:10px;display:flex;align-items:center;gap:4px;" onclick="fetchWeather(true)">🔄 Actualizar</button>
               </div>
-              <button class="btn-print" id="btnRefreshWeather" style="padding:2px 8px;font-size:10px;display:flex;align-items:center;gap:4px;" onclick="fetchWeather(true)">🔄 Actualizar</button>
             </div>
-          </div>
 
-          <!-- PRONÓSTICO PRÓXIMAS HORAS (HOY) -->
-          <div class="weather-hourly-wrap">
-            <div class="weather-hourly-title">PRÓXIMAS HORAS (HOY):</div>
-            <div class="weather-hourly-strip" id="weatherHourlyStrip">
-              <div class="weather-hour-card"><span class="weather-hour-time">Cargando horas...</span></div>
+            <!-- PRONÓSTICO PRÓXIMAS HORAS (HOY) -->
+            <div class="weather-hourly-wrap">
+              <div class="weather-hourly-title">PRÓXIMAS HORAS (HOY):</div>
+              <div class="weather-hourly-strip" id="weatherHourlyStrip">
+                <div class="weather-hour-card"><span class="weather-hour-time">Cargando horas...</span></div>
+              </div>
             </div>
-          </div>
 
-          <!-- AVISO DE VESTIMENTA / LLUVIA -->
-          <div class="weather-alert-box" id="weatherAlertBox">
-            💡 <i>Consultando pronóstico de lluvia y frío para Cuenca...</i>
+            <!-- AVISO DE VESTIMENTA / LLUVIA -->
+            <div class="weather-alert-box" id="weatherAlertBox">
+              💡 <i>Consultando pronóstico de lluvia y frío para Cuenca...</i>
+            </div>
           </div>
         </div>
       </div>
@@ -2726,12 +2730,40 @@
     </div>
   </div>
 
-  <!-- ==================== PESTAÑA 4: JUEGOS ==================== -->
+  <!-- ==================== PESTAÑA 4: JUEGOS & RULETA ==================== -->
   <div class="main-tab-view" id="tab-juegos">
     <div class="section-head">
       <div class="section-title-wrap">
-        <span class="section-tag">04 — Noches en el Depa</span>
-        <span class="section-title">Juegos Interactivos para los 5 Amigos</span>
+        <span class="section-tag">04 — Noches en el Depa & Retos</span>
+        <span class="section-title">Ruleta, Retos & Juegos Interactivos</span>
+      </div>
+    </div>
+
+    <!-- SECCIÓN RULETA Y RETOS DEL GRUPO -->
+    <div class="roulette-card" id="rouletteSection">
+      <div class="tool-header" style="margin-bottom: 12px;">
+        <div class="tool-header-left">
+          <span style="font-size:24px;">🎯</span>
+          <div>
+            <h3 style="font-family:'Spectral',serif;font-size:18.5px;font-weight:700;color:var(--blue-deep);margin:0;">Ruleta y Retos del Grupo</h3>
+            <div style="font-size:12px;color:var(--ink-soft);line-height:1.4;">Sortea turnos del grupo, qué jugar, qué comida típica probar, o genera retos y preguntas de verdad con IA.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="roulette-inner-grid">
+        <div class="roulette-box" id="rouletteBox">
+          <div class="roulette-name" id="rouletteName">¿Quién empieza?</div>
+          <div class="roulette-action" id="rouletteSub">Toca un botón al lado para sortear</div>
+        </div>
+
+        <div class="roulette-buttons">
+          <button class="btn-roulette purple" id="btnRoulettePerson" onclick="spinPerson()" title="Sortea quién hace una tarea del grupo">🙋 Sortear Amigo</button>
+          <button class="btn-roulette" id="btnRouletteGame" onclick="spinGame()" title="Elige al azar qué juego jugar">🎲 Sortear Juego</button>
+          <button class="btn-roulette" id="btnRouletteFood" style="background:#22754D;" onclick="spinFood()" title="Elige qué comida típica probar">🍲 Sortear Comida</button>
+          <button class="btn-roulette" id="btnRouletteAiDare" style="background:#B5421D;" onclick="spinAiDare()" title="Genera un reto dinámico con IA">⚡ Reto con IA</button>
+          <button class="btn-roulette ai" id="btnRouletteAiTruth" onclick="spinAiTruth()" title="Genera una pregunta de verdad con IA">✨ Verdad con IA</button>
+        </div>
       </div>
     </div>
 
@@ -3266,8 +3298,7 @@
 
 <script>
 // --- CONFIG & DYNAMIC AI CONTEXT ---
-const GEMINI_API_KEY = window.atob("QVEuQWI4Uk42S3BHLV9aZ0NUZF9OZjR4Sjd2OVlwcUY4WHR6SW4tWlBFOThnSERHOXJ0Unc=");
-const GEMINI_MODEL = "gemini-3.5-flash-lite";
+const GEMINI_MODEL = "gemini-2.5-flash";
 const travelers = ['Alan', 'Dennis', 'Ashley', 'Jahaira', 'Douglas'];
 let currentCategory = 'Gasolina Súper';
 let currentPayer = 'Alan';
@@ -4269,49 +4300,25 @@ async function sendUserChatMessage() {
 }
 
 async function callGeminiAI(userQuery, isDirect = false) {
-  const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/${GEMINI_MODEL}:generateContent?key=${GEMINI_API_KEY}`;
   const sysPrompt = isDirect ? getDirectAiContext() : getDynamicAiContext();
 
   try {
-    const res = await fetch(endpoint, {
+    const res = await fetch('/api/gemini', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        contents: [{ parts: [{ text: sysPrompt + '\n\n' + (isDirect ? 'Solicitud: ' : 'Usuario: ') + userQuery }] }],
-        generationConfig: {
-          temperature: 1.0,
-          topP: 0.95
-        }
+        prompt: sysPrompt + '\n\n' + (isDirect ? 'Solicitud: ' : 'Usuario: ') + userQuery,
+        model: typeof GEMINI_MODEL !== 'undefined' ? GEMINI_MODEL : 'gemini-2.5-flash'
       })
     });
-    
-    if (!res.ok) {
-      const fallbackEndpoint = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash-lite:generateContent?key=${GEMINI_API_KEY}`;
-      const resFallback = await fetch(fallbackEndpoint, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          contents: [{ parts: [{ text: sysPrompt + '\n\n' + (isDirect ? 'Solicitud: ' : 'Usuario: ') + userQuery }] }],
-          generationConfig: {
-            temperature: 1.0,
-            topP: 0.95
-          }
-        })
-      });
-      if (resFallback.ok) {
-        const fbData = await resFallback.json();
-        if (fbData.candidates && fbData.candidates[0].content.parts[0].text) {
-          return fbData.candidates[0].content.parts[0].text.trim();
-        }
-      }
-      throw new Error('API Error');
-    }
 
-    const data = await res.json();
-    if (data.candidates && data.candidates[0].content.parts[0].text) {
-      return data.candidates[0].content.parts[0].text.trim();
+    if (res.ok) {
+      const data = await res.json();
+      if (data && data.text) {
+        return data.text.trim();
+      }
     }
-    throw new Error('Sin contenido');
+    return getOfflineFallback(userQuery);
   } catch(e) {
     return getOfflineFallback(userQuery);
   }

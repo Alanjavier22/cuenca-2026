@@ -1,0 +1,15 @@
+{
+  "name": "cuenca-2026",
+  "version": "1.0.0",
+  "description": "Itinerario interactivo, juegos con IA, divisor de gastos y spots para el viaje a Cuenca 2026.",
+  "type": "module",
+  "scripts": {
+    "dev": "node server.js",
+    "build": "echo 'Build complete'",
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "@google/genai": "^2.21.0",
+    "express": "^4.21.2"
+  }
+}
