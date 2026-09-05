@@ -43,20 +43,49 @@ app.post('/api/gemini', async (req, res) => {
       });
     }
 
-    const targetModel = model || 'gemini-2.5-flash';
-    const response = await ai.models.generateContent({
-      model: targetModel,
-      contents: prompt,
-      config: {
-        temperature: 1.0,
-        topP: 0.95
-      }
-    });
+    const requestedModel = model || 'gemini-3.1-flash-lite';
+    // Only modern flash-lite models: gemini-3.1-flash-lite and gemini-3.5-flash-lite
+    const allowedModels = ['gemini-3.1-flash-lite', 'gemini-3.5-flash-lite'];
+    const validRequested = allowedModels.includes(requestedModel) ? requestedModel : 'gemini-3.1-flash-lite';
+    const candidateModels = [
+      validRequested,
+      validRequested === 'gemini-3.1-flash-lite' ? 'gemini-3.5-flash-lite' : 'gemini-3.1-flash-lite'
+    ];
 
-    const text = response.text || '';
-    return res.json({ text: text.trim() });
+    let lastError = null;
+    let generatedText = null;
+
+    for (const targetModel of candidateModels) {
+      try {
+        const response = await ai.models.generateContent({
+          model: targetModel,
+          contents: prompt,
+          config: {
+            temperature: 0.9,
+            topP: 0.95
+          }
+        });
+        if (response && response.text) {
+          generatedText = response.text.trim();
+          break;
+        }
+      } catch (err) {
+        lastError = err;
+        console.warn(`[Gemini API] Failed with ${targetModel} (${err?.status || err?.message}), trying fallback...`);
+      }
+    }
+
+    if (generatedText) {
+      return res.json({ text: generatedText });
+    }
+
+    console.warn('[Gemini API] All candidate models failed:', lastError?.message || lastError);
+    return res.status(500).json({
+      error: lastError?.message || 'Error generating AI content',
+      fallback: true
+    });
   } catch (err) {
-    console.warn('[Gemini API] Call error:', err?.message || err);
+    console.warn('[Gemini API] Unexpected error:', err?.message || err);
     return res.status(500).json({
       error: err?.message || 'Error generating AI content',
       fallback: true
@@ -79,16 +108,18 @@ app.get(['/manifest.webmanifest', '/manifest.json'], (req, res) => {
   res.sendFile(path.join(__dirname, file));
 });
 
+// Direct route for HTML files with no-cache so clients always get fresh app code
+app.get(['/', '/index.html', '/cuenca-actividades-y-juegos.html'], (req, res) => {
+  res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
+  res.sendFile(path.join(__dirname, 'index.html'));
+});
+
 // Serve static assets from project root
 app.use(express.static(__dirname));
 
-// Direct route for cuenca-actividades-y-juegos.html
-app.get('/cuenca-actividades-y-juegos.html', (req, res) => {
-  res.sendFile(path.join(__dirname, 'cuenca-actividades-y-juegos.html'));
-});
-
 // SPA / Default fallback to index.html
 app.get('*', (req, res) => {
+  res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
   res.sendFile(path.join(__dirname, 'index.html'));
 });
 

@@ -3661,7 +3661,7 @@
 
 <script>
 // --- CONFIG & DYNAMIC AI CONTEXT ---
-const GEMINI_MODEL = "gemini-2.5-flash";
+const GEMINI_MODEL = "gemini-3.1-flash-lite";
 const travelers = ['Alan', 'Dennis', 'Ashley', 'Jahaira', 'Douglas'];
 let currentCategory = 'Gasolina Súper';
 let currentPayer = 'Alan';
@@ -4156,10 +4156,20 @@ LÍMITES Y FILTROS ESTRICTOS (CERO INCOMODIDAD):
       dareText = cleaned.startsWith('Reto:') ? cleaned : `Reto: ${cleaned}`;
       recentDaresHistory.push(dareText);
     } else {
-      dareText = `Reto: ¡Canta el coro de tu canción favorita de karaoke con dramatismo de telenovela durante 20 segundos!`;
+      throw new Error('Reto devuelto con formato inválido');
     }
   } catch(e) {
-    dareText = `Reto: ¡Imita la voz de un comentarista de fútbol narrando un gol mientras te tomas un sorbo de tu bebida!`;
+    const backupDares = [
+      `Reto: ¡Canta el coro de tu canción favorita de karaoke con dramatismo de telenovela durante 20 segundos!`,
+      `Reto: ¡Imita la voz de un comentarista de fútbol narrando un gol mientras te tomas un sorbo de tu bebida!`,
+      `Reto: ¡Finge que acabas de ganar un premio Óscar y da tu discurso de agradecimiento entre lágrimas fingidas a los 4 amigos!`,
+      `Reto: ¡Haz tu mejor imitación de un guía turístico exagerado describiendo el frío de Cuenca durante 15 segundos!`,
+      `Reto: ¡Habla con acento extranjero o de doblaje de película clásica durante tus próximas 3 intervenciones!`,
+      `Reto: ¡Haz 5 sentadillas narrando cada una como si estuvieras levantando una roca gigante del Cajas!`
+    ];
+    const available = backupDares.filter(d => !recentDaresHistory.includes(d));
+    dareText = (available.length > 0 ? available : backupDares)[Math.floor(Math.random() * (available.length || backupDares.length))];
+    recentDaresHistory.push(dareText);
   }
 
   animateRoulette('👤 ' + t, dareText);
@@ -4196,10 +4206,19 @@ LÍMITES Y FILTROS ESTRICTOS (CERO INCOMODIDAD):
       truthText = cleaned.startsWith('Verdad:') ? cleaned : `Verdad: ${cleaned}`;
       recentTruthsHistory.push(truthText);
     } else {
-      truthText = 'Verdad: ¿Cuál es la compra más tonta e innecesaria en la que has gastado dinero y de la que hoy te ríes?';
+      throw new Error('Pregunta de verdad con formato inválido');
     }
   } catch(e) {
-    truthText = 'Verdad: ¿Cuál es tu gusto culposo de música o comida que te daría vergüenza admitir en público?';
+    const backupTruths = [
+      'Verdad: ¿Cuál es la compra más tonta e innecesaria en la que has gastado dinero y de la que hoy te ríes?',
+      'Verdad: ¿Cuál es tu gusto culposo de música o comida que te daría vergüenza admitir en público?',
+      'Verdad: ¿Qué mensaje vergonzoso enviaste alguna vez por error a la persona equivocada?',
+      'Verdad: ¿Qué manía o costumbre rara tienes cuando nadie te está viendo en casa?',
+      'Verdad: ¿Cuál fue tu peor metedura de pata en una reunión social de la que todavía te acuerdas?'
+    ];
+    const available = backupTruths.filter(t => !recentTruthsHistory.includes(t));
+    truthText = (available.length > 0 ? available : backupTruths)[Math.floor(Math.random() * (available.length || backupTruths.length))];
+    recentTruthsHistory.push(truthText);
   }
 
   animateRoulette('👤 ' + t, truthText);
@@ -4759,18 +4778,24 @@ async function callGeminiAI(userQuery, isDirect = false) {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         prompt: sysPrompt + '\n\n' + (isDirect ? 'Solicitud: ' : 'Usuario: ') + userQuery,
-        model: typeof GEMINI_MODEL !== 'undefined' ? GEMINI_MODEL : 'gemini-2.5-flash'
+        model: typeof GEMINI_MODEL !== 'undefined' ? GEMINI_MODEL : 'gemini-3.1-flash-lite'
       })
     });
 
     if (res.ok) {
       const data = await res.json();
-      if (data && data.text) {
+      if (data && data.text && data.text.trim()) {
         return data.text.trim();
       }
     }
+    if (isDirect) {
+      throw new Error('AI direct generation service unavailable');
+    }
     return getOfflineFallback(userQuery);
   } catch(e) {
+    if (isDirect) {
+      throw e;
+    }
     return getOfflineFallback(userQuery);
   }
 }
@@ -4792,7 +4817,18 @@ function logAiInteraction(category, data) {
 }
 
 function getOfflineFallback(q) {
-  const query = q.toLowerCase();
+  const query = (q || '').toLowerCase();
+  if (query.includes('reto') || query.includes('juego') || query.includes('animador')) {
+    const defaultDares = [
+      'Reto: ¡Canta el coro de tu canción favorita de karaoke con dramatismo de telenovela por 20 segundos!',
+      'Reto: ¡Haz tu mejor imitación cómica de un relator de fútbol gritando un gol!',
+      'Reto: ¡Finge que ganas un premio de cine y da un discurso emotivo agradeciendo al grupo!'
+    ];
+    return defaultDares[Math.floor(Math.random() * defaultDares.length)];
+  }
+  if (query.includes('verdad')) {
+    return 'Verdad: ¿Qué compra o gasto insólito has hecho en tu vida del que hoy te ríes?';
+  }
   if (query.includes('bar') || query.includes('cerveza') || query.includes('noche')) {
     return 'Recomendado Cervecería La María en El Barranco: cervezas artesanales y pizzas junto al río Tomebamba.';
   }
@@ -6023,6 +6059,7 @@ window.addEventListener('DOMContentLoaded', () => {
   initScheduleRadar();
   initLiveSync();
   checkIosInstallBanner();
+  checkAppUpdate();
 
   // Scroll suave al final del chat cuando el teclado virtual sube
   const chatInput = document.getElementById('aiChatInput');
@@ -6051,8 +6088,8 @@ window.addEventListener('DOMContentLoaded', () => {
   }
 });
 
-// Control de versión para auto-recarga transparente al desminimizar la app
-window.APP_VERSION = '2026.09.02.1720';
+// Control de versión para auto-recarga transparente al desminimizar la app o iniciarla
+window.APP_VERSION = '2026.09.05.1005';
 
 async function checkAppUpdate() {
   try {
@@ -6061,6 +6098,10 @@ async function checkAppUpdate() {
     const text = await res.text();
     const match = text.match(/window\.APP_VERSION\s*=\s*['"]([^'"]+)['"]/);
     if (match && match[1] && match[1] !== window.APP_VERSION) {
+      if ('caches' in window) {
+        const keys = await caches.keys();
+        await Promise.all(keys.map(k => caches.delete(k)));
+      }
       window.location.reload();
     }
   } catch(e) {}

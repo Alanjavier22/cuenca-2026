@@ -1,5 +1,5 @@
-// Service Worker para Cuenca 2026 PWA - Versión 5
-const CACHE_NAME = 'cuenca-2026-v5';
+// Service Worker para Cuenca 2026 PWA - Versión 8
+const CACHE_NAME = 'cuenca-2026-v8';
 const ASSETS_TO_CACHE = [
   './manifest.webmanifest',
   './icon-192.png',
@@ -28,6 +28,11 @@ self.addEventListener('activate', event => {
 });
 
 self.addEventListener('fetch', event => {
+  // Las llamadas API NUNCA pasan por el Service Worker ni se almacenan en caché
+  if (event.request.url.includes('/api/')) {
+    return;
+  }
+
   // Las páginas HTML SIEMPRE van directo a la red (sin caché intermedio cuando hay conexión)
   if (event.request.mode === 'navigate') {
     event.respondWith(
